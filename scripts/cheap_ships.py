@@ -21,7 +21,7 @@ BACKOFF_SECONDS = 1.5
 DEFAULT_SHIPS = Path("data/ships.json")
 DEFAULT_REGIONS = Path("data/regions.json")
 DEFAULT_SYSTEMS = Path("data/systems.json")
-DEFAULT_FINAL_OUTPUT = Path("data/arbitrage_summary.txt")
+DEFAULT_FINAL_OUTPUT = Path("data/cheap_ships_summary.txt")
 
 
 @dataclass(frozen=True)
@@ -333,7 +333,7 @@ def parse_args() -> argparse.Namespace:
         "--final-output",
         type=Path,
         default=DEFAULT_FINAL_OUTPUT,
-        help="Write the final snapshot to this path (default: arbitrage_summary.txt).",
+        help="Write the final snapshot to this path (default: cheap_ships_summary.txt).",
     )
     return parser.parse_args()
 
