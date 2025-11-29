@@ -1,0 +1,112 @@
+Buy -> Sell                                             | Items |   Units |       Profit (ISK) |         Investment |    Volume (m3) |      Jumps |     ISK/jump
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+The Forge / Poinen -> The Forge / Jita                  |     1 |       1 |       2,453,700.00 |         379,300.00 |           5.00 |          6 |   408,950.00
+    Dread Guristas Omnidirectional Tracking Enhancer x1 @ 379,300.00 -> 2,833,000.00 | profit 2,453,700.00 | mult 7.47x
+    Route: Jita -> Poinen (3 jumps), then Poinen -> Jita (3 jumps)
+Lonetrek / Todaki -> The Forge / Jita                   |     1 |       1 |       1,472,000.00 |       1,216,000.00 |           1.00 |          6 |   245,333.33
+    Agency 'Overclocker' SB5 Dose II x1 @ 1,216,000.00 -> 2,688,000.00 | profit 1,472,000.00 | mult 2.21x
+    Route: Jita -> Todaki (3 jumps), then Todaki -> Jita (3 jumps)
+The Forge / Jita -> Lonetrek / Jouvulen                 |     3 |       3 |         740,700.00 |         392,310.00 |          15.00 |          5 |   148,140.00
+    Small Hybrid Ambit Extension I x1 @ 174,900.00 -> 588,900.00 | profit 414,000.00 | mult 3.37x
+    Small EM Armor Reinforcer I x1 @ 199,500.00 -> 462,900.00 | profit 263,400.00 | mult 2.32x
+    Tracking Computer I x1 @ 17,910.00 -> 81,210.00 | profit 63,300.00 | mult 4.53x
+    Route: Jita -> Jita (0 jumps), then Jita -> Jouvulen (5 jumps)
+The Citadel / Kusomonmon -> The Forge / Jita            |     1 |       3 |         662,700.00 |         301,200.00 |           0.30 |          6 |   110,450.00
+    Rough Element - Limited x3 @ 100,400.00 -> 321,300.00 | profit 662,700.00 | mult 3.20x
+    Route: Jita -> Kusomonmon (3 jumps), then Kusomonmon -> Jita (3 jumps)
+Lonetrek / Kakakela -> The Forge / Jita                 |     5 |      20 |         331,741.40 |         175,590.60 |          50.20 |          4 |    82,935.35
+    Contaminated Nanite Compound x3 @ 20,230.00 -> 75,010.00 | profit 164,340.00 | mult 3.71x
+    X-Large Clarity Ward Enduring Shield Booster x1 @ 105,000.00 -> 214,900.00 | profit 109,900.00 | mult 2.05x
+    Broken Drone Transceiver x10 @ 812.10 -> 5,020.00 | profit 42,079.00 | mult 6.18x
+    Scorched Telemetry Processor x3 @ 553.20 -> 3,502.00 | profit 8,846.40 | mult 6.33x
+    Domination Fusion M x3 @ 40.00 -> 2,232.00 | profit 6,576.00 | mult 55.80x
+    Route: Jita -> Kakakela (2 jumps), then Kakakela -> Jita (2 jumps)
+The Forge / Jita -> The Citadel / Onatoh                |     1 |       1 |         420,210.00 |          79,790.00 |           5.00 |          6 |    70,035.00
+    Faint Epsilon Scoped Warp Scrambler x1 @ 79,790.00 -> 500,000.00 | profit 420,210.00 | mult 6.27x
+    Route: Jita -> Jita (0 jumps), then Jita -> Onatoh (6 jumps)
+Lonetrek / Malkalen -> Lonetrek / Isikano               |     1 |       1 |         340,000.00 |         180,000.00 |           0.01 |          5 |    68,000.00
+    Station Container Blueprint x1 @ 180,000.00 -> 520,000.00 | profit 340,000.00 | mult 2.89x
+    Route: Jita -> Malkalen (2 jumps), then Malkalen -> Isikano (3 jumps)
+The Forge / Jita -> Lonetrek / Airkio                   |     2 |     161 |         169,189.60 |           9,512.00 |           5.40 |          3 |    56,396.53
+    150mm Carbide Railgun I x1 @ 8,872.00 -> 176,500.00 | profit 167,628.00 | mult 19.89x
+    Iron Charge S x160 @ 4.00 -> 13.76 | profit 1,561.60 | mult 3.44x
+    Route: Jita -> Jita (0 jumps), then Jita -> Airkio (3 jumps)
+Lonetrek / Funtanainen -> The Forge / Jita              |     1 |      50 |         171,600.00 |          12,500.00 |         250.00 |          4 |    42,900.00
+    Slaves x50 @ 250.00 -> 3,682.00 | profit 171,600.00 | mult 14.73x
+    Route: Jita -> Funtanainen (2 jumps), then Funtanainen -> Jita (2 jumps)
+Lonetrek / Nourvukaiken -> The Forge / Jita             |     3 |       4 |         229,554.08 |         198,526.12 |           5.11 |          6 |    38,259.01
+    Explosive Shield Amplifier II x1 @ 198,400.00 -> 426,100.00 | profit 227,700.00 | mult 2.15x
+    Caldari Frigate x1 @ 12.08 -> 1,424.00 | profit 1,411.92 | mult 117.88x
+    Nova Torpedo x2 @ 57.02 -> 278.10 | profit 442.16 | mult 4.88x
+    Route: Jita -> Nourvukaiken (3 jumps), then Nourvukaiken -> Jita (3 jumps)
+The Forge / Jita -> Lonetrek / Akiainavas               |     1 |       1 |         138,200.00 |         111,800.00 |          12.50 |          4 |    34,550.00
+    Small Hull Repairer I x1 @ 111,800.00 -> 250,000.00 | profit 138,200.00 | mult 2.24x
+    Route: Jita -> Jita (0 jumps), then Jita -> Akiainavas (4 jumps)
+Lonetrek / Airkio -> The Forge / Jita                   |     7 |    1007 |         199,132.70 |          11,807.30 |          28.60 |          6 |    33,188.78
+    Blood Silver Tag x1 @ 2,251.00 -> 150,200.00 | profit 147,949.00 | mult 66.73x
+    Compulsive Scoped Multispectral ECM x1 @ 128.10 -> 22,080.00 | profit 21,951.90 | mult 172.37x
+    Janitor x2 @ 2,500.00 -> 8,200.00 | profit 11,400.00 | mult 3.28x
+    Small Inductive Compact Remote Capacitor Transmitter x1 @ 1,804.00 -> 7,759.00 | profit 5,955.00 | mult 4.30x
+    Small Radiative Scoped Remote Capacitor Transmitter x1 @ 1,801.00 -> 7,273.00 | profit 5,472.00 | mult 4.04x
+    Capacitor Flux Coil I x1 @ 803.20 -> 5,148.00 | profit 4,344.80 | mult 6.41x
+    Guristas Iron Charge S x1000 @ 0.02 -> 2.08 | profit 2,060.00 | mult 104.00x
+    Route: Jita -> Airkio (3 jumps), then Airkio -> Jita (3 jumps)
+Lonetrek / Veisto -> The Forge / Jita                   |     1 |       1 |         116,610.00 |          41,090.00 |           0.01 |          4 |    29,152.50
+    Tangled Power Conduit x1 @ 41,090.00 -> 157,700.00 | profit 116,610.00 | mult 3.84x
+    Route: Jita -> Veisto (2 jumps), then Veisto -> Jita (2 jumps)
+Lonetrek / Korama -> The Forge / Jita                   |     2 |       3 |         131,269.80 |          22,590.20 |           0.30 |          6 |    21,878.30
+    Agitated Electrical Filament x2 @ 150.10 -> 39,290.00 | profit 78,279.80 | mult 261.76x
+    Caldari Navy Captain Insignia I x1 @ 22,290.00 -> 75,280.00 | profit 52,990.00 | mult 3.38x
+    Route: Jita -> Korama (3 jumps), then Korama -> Jita (3 jumps)
+Lonetrek / Nourvukaiken -> Lonetrek / Kakakela          |     1 |       1 |          84,400.00 |          49,900.00 |           5.00 |          6 |    14,066.67
+    Small Ancillary Shield Booster x1 @ 49,900.00 -> 134,300.00 | profit 84,400.00 | mult 2.69x
+    Route: Jita -> Nourvukaiken (3 jumps), then Nourvukaiken -> Kakakela (3 jumps)
+Lonetrek / Nourvukaiken -> The Forge / Perimeter        |     1 |       1 |          83,297.00 |           5,003.00 |           1.00 |          6 |    13,882.83
+    Agency 'Hardshell' TB3 Dose I x1 @ 5,003.00 -> 88,300.00 | profit 83,297.00 | mult 17.65x
+    Route: Jita -> Nourvukaiken (3 jumps), then Nourvukaiken -> Perimeter (3 jumps)
+The Forge / Maurasi -> Lonetrek / Sobaseki              |     1 |       1 |          23,860.00 |          18,700.00 |           5.00 |          3 |     7,953.33
+    125mm Gatling AutoCannon I x1 @ 18,700.00 -> 42,560.00 | profit 23,860.00 | mult 2.28x
+    Route: Jita -> Maurasi (1 jumps), then Maurasi -> Sobaseki (2 jumps)
+Lonetrek / Uemisaisen -> The Forge / Jita               |     1 |       1 |          26,718.99 |               1.01 |           1.00 |          6 |     4,453.16
+    Talocan Mechanical Gears x1 @ 1.01 -> 26,720.00 | profit 26,718.99 | mult 26455.45x
+    Route: Jita -> Uemisaisen (3 jumps), then Uemisaisen -> Jita (3 jumps)
+The Forge / Maurasi -> The Forge / Jita                 |     1 |       1 |           7,409.00 |           3,601.00 |           5.00 |          2 |     3,704.50
+    Initiated Enduring Multispectral ECM x1 @ 3,601.00 -> 11,010.00 | profit 7,409.00 | mult 3.06x
+    Route: Jita -> Maurasi (1 jumps), then Maurasi -> Jita (1 jumps)
+The Forge / Jita -> Lonetrek / Kakakela                 |     1 |     100 |           6,364.00 |           6,076.00 |          10.00 |          2 |     3,182.00
+    Scarlet Embrace Firework x100 @ 60.76 -> 124.40 | profit 6,364.00 | mult 2.05x
+    Route: Jita -> Jita (0 jumps), then Jita -> Kakakela (2 jumps)
+Lonetrek / Isanamo -> The Forge / Jita                  |     1 |       1 |          10,629.00 |           4,501.00 |           0.01 |          4 |     2,657.25
+    Defective Current Pump x1 @ 4,501.00 -> 15,130.00 | profit 10,629.00 | mult 3.36x
+    Route: Jita -> Isanamo (2 jumps), then Isanamo -> Jita (2 jumps)
+The Forge / Jita -> The Citadel / Auviken               |     1 |     140 |           9,479.40 |           7,421.40 |         161.00 |          5 |     1,895.88
+    Wheat x140 @ 53.01 -> 120.72 | profit 9,479.40 | mult 2.28x
+    Route: Jita -> Jita (0 jumps), then Jita -> Auviken (5 jumps)
+The Citadel / Kaimon -> The Forge / Jita                |     1 |       1 |          10,290.00 |          10,010.00 |           1.00 |          6 |     1,715.00
+    Limited Social Adaptation Chip x1 @ 10,010.00 -> 20,300.00 | profit 10,290.00 | mult 2.03x
+    Route: Jita -> Kaimon (3 jumps), then Kaimon -> Jita (3 jumps)
+The Forge / Unpas -> The Forge / Jita                   |     1 |     100 |           9,998.00 |           1,502.00 |           2.50 |          6 |     1,666.33
+    Thorium Charge L x100 @ 15.02 -> 115.00 | profit 9,998.00 | mult 7.66x
+    Route: Jita -> Unpas (3 jumps), then Unpas -> Jita (3 jumps)
+The Forge / Jita -> The Forge / Uitra                   |     1 |     400 |           6,096.00 |           1,084.00 |           1.00 |          4 |     1,524.00
+    Tungsten Charge S x400 @ 2.71 -> 17.95 | profit 6,096.00 | mult 6.62x
+    Route: Jita -> Jita (0 jumps), then Jita -> Uitra (4 jumps)
+Lonetrek / Kakakela -> The Forge / Perimeter            |     1 |       1 |           5,311.90 |             404.10 |           1.00 |          5 |     1,062.38
+    Gamma S x1 @ 404.10 -> 5,716.00 | profit 5,311.90 | mult 14.15x
+    Route: Jita -> Kakakela (2 jumps), then Kakakela -> Perimeter (3 jumps)
+The Citadel / Sirppala -> The Forge / Jita              |     2 |       2 |           5,117.99 |           1,002.01 |       2,500.01 |          6 |       853.00
+    Micro Circuit x1 @ 1,001.00 -> 6,007.00 | profit 5,006.00 | mult 6.00x
+    Velator x1 @ 1.01 -> 113.00 | profit 111.99 | mult 111.88x
+    Route: Jita -> Sirppala (3 jumps), then Sirppala -> Jita (3 jumps)
+The Forge / Perimeter -> Lonetrek / Sobaseki            |     1 |     100 |           1,579.00 |             501.00 |           0.25 |          3 |       526.33
+    Carbonized Lead S x100 @ 5.01 -> 20.80 | profit 1,579.00 | mult 4.15x
+    Route: Jita -> Perimeter (1 jumps), then Perimeter -> Sobaseki (2 jumps)
+Lonetrek / Airkio -> Lonetrek / Funtanainen             |     1 |     100 |             999.00 |             101.00 |           1.25 |          6 |       166.50
+    Lead Charge M x100 @ 1.01 -> 11.00 | profit 999.00 | mult 10.89x
+    Route: Jita -> Airkio (3 jumps), then Airkio -> Funtanainen (3 jumps)
+Lonetrek / Amsen -> The Forge / Jita                    |     1 |       1 |             793.20 |             449.80 |           5.00 |          6 |       132.20
+    Denny Enduring Omnidirectional Tracking Link x1 @ 449.80 -> 1,243.00 | profit 793.20 | mult 2.76x
+    Route: Jita -> Amsen (3 jumps), then Amsen -> Jita (3 jumps)
+Lonetrek / Malkalen -> The Forge / Jita                 |     1 |      23 |             279.68 |              93.15 |           2.30 |          4 |        69.92
+    Auxiliary Parts x23 @ 4.05 -> 16.21 | profit 279.68 | mult 4.00x
+    Route: Jita -> Malkalen (2 jumps), then Malkalen -> Jita (2 jumps)

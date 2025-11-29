@@ -67,7 +67,8 @@ current system to determine total travel distance (current system -> buy system
 
 ```
 python scripts/item_arbitrage.py --current-system Jita --min-multiplier 1.08 \
-		--max-investment 150000000 --max-volume 9500 --min-profit 7500000 --top 15
+		--max-investment 150000000 --max-volume 9500 --min-profit-per-jump 1500000 \
+		--max-total-jumps 6 --top 15
 ```
 
 Key options:
@@ -80,8 +81,11 @@ Key options:
 - `--max-item-volume`: Hard cap on the per-unit volume; skip bulky items even
 	if the total trade volume would have fit otherwise.
 - `--min-multiplier`: Minimum buyer/seller price multiplier (e.g. `1.05`).
-- `--min-profit`: Minimum total ISK profit an item must produce before it is
-	considered for grouping.
+- `--min-profit-per-jump`: Skip routes whose ISK per jump falls below this
+	value; helpful when you want only the most efficient hauls.
+- `--max-total-jumps`: Drop any grouped opportunity that would require more
+	than this many jumps (current system -> buy -> sell), ideal when flying a
+	short-range hauler like a Tayra.
 - `--top`: How many grouped routes to print after every sweep.
 - `--route-flag`: Pass `shortest`, `secure`, or `insecure` to mirror the ESI
 	route API preference.

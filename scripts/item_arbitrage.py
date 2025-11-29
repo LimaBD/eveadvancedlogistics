@@ -31,6 +31,14 @@ DEFAULT_ITEMS = Path("data/items.json")
 DEFAULT_REGIONS = Path("data/regions.json")
 DEFAULT_SYSTEMS = DEFAULT_SYSTEMS_PATH
 DEFAULT_FINAL_OUTPUT = Path("data/arbitrage_items_summary.txt")
+THE_FORGE_REGION_ID = 10000002
+FORGE_ADJACENT_REGION_IDS = {
+    THE_FORGE_REGION_ID,
+    10000016,  # Lonetrek
+    10000033,  # The Citadel
+    10000029,  # Geminate
+    10000003,  # Vale of the Silent
+}
 
 
 @dataclass(frozen=True)
@@ -356,17 +364,42 @@ def filter_routes_by_profit_per_jump(
     routes: Sequence[RouteOpportunity],
     *,
     min_profit_per_jump: Optional[float],
+    max_total_jumps: Optional[int],
 ) -> List[RouteOpportunity]:
-    if min_profit_per_jump is None or min_profit_per_jump <= 0:
+    no_profit_filter = min_profit_per_jump is None or min_profit_per_jump <= 0
+    no_jump_filter = max_total_jumps is None or max_total_jumps < 0
+    if no_profit_filter and no_jump_filter:
         return list(routes)
     filtered: List[RouteOpportunity] = []
     for route in routes:
+        if not no_jump_filter:
+            assert max_total_jumps is not None
+            total_jumps = route.total_jumps
+            if total_jumps is None or total_jumps > max_total_jumps:
+                continue
+        if no_profit_filter:
+            filtered.append(route)
+            continue
         isk_per_jump = route.isk_per_jump
         if isk_per_jump is None:
             continue
+        assert min_profit_per_jump is not None
         if isk_per_jump >= min_profit_per_jump:
             filtered.append(route)
     return filtered
+
+
+def describe_active_route_filters(
+    *,
+    min_profit_per_jump: Optional[float],
+    max_total_jumps: Optional[int],
+) -> List[str]:
+    reasons: List[str] = []
+    if min_profit_per_jump is not None and min_profit_per_jump > 0:
+        reasons.append(f"--min-profit-per-jump={min_profit_per_jump:,.0f}")
+    if max_total_jumps is not None and max_total_jumps >= 0:
+        reasons.append(f"--max-total-jumps={max_total_jumps}")
+    return reasons
 
 
 def render_route_report(
@@ -437,6 +470,14 @@ def parse_args() -> argparse.Namespace:
         help="Minimum ISK earned per jump required for a route (disabled by default).",
     )
     parser.add_argument(
+        "--max-total-jumps",
+        type=int,
+        default=None,
+        help=(
+            "Skip grouped opportunities whose total travel (current -> buy -> sell) exceeds this many jumps."
+        ),
+    )
+    parser.add_argument(
         "--max-investment",
         type=float,
         default=20_000_000.0,
@@ -485,6 +526,11 @@ def parse_args() -> argparse.Namespace:
         help="Routing preference passed to the ESI route API.",
     )
     parser.add_argument(
+        "--forge-adjacent-only",
+        action="store_true",
+        help="Limit scanning to The Forge and its directly adjacent regions",
+    )
+    parser.add_argument(
         "--final-output",
         type=Path,
         default=DEFAULT_FINAL_OUTPUT,
@@ -521,6 +567,19 @@ def main() -> None:
         print("No published items available after applying filters", file=sys.stderr)
         sys.exit(1)
     regions = build_regions(regions_payload)
+    if args.forge_adjacent_only:
+        before = len(regions)
+        regions = [region for region in regions if region.region_id in FORGE_ADJACENT_REGION_IDS]
+        if not regions:
+            print(
+                "No regions remain after applying --forge-adjacent-only.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        print(
+            f"Forge adjacency filter active: scanning {len(regions)} of {before} regions.",
+            file=sys.stderr,
+        )
     if not regions:
         print("No regions to scan", file=sys.stderr)
         sys.exit(1)
@@ -573,12 +632,19 @@ def main() -> None:
         routes = filter_routes_by_profit_per_jump(
             routes_raw,
             min_profit_per_jump=args.min_profit_per_jump,
+            max_total_jumps=args.max_total_jumps,
         )
-        if args.min_profit_per_jump is not None and not routes and routes_raw:
-            print(
-                f"All {len(routes_raw)} routes were filtered out by --min-profit-per-jump="
-                f"{args.min_profit_per_jump:,.0f}. Lower the threshold to inspect them."
+        if not routes and routes_raw:
+            reasons = describe_active_route_filters(
+                min_profit_per_jump=args.min_profit_per_jump,
+                max_total_jumps=args.max_total_jumps,
             )
+            if reasons:
+                print(
+                    f"All {len(routes_raw)} routes were filtered out by "
+                    + " and ".join(reasons)
+                    + ". Adjust the thresholds to inspect them."
+                )
         report = render_route_report(
             routes,
             top_n=args.top,
@@ -606,12 +672,19 @@ def main() -> None:
     routes = filter_routes_by_profit_per_jump(
         routes_raw,
         min_profit_per_jump=args.min_profit_per_jump,
+        max_total_jumps=args.max_total_jumps,
     )
-    if args.min_profit_per_jump is not None and not routes and routes_raw:
-        print(
-            f"All {len(routes_raw)} routes were filtered out by --min-profit-per-jump="
-            f"{args.min_profit_per_jump:,.0f}. Lower the threshold to inspect them."
+    if not routes and routes_raw:
+        reasons = describe_active_route_filters(
+            min_profit_per_jump=args.min_profit_per_jump,
+            max_total_jumps=args.max_total_jumps,
         )
+        if reasons:
+            print(
+                f"All {len(routes_raw)} routes were filtered out by "
+                + " and ".join(reasons)
+                + ". Adjust the thresholds to inspect them."
+            )
     final_report = render_route_report(
         routes,
         top_n=args.top,
