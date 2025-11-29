@@ -171,7 +171,12 @@ class ArbitrageTracker:
                     margin=margin_ratio,
                 )
             )
-        return sorted(opps, key=lambda entry: entry.margin, reverse=True)
+        # Prioritize opportunities that deliver the most ISK, tie-breaking on margin.
+        return sorted(
+            opps,
+            key=lambda entry: (entry.total_profit, entry.margin),
+            reverse=True,
+        )
 
 
 def load_json_list(path: Path) -> List[Dict]:
