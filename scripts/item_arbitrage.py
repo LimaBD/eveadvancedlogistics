@@ -397,14 +397,12 @@ def render_route_report(
             f"{buy_sell:<55} | {len(route.items):>5} | {route.total_units:>7} | {profit_display:>18} | "
             f"{investment_display:>18} | {volume_display:>14} | {jumps_display:>10} | {isk_per_jump_display:>12}"
         )
-        for item in route.items[:5]:
+        for item in route.items:
             lines.append(
                 "    "
                 + f"{item.item_name} x{item.tradable_units} @ {item.buy_from.price:,.2f} -> {item.sell_to.price:,.2f}"
                 + f" | profit {item.total_profit:,.2f} | mult {item.multiplier:.2f}x"
             )
-        if len(route.items) > 5:
-            lines.append(f"    ... {len(route.items) - 5} more items grouped on this route")
         if route.jumps_from_current is not None and route.jumps_trade is not None:
             lines.append(
                 "    "
@@ -429,19 +427,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--min-multiplier",
         type=float,
-        default=1.05,
-        help="Minimum price multiplier (buyer/seller) to accept (default: 1.05).",
+        default=2,
+        help="Minimum price multiplier (buyer/seller) to accept (default: 2).",
     )
     parser.add_argument(
         "--min-profit-per-jump",
         type=float,
-        default=800_000.0,
-        help="Minimum ISK earned per jump required for a route (default: 0.8M).",
+        default=None,
+        help="Minimum ISK earned per jump required for a route (disabled by default).",
     )
     parser.add_argument(
         "--max-investment",
         type=float,
-        default=10_000_000.0,
+        default=20_000_000.0,
         help="Maximum ISK to commit per item opportunity.",
     )
     parser.add_argument(
@@ -566,16 +564,21 @@ def main() -> None:
             max_volume=args.max_volume,
             max_item_volume=args.max_item_volume,
         )
-        routes = group_opportunities(
+        routes_raw = group_opportunities(
             opportunities,
             resolver=resolver,
             jump_cache=jump_cache,
             current_system_id=current_system_id,
         )
         routes = filter_routes_by_profit_per_jump(
-            routes,
+            routes_raw,
             min_profit_per_jump=args.min_profit_per_jump,
         )
+        if args.min_profit_per_jump is not None and not routes and routes_raw:
+            print(
+                f"All {len(routes_raw)} routes were filtered out by --min-profit-per-jump="
+                f"{args.min_profit_per_jump:,.0f}. Lower the threshold to inspect them."
+            )
         report = render_route_report(
             routes,
             top_n=args.top,
@@ -594,16 +597,21 @@ def main() -> None:
         max_volume=args.max_volume,
         max_item_volume=args.max_item_volume,
     )
-    routes = group_opportunities(
+    routes_raw = group_opportunities(
         opportunities,
         resolver=resolver,
         jump_cache=jump_cache,
         current_system_id=current_system_id,
     )
     routes = filter_routes_by_profit_per_jump(
-        routes,
+        routes_raw,
         min_profit_per_jump=args.min_profit_per_jump,
     )
+    if args.min_profit_per_jump is not None and not routes and routes_raw:
+        print(
+            f"All {len(routes_raw)} routes were filtered out by --min-profit-per-jump="
+            f"{args.min_profit_per_jump:,.0f}. Lower the threshold to inspect them."
+        )
     final_report = render_route_report(
         routes,
         top_n=args.top,
