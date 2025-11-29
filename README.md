@@ -57,6 +57,40 @@ Key options:
 The script prints an updated table after completing page *N* for every region,
 so you immediately see fresh opportunities as the crawl deepens.
 
+## Item-wide arbitrage scanner grouped by route
+
+Use `scripts/item_arbitrage.py` when you want to consider *any* published item
+and weigh each trade against your hauling constraints. The script consumes the
+cached `items.json`, `regions.json`, and `systems.json` datasets plus your
+current system to determine total travel distance (current system -> buy system
+-> sell system) and orders the grouped output by ISK per jump.
+
+```
+python scripts/item_arbitrage.py --current-system Jita --min-multiplier 1.08 \
+		--max-investment 150000000 --max-volume 9500 --min-profit 7500000 --top 15
+```
+
+Key options:
+
+- `--current-system`: Name or ID of your present location (required). The
+	script adds the approach leg to the total jump count before ordering results.
+- `--max-investment`: Maximum ISK you are willing to tie up per item trade.
+- `--max-volume`: Maximum cubic meters you can haul per trade (default 200m3).
+	Volume data comes from `packaged_volume` when available.
+- `--max-item-volume`: Hard cap on the per-unit volume; skip bulky items even
+	if the total trade volume would have fit otherwise.
+- `--min-multiplier`: Minimum buyer/seller price multiplier (e.g. `1.05`).
+- `--min-profit`: Minimum total ISK profit an item must produce before it is
+	considered for grouping.
+- `--top`: How many grouped routes to print after every sweep.
+- `--route-flag`: Pass `shortest`, `secure`, or `insecure` to mirror the ESI
+	route API preference.
+
+After each full page sweep the script prints a table summarizing each buy/sell
+route (grouping all items that share the same origin/destination pair) along
+with item-level details and ISK per jump. The final snapshot is written to
+`data/arbitrage_items_summary.txt` by default.
+
 ## Route jump calculator
 
 Use `scripts/calc_jumps.py` to query the ESI routing API and quickly determine
