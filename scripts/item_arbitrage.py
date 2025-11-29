@@ -435,8 +435,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--min-profit-per-jump",
         type=float,
-        default=1_000_000.0,
-        help="Minimum ISK earned per jump required for a route (default: 1M).",
+        default=800_000.0,
+        help="Minimum ISK earned per jump required for a route (default: 0.8M).",
     )
     parser.add_argument(
         "--max-investment",
@@ -447,7 +447,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-volume",
         type=float,
-        default=200.0,
+        default=140.0,
         help="Maximum cubic meters per item opportunity (default: 200m3).",
     )
     parser.add_argument(
