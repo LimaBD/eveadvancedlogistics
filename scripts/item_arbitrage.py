@@ -200,6 +200,8 @@ class ArbitrageTracker:
         max_investment: Optional[float],
         max_volume: Optional[float],
         max_item_volume: Optional[float],
+        max_units_cap: Optional[int],
+        max_items_cap: Optional[int],
     ) -> List[ItemOpportunity]:
         opps: List[ItemOpportunity] = []
         shared_type_ids = self.best_buy_orders.keys() & self.best_sell_orders.keys()
@@ -221,6 +223,10 @@ class ArbitrageTracker:
             max_units = min(seller.volume_remain, buyer.volume_remain)
             if max_units <= 0:
                 continue
+            if max_units_cap is not None:
+                if max_units_cap <= 0:
+                    continue
+                max_units = min(max_units, max_units_cap)
             if max_investment is not None:
                 if seller.price > max_investment:
                     continue
@@ -254,11 +260,16 @@ class ArbitrageTracker:
                     total_volume=total_volume,
                 )
             )
-        return sorted(
+        ordered = sorted(
             opps,
             key=lambda entry: (entry.total_profit, entry.multiplier),
             reverse=True,
         )
+        if max_items_cap is not None:
+            if max_items_cap <= 0:
+                return []
+            return ordered[:max_items_cap]
+        return ordered
 
 
 def load_json_list(path: Path) -> List[Dict]:
@@ -562,6 +573,18 @@ def parse_args() -> argparse.Namespace:
         help="Maximum cubic meters per item opportunity (default: 200m3).",
     )
     parser.add_argument(
+        "--max-units",
+        type=int,
+        default=None,
+        help="Maximum number of units to buy per item opportunity.",
+    )
+    parser.add_argument(
+        "--max-items",
+        type=int,
+        default=None,
+        help="Maximum number of individual item opportunities to retain after sorting.",
+    )
+    parser.add_argument(
         "--max-item-volume",
         type=float,
         default=None,
@@ -700,6 +723,8 @@ def main() -> None:
             max_investment=args.max_investment,
             max_volume=args.max_volume,
             max_item_volume=args.max_item_volume,
+            max_units_cap=args.max_units,
+            max_items_cap=args.max_items,
         )
         routes_raw = group_opportunities(
             opportunities,
@@ -750,6 +775,8 @@ def main() -> None:
         max_investment=args.max_investment,
         max_volume=args.max_volume,
         max_item_volume=args.max_item_volume,
+        max_units_cap=args.max_units,
+        max_items_cap=args.max_items,
     )
     routes_raw = group_opportunities(
         opportunities,
