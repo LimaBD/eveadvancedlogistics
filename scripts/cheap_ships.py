@@ -303,8 +303,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--top",
         type=int,
-        default=25,
-        help="Display only the top N opportunities each refresh (default: 25).",
+        default=100,
+        help="Display only the top N opportunities each refresh (default: 100).",
     )
     parser.add_argument(
         "--max-pages",
