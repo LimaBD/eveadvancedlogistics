@@ -1,0 +1,3880 @@
+[
+  {
+    "id": 58745,
+    "name": "AIR Civilian Astero",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 24692,
+    "name": "Abaddon",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33625,
+    "name": "Abaddon Kador Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33623,
+    "name": "Abaddon Tash-Murkon Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 22448,
+    "name": "Absolution",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 2836,
+    "name": "Adrestia",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 23919,
+    "name": "Aeon",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 32872,
+    "name": "Algos",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 32848,
+    "name": "Aliastra Catalyst",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 78366,
+    "name": "Alligator",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 29328,
+    "name": "Amarr Media Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 3768,
+    "name": "Amarr Police Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11134,
+    "name": "Amarr Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 11188,
+    "name": "Anathema",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 28848,
+    "name": "Anshar",
+    "group_id": 902,
+    "published": true,
+    "group_name": "Jump Freighter"
+  },
+  {
+    "id": 642,
+    "name": "Apocalypse",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34213,
+    "name": "Apocalypse Blood Raider Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 11936,
+    "name": "Apocalypse Imperial Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34215,
+    "name": "Apocalypse Kador Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 17726,
+    "name": "Apocalypse Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34217,
+    "name": "Apocalypse Tash-Murkon Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 37604,
+    "name": "Apostle",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 29266,
+    "name": "Apotheosis",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 11969,
+    "name": "Arazu",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 628,
+    "name": "Arbitrator",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 23757,
+    "name": "Archon",
+    "group_id": 547,
+    "published": true,
+    "group_name": "Carrier"
+  },
+  {
+    "id": 11202,
+    "name": "Ares",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 28850,
+    "name": "Ark",
+    "group_id": 902,
+    "published": true,
+    "group_name": "Jump Freighter"
+  },
+  {
+    "id": 643,
+    "name": "Armageddon",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 11938,
+    "name": "Armageddon Imperial Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 32305,
+    "name": "Armageddon Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 17922,
+    "name": "Ashimmu",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 22466,
+    "name": "Astarte",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 33468,
+    "name": "Astero",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 608,
+    "name": "Atron",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 625,
+    "name": "Augoror",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 29337,
+    "name": "Augoror Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 81040,
+    "name": "Avalanche",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 11567,
+    "name": "Avatar",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 78576,
+    "name": "Azariel",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 88001,
+    "name": "Babaroga",
+    "group_id": 900,
+    "published": true,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 648,
+    "name": "Badger",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 77283,
+    "name": "Bane",
+    "group_id": 4594,
+    "published": true,
+    "group_name": "Lancer Dreadnought"
+  },
+  {
+    "id": 582,
+    "name": "Bantam",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33820,
+    "name": "Barghest",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 11985,
+    "name": "Basilisk",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 630,
+    "name": "Bellicose",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 74316,
+    "name": "Bestla",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 1944,
+    "name": "Bestower",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 33695,
+    "name": "Bestower Tash-Murkon Edition",
+    "group_id": 28,
+    "published": false,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 17920,
+    "name": "Bhaalgorn",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 37480,
+    "name": "Bifrost",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 632,
+    "name": "Blackbird",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 11373,
+    "name": "Blade",
+    "group_id": 324,
+    "published": false,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 64034,
+    "name": "Boobook",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 34328,
+    "name": "Bowhead",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 598,
+    "name": "Breacher",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 12013,
+    "name": "Broadsword",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 16229,
+    "name": "Brutix",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33151,
+    "name": "Brutix Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33869,
+    "name": "Brutix Serpentis Edition",
+    "group_id": 419,
+    "published": false,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 599,
+    "name": "Burst",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 12731,
+    "name": "Bustard",
+    "group_id": 380,
+    "published": true,
+    "group_name": "Deep Space Transport"
+  },
+  {
+    "id": 11192,
+    "name": "Buzzard",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 42246,
+    "name": "Caedes",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 45647,
+    "name": "Caiman",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 29330,
+    "name": "Caldari Media Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 17619,
+    "name": "Caldari Navy Hookbill",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 672,
+    "name": "Caldari Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 32788,
+    "name": "Cambion",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 670,
+    "name": "Capsule",
+    "group_id": 29,
+    "published": true,
+    "group_name": "Capsule"
+  },
+  {
+    "id": 33328,
+    "name": "Capsule - Genolution 'Auroral' 197-variant",
+    "group_id": 29,
+    "published": true,
+    "group_name": "Capsule"
+  },
+  {
+    "id": 621,
+    "name": "Caracal",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17634,
+    "name": "Caracal Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33643,
+    "name": "Caracal Nugoeihuvi Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33645,
+    "name": "Caracal Wiyrkomi Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 16240,
+    "name": "Catalyst",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 73796,
+    "name": "Catalyst Navy Issue",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 33877,
+    "name": "Catalyst Serpentis Edition",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 633,
+    "name": "Celestis",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 85086,
+    "name": "Cenotaph",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 11993,
+    "name": "Cerberus",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 33675,
+    "name": "Chameleon",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 20185,
+    "name": "Charon",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 11182,
+    "name": "Cheetah",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 42243,
+    "name": "Chemosh",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 23915,
+    "name": "Chimera",
+    "group_id": 547,
+    "published": true,
+    "group_name": "Carrier"
+  },
+  {
+    "id": 33397,
+    "name": "Chremoas",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 27299,
+    "name": "Civilian Amarr Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 27301,
+    "name": "Civilian Caldari Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 27303,
+    "name": "Civilian Gallente Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 27305,
+    "name": "Civilian Minmatar Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 11196,
+    "name": "Claw",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 22468,
+    "name": "Claymore",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 85229,
+    "name": "Cobra",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 11019,
+    "name": "Cockroach",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 16236,
+    "name": "Coercer",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 33879,
+    "name": "Coercer Blood Raiders Edition",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 73789,
+    "name": "Coercer Navy Issue",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 1918,
+    "name": "Concord Army Battleship",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 1900,
+    "name": "Concord Army Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 1912,
+    "name": "Concord Police Battleship",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 1904,
+    "name": "Concord Police Cruiser",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 1896,
+    "name": "Concord Police Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 1916,
+    "name": "Concord SWAT Battleship",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 1898,
+    "name": "Concord SWAT Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 1914,
+    "name": "Concord Special Ops Battleship",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 1902,
+    "name": "Concord Special Ops Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 583,
+    "name": "Condor",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 34317,
+    "name": "Confessor",
+    "group_id": 1305,
+    "published": true,
+    "group_name": "Tactical Destroyer"
+  },
+  {
+    "id": 32876,
+    "name": "Corax",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 16238,
+    "name": "Cormorant",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 33881,
+    "name": "Cormorant Guristas Edition",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 73795,
+    "name": "Cormorant Navy Issue",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 34496,
+    "name": "Council Diplomatic Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 17476,
+    "name": "Covetor",
+    "group_id": 463,
+    "published": true,
+    "group_name": "Mining Barge"
+  },
+  {
+    "id": 12729,
+    "name": "Crane",
+    "group_id": 1202,
+    "published": true,
+    "group_name": "Blockade Runner"
+  },
+  {
+    "id": 11176,
+    "name": "Crow",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 2161,
+    "name": "Crucifier",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37453,
+    "name": "Crucifier Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 17926,
+    "name": "Cruor",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11184,
+    "name": "Crusader",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 20125,
+    "name": "Curse",
+    "group_id": 906,
+    "published": true,
+    "group_name": "Combat Recon Ship"
+  },
+  {
+    "id": 77726,
+    "name": "Cybele",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 16231,
+    "name": "Cyclone",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 72811,
+    "name": "Cyclone Fleet Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33871,
+    "name": "Cyclone Thukker Tribe Edition",
+    "group_id": 419,
+    "published": false,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 17720,
+    "name": "Cynabal",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 12036,
+    "name": "Dagger",
+    "group_id": 324,
+    "published": false,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 42242,
+    "name": "Dagon",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 47269,
+    "name": "Damavik",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 22474,
+    "name": "Damnation",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 17928,
+    "name": "Daredevil",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37457,
+    "name": "Deacon",
+    "group_id": 1527,
+    "published": true,
+    "group_name": "Logistics Frigate"
+  },
+  {
+    "id": 12023,
+    "name": "Deimos",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 81046,
+    "name": "Deluge",
+    "group_id": 1202,
+    "published": true,
+    "group_name": "Blockade Runner"
+  },
+  {
+    "id": 12017,
+    "name": "Devoter",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 613,
+    "name": "Devourer",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 645,
+    "name": "Dominix",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 32307,
+    "name": "Dominix Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34441,
+    "name": "Dominix Quafe Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 32874,
+    "name": "Dragoon",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 24698,
+    "name": "Drake",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33153,
+    "name": "Drake Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 17932,
+    "name": "Dramiel",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 52254,
+    "name": "Draugur",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 49711,
+    "name": "Drekavac",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 12011,
+    "name": "Eagle",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 3532,
+    "name": "Echelon",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 617,
+    "name": "Echo",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 37135,
+    "name": "Endurance",
+    "group_id": 1283,
+    "published": true,
+    "group_name": "Expedition Frigate"
+  },
+  {
+    "id": 44995,
+    "name": "Enforcer",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 12044,
+    "name": "Enyo",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 22442,
+    "name": "Eos",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 655,
+    "name": "Epithal",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 671,
+    "name": "Erebus",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 11375,
+    "name": "Erinye",
+    "group_id": 324,
+    "published": false,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 22460,
+    "name": "Eris",
+    "group_id": 541,
+    "published": true,
+    "group_name": "Interdictor"
+  },
+  {
+    "id": 32790,
+    "name": "Etana",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 589,
+    "name": "Executioner",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 634,
+    "name": "Exequror",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 29344,
+    "name": "Exequror Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 11957,
+    "name": "Falcon",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 17841,
+    "name": "Federation Navy Comet",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 20189,
+    "name": "Fenrir",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 16227,
+    "name": "Ferox",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33873,
+    "name": "Ferox Guristas Edition",
+    "group_id": 419,
+    "published": false,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 72812,
+    "name": "Ferox Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 35781,
+    "name": "Fiend",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 22464,
+    "name": "Flycatcher",
+    "group_id": 541,
+    "published": true,
+    "group_name": "Interdictor"
+  },
+  {
+    "id": 32207,
+    "name": "Freki",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 614,
+    "name": "Fury",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 47727,
+    "name": "GFX Test Vargur 1/2",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 47728,
+    "name": "GFX Test Vargur 2/2",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 29332,
+    "name": "Gallente Media Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 595,
+    "name": "Gallente Police Ship",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11129,
+    "name": "Gallente Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 33816,
+    "name": "Garmur",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11383,
+    "name": "Gatherer",
+    "group_id": 324,
+    "published": false,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 74141,
+    "name": "Geri",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 17715,
+    "name": "Gila",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 3756,
+    "name": "Gnosis",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 11940,
+    "name": "Gold Magnate",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 28710,
+    "name": "Golem",
+    "group_id": 900,
+    "published": true,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34231,
+    "name": "Golem Guristas Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34233,
+    "name": "Golem Kaalakiota Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34235,
+    "name": "Golem Nugoeihuvi Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 21097,
+    "name": "Goru's Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 584,
+    "name": "Griffin",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37455,
+    "name": "Griffin Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11987,
+    "name": "Guardian",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 11011,
+    "name": "Guardian-Vexor",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 21628,
+    "name": "Guristas Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 24696,
+    "name": "Harbinger",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33155,
+    "name": "Harbinger Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 11381,
+    "name": "Harpy",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 11379,
+    "name": "Hawk",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 35683,
+    "name": "Hecate",
+    "group_id": 1305,
+    "published": true,
+    "group_name": "Tactical Destroyer"
+  },
+  {
+    "id": 22852,
+    "name": "Hel",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 11172,
+    "name": "Helios",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 33079,
+    "name": "Hematos",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 22452,
+    "name": "Heretic",
+    "group_id": 541,
+    "published": true,
+    "group_name": "Interdictor"
+  },
+  {
+    "id": 605,
+    "name": "Heron",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 72904,
+    "name": "Heron Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 651,
+    "name": "Hoarder",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 12034,
+    "name": "Hound",
+    "group_id": 834,
+    "published": true,
+    "group_name": "Stealth Bomber"
+  },
+  {
+    "id": 77281,
+    "name": "Hubris",
+    "group_id": 4594,
+    "published": true,
+    "group_name": "Lancer Dreadnought"
+  },
+  {
+    "id": 11961,
+    "name": "Huginn",
+    "group_id": 906,
+    "published": true,
+    "group_name": "Combat Recon Ship"
+  },
+  {
+    "id": 22544,
+    "name": "Hulk",
+    "group_id": 543,
+    "published": true,
+    "group_name": "Exhumer"
+  },
+  {
+    "id": 24702,
+    "name": "Hurricane",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33157,
+    "name": "Hurricane Fleet Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 48636,
+    "name": "Hydra",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 11387,
+    "name": "Hyena",
+    "group_id": 893,
+    "published": true,
+    "group_name": "Electronic Attack Ship"
+  },
+  {
+    "id": 24690,
+    "name": "Hyperion",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33635,
+    "name": "Hyperion Aliastra Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33637,
+    "name": "Hyperion Inner Zone Shipping Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 601,
+    "name": "Ibis",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 52252,
+    "name": "Ikitursa",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 607,
+    "name": "Imicus",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 72913,
+    "name": "Imicus Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 615,
+    "name": "Immolator",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 17360,
+    "name": "Immovable Enigma",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 35779,
+    "name": "Imp",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 596,
+    "name": "Impairor",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 12753,
+    "name": "Impel",
+    "group_id": 380,
+    "published": true,
+    "group_name": "Deep Space Transport"
+  },
+  {
+    "id": 17703,
+    "name": "Imperial Navy Slicer",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 594,
+    "name": "Incursus",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33667,
+    "name": "Incursus Aliastra Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33669,
+    "name": "Incursus Inner Zone Shipping Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 32844,
+    "name": "Inner Zone Shipping Catalyst",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 32985,
+    "name": "Inner Zone Shipping Imicus",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 590,
+    "name": "Inquisitor",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 32842,
+    "name": "Intaki Syndicate Catalyst",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 32840,
+    "name": "InterBus Catalyst",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 30842,
+    "name": "InterBus Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 12042,
+    "name": "Ishkur",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 12005,
+    "name": "Ishtar",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 33689,
+    "name": "Iteron Inner Zone Shipping Edition",
+    "group_id": 28,
+    "published": false,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 657,
+    "name": "Iteron Mark V",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 34828,
+    "name": "Jackdaw",
+    "group_id": 1305,
+    "published": true,
+    "group_name": "Tactical Destroyer"
+  },
+  {
+    "id": 11400,
+    "name": "Jaguar",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 77284,
+    "name": "Karura",
+    "group_id": 4594,
+    "published": true,
+    "group_name": "Lancer Dreadnought"
+  },
+  {
+    "id": 11174,
+    "name": "Keres",
+    "group_id": 893,
+    "published": true,
+    "group_name": "Electronic Attack Ship"
+  },
+  {
+    "id": 602,
+    "name": "Kestrel",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 17705,
+    "name": "Khanid Navy Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 78369,
+    "name": "Khizriel",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 49710,
+    "name": "Kikimora",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 37458,
+    "name": "Kirin",
+    "group_id": 1527,
+    "published": true,
+    "group_name": "Logistics Frigate"
+  },
+  {
+    "id": 11389,
+    "name": "Kishar",
+    "group_id": 324,
+    "published": false,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 11194,
+    "name": "Kitsune",
+    "group_id": 893,
+    "published": true,
+    "group_name": "Electronic Attack Ship"
+  },
+  {
+    "id": 45649,
+    "name": "Komodo",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 28661,
+    "name": "Kronos",
+    "group_id": 900,
+    "published": true,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34245,
+    "name": "Kronos Inner Zone Shipping Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34241,
+    "name": "Kronos Police Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34243,
+    "name": "Kronos Quafe Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 654,
+    "name": "Kryos",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 11971,
+    "name": "Lachesis",
+    "group_id": 906,
+    "published": true,
+    "group_name": "Combat Recon Ship"
+  },
+  {
+    "id": 60764,
+    "name": "Laelaps",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 29986,
+    "name": "Legion",
+    "group_id": 963,
+    "published": true,
+    "group_name": "Strategic Cruiser"
+  },
+  {
+    "id": 33513,
+    "name": "Leopard",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 47271,
+    "name": "Leshak",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 3764,
+    "name": "Leviathan",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 37606,
+    "name": "Lif",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 45645,
+    "name": "Loggerhead",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 29990,
+    "name": "Loki",
+    "group_id": 963,
+    "published": true,
+    "group_name": "Strategic Cruiser"
+  },
+  {
+    "id": 618,
+    "name": "Lynx",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 17738,
+    "name": "Machariel",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 22548,
+    "name": "Mackinaw",
+    "group_id": 543,
+    "published": true,
+    "group_name": "Exhumer"
+  },
+  {
+    "id": 33683,
+    "name": "Mackinaw ORE Development Edition",
+    "group_id": 543,
+    "published": false,
+    "group_name": "Exhumer"
+  },
+  {
+    "id": 24694,
+    "name": "Maelstrom",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33633,
+    "name": "Maelstrom Krusual Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33631,
+    "name": "Maelstrom Nefantar Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 29248,
+    "name": "Magnate",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 72907,
+    "name": "Magnate Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37483,
+    "name": "Magus",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 11186,
+    "name": "Malediction",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 3516,
+    "name": "Malice",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 624,
+    "name": "Maller",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 78367,
+    "name": "Mamba",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 652,
+    "name": "Mammoth",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 33693,
+    "name": "Mammoth Nefantar Edition",
+    "group_id": 28,
+    "published": false,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 12032,
+    "name": "Manticore",
+    "group_id": 834,
+    "published": true,
+    "group_name": "Stealth Bomber"
+  },
+  {
+    "id": 44996,
+    "name": "Marshal",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 12747,
+    "name": "Mastodon",
+    "group_id": 380,
+    "published": true,
+    "group_name": "Deep Space Transport"
+  },
+  {
+    "id": 609,
+    "name": "Maulus",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37456,
+    "name": "Maulus Navy Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 616,
+    "name": "Medusa",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 641,
+    "name": "Megathron",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 13202,
+    "name": "Megathron Federate Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34239,
+    "name": "Megathron Inner Zone Shipping Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 17728,
+    "name": "Megathron Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34237,
+    "name": "Megathron Police Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34118,
+    "name": "Megathron Quafe Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 78333,
+    "name": "Mekubal",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 603,
+    "name": "Merlin",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33659,
+    "name": "Merlin Nugoeihuvi Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33661,
+    "name": "Merlin Wiyrkomi Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 77114,
+    "name": "Metamorphosis",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 656,
+    "name": "Miasmos",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 32811,
+    "name": "Miasmos Amastris Edition",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 4363,
+    "name": "Miasmos Quafe Ultra Edition",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 4388,
+    "name": "Miasmos Quafe Ultramarine Edition",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 32209,
+    "name": "Mimir",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 29334,
+    "name": "Minmatar Media Shuttle",
+    "group_id": 31,
+    "published": false,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 600,
+    "name": "Minmatar Peacekeeper Ship",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11132,
+    "name": "Minmatar Shuttle",
+    "group_id": 31,
+    "published": true,
+    "group_name": "Shuttle"
+  },
+  {
+    "id": 37605,
+    "name": "Minokawa",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 623,
+    "name": "Moa",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 42241,
+    "name": "Molok",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 45534,
+    "name": "Monitor",
+    "group_id": 1972,
+    "published": true,
+    "group_name": "Flag Cruiser"
+  },
+  {
+    "id": 33395,
+    "name": "Moracha",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 17707,
+    "name": "Mordus Frigate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 19724,
+    "name": "Moros",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 34339,
+    "name": "Moros Interbus Edition",
+    "group_id": 485,
+    "published": false,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 73792,
+    "name": "Moros Navy Issue",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 12015,
+    "name": "Muninn",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 24700,
+    "name": "Myrmidon",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 72869,
+    "name": "Myrmidon Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 4306,
+    "name": "Naga",
+    "group_id": 1201,
+    "published": true,
+    "group_name": "Attack Battlecruiser"
+  },
+  {
+    "id": 19722,
+    "name": "Naglfar",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 73787,
+    "name": "Naglfar Fleet Issue",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 34341,
+    "name": "Naglfar Justice Edition",
+    "group_id": 485,
+    "published": false,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 3628,
+    "name": "Nation",
+    "group_id": 659,
+    "published": false,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 592,
+    "name": "Navitas",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33099,
+    "name": "Nefantar Thrasher",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 11377,
+    "name": "Nemesis",
+    "group_id": 834,
+    "published": true,
+    "group_name": "Stealth Bomber"
+  },
+  {
+    "id": 650,
+    "name": "Nereus",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 52250,
+    "name": "Nergal",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 33472,
+    "name": "Nestor",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 24483,
+    "name": "Nidhoggur",
+    "group_id": 547,
+    "published": true,
+    "group_name": "Carrier"
+  },
+  {
+    "id": 22470,
+    "name": "Nighthawk",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 17736,
+    "name": "Nightmare",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 37607,
+    "name": "Ninazu",
+    "group_id": 1538,
+    "published": true,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 2998,
+    "name": "Noctis",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 28846,
+    "name": "Nomad",
+    "group_id": 902,
+    "published": true,
+    "group_name": "Jump Freighter"
+  },
+  {
+    "id": 23913,
+    "name": "Nyx",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 20187,
+    "name": "Obelisk",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 12745,
+    "name": "Occator",
+    "group_id": 380,
+    "published": true,
+    "group_name": "Deep Space Transport"
+  },
+  {
+    "id": 89607,
+    "name": "Odysseus",
+    "group_id": 4902,
+    "published": true,
+    "group_name": "Expedition Command Ship"
+  },
+  {
+    "id": 2006,
+    "name": "Omen",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33639,
+    "name": "Omen Kador Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17709,
+    "name": "Omen Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33641,
+    "name": "Omen Tash-Murkon Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 11989,
+    "name": "Oneiros",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 11995,
+    "name": "Onyx",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 25560,
+    "name": "Opux Dragoon Yacht",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 635,
+    "name": "Opux Luxury Yacht",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 4302,
+    "name": "Oracle",
+    "group_id": 1201,
+    "published": true,
+    "group_name": "Attack Battlecruiser"
+  },
+  {
+    "id": 28606,
+    "name": "Orca",
+    "group_id": 941,
+    "published": true,
+    "group_name": "Industrial Command Ship"
+  },
+  {
+    "id": 33685,
+    "name": "Orca ORE Development Edition",
+    "group_id": 941,
+    "published": false,
+    "group_name": "Industrial Command Ship"
+  },
+  {
+    "id": 33818,
+    "name": "Orthrus",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 620,
+    "name": "Osprey",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 29340,
+    "name": "Osprey Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 89649,
+    "name": "Outrider",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 44993,
+    "name": "Pacifier",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 28659,
+    "name": "Paladin",
+    "group_id": 900,
+    "published": true,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34219,
+    "name": "Paladin Blood Raider Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34221,
+    "name": "Paladin Kador Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34223,
+    "name": "Paladin Tash-Murkon Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 22440,
+    "name": "Panther",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 17718,
+    "name": "Phantasm",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 12021,
+    "name": "Phobos",
+    "group_id": 894,
+    "published": true,
+    "group_name": "Heavy Interdiction Cruiser"
+  },
+  {
+    "id": 19726,
+    "name": "Phoenix",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 73793,
+    "name": "Phoenix Navy Issue",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 34343,
+    "name": "Phoenix Wiyrkomi Edition",
+    "group_id": 485,
+    "published": false,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 11965,
+    "name": "Pilgrim",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 89240,
+    "name": "Pioneer",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 89647,
+    "name": "Pioneer Consortium Issue",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 9862,
+    "name": "Polaris Centurion Frigate",
+    "group_id": 237,
+    "published": false,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 9858,
+    "name": "Polaris Centurion TEST",
+    "group_id": 237,
+    "published": false,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 1233,
+    "name": "Polaris Enigma Frigate",
+    "group_id": 237,
+    "published": false,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 9854,
+    "name": "Polaris Inspector Frigate",
+    "group_id": 237,
+    "published": false,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 9860,
+    "name": "Polaris Legatus Frigate",
+    "group_id": 237,
+    "published": false,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 33677,
+    "name": "Police Pursuit Comet",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37481,
+    "name": "Pontifex",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 42244,
+    "name": "Porpoise",
+    "group_id": 941,
+    "published": true,
+    "group_name": "Industrial Command Ship"
+  },
+  {
+    "id": 47466,
+    "name": "Praxis",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 2863,
+    "name": "Primae",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 586,
+    "name": "Probe",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 72903,
+    "name": "Probe Fleet Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 17480,
+    "name": "Procurer",
+    "group_id": 463,
+    "published": true,
+    "group_name": "Mining Barge"
+  },
+  {
+    "id": 16233,
+    "name": "Prophecy",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 33875,
+    "name": "Prophecy Blood Raiders Edition",
+    "group_id": 419,
+    "published": false,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 72872,
+    "name": "Prophecy Navy Issue",
+    "group_id": 419,
+    "published": true,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 12733,
+    "name": "Prorator",
+    "group_id": 1202,
+    "published": true,
+    "group_name": "Blockade Runner"
+  },
+  {
+    "id": 33697,
+    "name": "Prospect",
+    "group_id": 1283,
+    "published": true,
+    "group_name": "Expedition Frigate"
+  },
+  {
+    "id": 29988,
+    "name": "Proteus",
+    "group_id": 963,
+    "published": true,
+    "group_name": "Strategic Cruiser"
+  },
+  {
+    "id": 20183,
+    "name": "Providence",
+    "group_id": 513,
+    "published": true,
+    "group_name": "Freighter"
+  },
+  {
+    "id": 12735,
+    "name": "Prowler",
+    "group_id": 1202,
+    "published": true,
+    "group_name": "Blockade Runner"
+  },
+  {
+    "id": 597,
+    "name": "Punisher",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33655,
+    "name": "Punisher Kador Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33657,
+    "name": "Punisher Tash-Murkon Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 12038,
+    "name": "Purifier",
+    "group_id": 834,
+    "published": true,
+    "group_name": "Stealth Bomber"
+  },
+  {
+    "id": 85236,
+    "name": "Python",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 32846,
+    "name": "Quafe Catalyst",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 42245,
+    "name": "Rabisu",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 23773,
+    "name": "Ragnarok",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 60765,
+    "name": "Raiju",
+    "group_id": 893,
+    "published": true,
+    "group_name": "Electronic Attack Ship"
+  },
+  {
+    "id": 11963,
+    "name": "Rapier",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 11178,
+    "name": "Raptor",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 17918,
+    "name": "Rattlesnake",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34151,
+    "name": "Rattlesnake Victory Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 638,
+    "name": "Raven",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34225,
+    "name": "Raven Guristas Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34227,
+    "name": "Raven Kaalakiota Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 17636,
+    "name": "Raven Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34229,
+    "name": "Raven Nugoeihuvi Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 26840,
+    "name": "Raven State Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 588,
+    "name": "Reaper",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 22428,
+    "name": "Redeemer",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 17812,
+    "name": "Republic Fleet Firetail",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 11393,
+    "name": "Retribution",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 17478,
+    "name": "Retriever",
+    "group_id": 463,
+    "published": true,
+    "group_name": "Mining Barge"
+  },
+  {
+    "id": 19720,
+    "name": "Revelation",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 73790,
+    "name": "Revelation Navy Issue",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 34345,
+    "name": "Revelation Sarum Edition",
+    "group_id": 485,
+    "published": false,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 3514,
+    "name": "Revenant",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 28844,
+    "name": "Rhea",
+    "group_id": 902,
+    "published": true,
+    "group_name": "Jump Freighter"
+  },
+  {
+    "id": 587,
+    "name": "Rifter",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33665,
+    "name": "Rifter Krusual Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33663,
+    "name": "Rifter Nefantar Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 49712,
+    "name": "Rodiva",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 24688,
+    "name": "Rokh",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33627,
+    "name": "Rokh Nugoeihuvi Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33629,
+    "name": "Rokh Wiyrkomi Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 11959,
+    "name": "Rook",
+    "group_id": 906,
+    "published": true,
+    "group_name": "Combat Recon Ship"
+  },
+  {
+    "id": 28352,
+    "name": "Rorqual",
+    "group_id": 883,
+    "published": true,
+    "group_name": "Capital Industrial Ship"
+  },
+  {
+    "id": 33687,
+    "name": "Rorqual ORE Development Edition",
+    "group_id": 883,
+    "published": false,
+    "group_name": "Capital Industrial Ship"
+  },
+  {
+    "id": 629,
+    "name": "Rupture",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 3751,
+    "name": "SOCT 1",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 3753,
+    "name": "SOCT 2",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 22456,
+    "name": "Sabre",
+    "group_id": 541,
+    "published": true,
+    "group_name": "Interdictor"
+  },
+  {
+    "id": 12019,
+    "name": "Sacrilege",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 87381,
+    "name": "Sarathiel",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 32987,
+    "name": "Sarum Magnate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37460,
+    "name": "Scalpel",
+    "group_id": 1527,
+    "published": true,
+    "group_name": "Logistics Frigate"
+  },
+  {
+    "id": 11978,
+    "name": "Scimitar",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 640,
+    "name": "Scorpion",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 4005,
+    "name": "Scorpion Ishukone Watch",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 32309,
+    "name": "Scorpion Navy Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 631,
+    "name": "Scythe",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 29336,
+    "name": "Scythe Fleet Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 11190,
+    "name": "Sentinel",
+    "group_id": 893,
+    "published": true,
+    "group_name": "Electronic Attack Ship"
+  },
+  {
+    "id": 78414,
+    "name": "Shapash",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 85062,
+    "name": "Sidewinder",
+    "group_id": 830,
+    "published": true,
+    "group_name": "Covert Ops"
+  },
+  {
+    "id": 19744,
+    "name": "Sigil",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 11942,
+    "name": "Silver Magnate",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 22430,
+    "name": "Sin",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 22546,
+    "name": "Skiff",
+    "group_id": 543,
+    "published": true,
+    "group_name": "Exhumer"
+  },
+  {
+    "id": 54731,
+    "name": "Skybreaker",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 585,
+    "name": "Slasher",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 22444,
+    "name": "Sleipnir",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 81008,
+    "name": "Squall",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 622,
+    "name": "Stabber",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17713,
+    "name": "Stabber Fleet Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33649,
+    "name": "Stabber Krusual Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33647,
+    "name": "Stabber Nefantar Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 11198,
+    "name": "Stiletto",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 37482,
+    "name": "Stork",
+    "group_id": 1534,
+    "published": true,
+    "group_name": "Command Destroyer"
+  },
+  {
+    "id": 54732,
+    "name": "Stormbringer",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33470,
+    "name": "Stratios",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33553,
+    "name": "Stratios Emergency Responder",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17924,
+    "name": "Succubus",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 32983,
+    "name": "Sukuuvestaa Heron",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 42685,
+    "name": "Sunesis",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 34562,
+    "name": "Svipul",
+    "group_id": 1305,
+    "published": true,
+    "group_name": "Tactical Destroyer"
+  },
+  {
+    "id": 619,
+    "name": "Swordspine",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 33081,
+    "name": "Taipan",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 4308,
+    "name": "Talos",
+    "group_id": 1201,
+    "published": true,
+    "group_name": "Attack Battlecruiser"
+  },
+  {
+    "id": 32878,
+    "name": "Talwar",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 11200,
+    "name": "Taranis",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 33190,
+    "name": "Tash-Murkon Magnate",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 649,
+    "name": "Tayra",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 33691,
+    "name": "Tayra Wiyrkomi Edition",
+    "group_id": 28,
+    "published": false,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 639,
+    "name": "Tempest",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 17732,
+    "name": "Tempest Fleet Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34247,
+    "name": "Tempest Justice Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34249,
+    "name": "Tempest Krusual Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34251,
+    "name": "Tempest Nefantar Edition",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 26842,
+    "name": "Tempest Tribal Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 29984,
+    "name": "Tengu",
+    "group_id": 963,
+    "published": true,
+    "group_name": "Strategic Cruiser"
+  },
+  {
+    "id": 52267,
+    "name": "Test Site Maller",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 37459,
+    "name": "Thalia",
+    "group_id": 1527,
+    "published": true,
+    "group_name": "Logistics Frigate"
+  },
+  {
+    "id": 23911,
+    "name": "Thanatos",
+    "group_id": 547,
+    "published": true,
+    "group_name": "Carrier"
+  },
+  {
+    "id": 85087,
+    "name": "Tholos",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 627,
+    "name": "Thorax",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33651,
+    "name": "Thorax Aliastra Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 33653,
+    "name": "Thorax Inner Zone Shipping Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 16242,
+    "name": "Thrasher",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 73794,
+    "name": "Thrasher Fleet Issue",
+    "group_id": 420,
+    "published": true,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 33883,
+    "name": "Thrasher Thukker Tribe Edition",
+    "group_id": 420,
+    "published": false,
+    "group_name": "Destroyer"
+  },
+  {
+    "id": 54733,
+    "name": "Thunderchild",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 48635,
+    "name": "Tiamat",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 591,
+    "name": "Tormentor",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 4310,
+    "name": "Tornado",
+    "group_id": 1201,
+    "published": true,
+    "group_name": "Attack Battlecruiser"
+  },
+  {
+    "id": 81047,
+    "name": "Torrent",
+    "group_id": 380,
+    "published": true,
+    "group_name": "Deep Space Transport"
+  },
+  {
+    "id": 593,
+    "name": "Tristan",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 34443,
+    "name": "Tristan Quafe Edition",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 644,
+    "name": "Typhoon",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 32311,
+    "name": "Typhoon Fleet Issue",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 2834,
+    "name": "Utu",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 11999,
+    "name": "Vagabond",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 77288,
+    "name": "Valravn",
+    "group_id": 4594,
+    "published": true,
+    "group_name": "Lancer Dreadnought"
+  },
+  {
+    "id": 3518,
+    "name": "Vangel",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 42132,
+    "name": "Vanguard",
+    "group_id": 547,
+    "published": false,
+    "group_name": "Carrier"
+  },
+  {
+    "id": 42126,
+    "name": "Vanquisher",
+    "group_id": 30,
+    "published": true,
+    "group_name": "Titan"
+  },
+  {
+    "id": 28665,
+    "name": "Vargur",
+    "group_id": 900,
+    "published": true,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34253,
+    "name": "Vargur Justice Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34255,
+    "name": "Vargur Krusual Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 34257,
+    "name": "Vargur Nefantar Edition",
+    "group_id": 900,
+    "published": false,
+    "group_name": "Marauder"
+  },
+  {
+    "id": 47270,
+    "name": "Vedmak",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 42124,
+    "name": "Vehement",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 606,
+    "name": "Velator",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 42125,
+    "name": "Vendetta",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 42133,
+    "name": "Venerable",
+    "group_id": 1538,
+    "published": false,
+    "group_name": "Force Auxiliary"
+  },
+  {
+    "id": 11365,
+    "name": "Vengeance",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 32880,
+    "name": "Venture",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 89648,
+    "name": "Venture Consortium Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 626,
+    "name": "Vexor",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17843,
+    "name": "Vexor Navy Issue",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 34445,
+    "name": "Vexor Quafe Edition",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 32989,
+    "name": "Vherokior Probe",
+    "group_id": 25,
+    "published": false,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 12743,
+    "name": "Viator",
+    "group_id": 1202,
+    "published": true,
+    "group_name": "Blockade Runner"
+  },
+  {
+    "id": 45531,
+    "name": "Victor",
+    "group_id": 833,
+    "published": true,
+    "group_name": "Force Recon Ship"
+  },
+  {
+    "id": 34590,
+    "name": "Victorieux Luxury Yacht",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 3766,
+    "name": "Vigil",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 37454,
+    "name": "Vigil Fleet Issue",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 17722,
+    "name": "Vigilant",
+    "group_id": 26,
+    "published": true,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 17740,
+    "name": "Vindicator",
+    "group_id": 27,
+    "published": true,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 33083,
+    "name": "Violator",
+    "group_id": 237,
+    "published": true,
+    "group_name": "Corvette"
+  },
+  {
+    "id": 45530,
+    "name": "Virtuoso",
+    "group_id": 834,
+    "published": true,
+    "group_name": "Stealth Bomber"
+  },
+  {
+    "id": 22446,
+    "name": "Vulture",
+    "group_id": 540,
+    "published": true,
+    "group_name": "Command Ship"
+  },
+  {
+    "id": 33673,
+    "name": "Whiptail",
+    "group_id": 831,
+    "published": true,
+    "group_name": "Interceptor"
+  },
+  {
+    "id": 22436,
+    "name": "Widow",
+    "group_id": 898,
+    "published": true,
+    "group_name": "Black Ops"
+  },
+  {
+    "id": 11371,
+    "name": "Wolf",
+    "group_id": 324,
+    "published": true,
+    "group_name": "Assault Frigate"
+  },
+  {
+    "id": 17930,
+    "name": "Worm",
+    "group_id": 25,
+    "published": true,
+    "group_name": "Frigate"
+  },
+  {
+    "id": 653,
+    "name": "Wreathe",
+    "group_id": 28,
+    "published": true,
+    "group_name": "Hauler"
+  },
+  {
+    "id": 23917,
+    "name": "Wyvern",
+    "group_id": 659,
+    "published": true,
+    "group_name": "Supercarrier"
+  },
+  {
+    "id": 49713,
+    "name": "Zarmazd",
+    "group_id": 832,
+    "published": true,
+    "group_name": "Logistics"
+  },
+  {
+    "id": 12003,
+    "name": "Zealot",
+    "group_id": 358,
+    "published": true,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 2078,
+    "name": "Zephyr",
+    "group_id": 1022,
+    "published": true,
+    "group_name": "Prototype Exploration Ship"
+  },
+  {
+    "id": 52907,
+    "name": "Zirnitra",
+    "group_id": 485,
+    "published": true,
+    "group_name": "Dreadnought"
+  },
+  {
+    "id": 34467,
+    "name": "\u4e07\u738b\u5b9d\u5ea7\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34469,
+    "name": "\u4e4c\u9e26\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34479,
+    "name": "\u4f0a\u4ec0\u5854\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 358,
+    "published": false,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 34463,
+    "name": "\u54cd\u5c3e\u86c7\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34459,
+    "name": "\u5730\u72f1\u5929\u4f7f\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34465,
+    "name": "\u591a\u7c73\u5c3c\u514b\u65af\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34473,
+    "name": "\u5e7c\u9f99\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 419,
+    "published": false,
+    "group_name": "Combat Battlecruiser"
+  },
+  {
+    "id": 34457,
+    "name": "\u672b\u65e5\u6c99\u573a\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34475,
+    "name": "\u6bd2\u8725\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 26,
+    "published": false,
+    "group_name": "Cruiser"
+  },
+  {
+    "id": 34471,
+    "name": "\u707e\u96be\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  },
+  {
+    "id": 34477,
+    "name": "\u94f6\u9e70\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 358,
+    "published": false,
+    "group_name": "Heavy Assault Cruiser"
+  },
+  {
+    "id": 34461,
+    "name": "\u9a6c\u514b\u745e\u7ea7YC117\u5e74\u7279\u522b\u7248",
+    "group_id": 27,
+    "published": false,
+    "group_name": "Battleship"
+  }
+]
