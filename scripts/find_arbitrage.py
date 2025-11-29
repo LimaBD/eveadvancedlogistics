@@ -14,13 +14,13 @@ import requests
 ESI_BASE = "https://esi.evetech.net/latest"
 DATASOURCE = "tranquility"
 ORDERS_URL = f"{ESI_BASE}/markets/{{region_id}}/orders/"
-SYSTEM_URL = f"{ESI_BASE}/universe/systems/{{system_id}}/"
 USER_AGENT = "EveAdvancedLogistics/0.1 (arbitrage scanner)"
 REQUEST_TIMEOUT = 30
 MAX_RETRIES = 4
 BACKOFF_SECONDS = 1.5
 DEFAULT_SHIPS = Path("data/ships.json")
 DEFAULT_REGIONS = Path("data/regions.json")
+DEFAULT_SYSTEMS = Path("data/systems.json")
 DEFAULT_FINAL_OUTPUT = Path("data/arbitrage_summary.txt")
 
 
@@ -89,27 +89,15 @@ class HttpClient:
         raise RuntimeError(f"Failed to GET {url}") from last_exc
 
 class SystemNameResolver:
-    """Resolve system IDs to names with local caching."""
+    """Resolve system IDs using locally cached metadata."""
 
-    def __init__(self, http_client: HttpClient) -> None:
-        self.http_client = http_client
-        self.cache: Dict[int, str] = {}
+    def __init__(self, system_lookup: Dict[int, str]) -> None:
+        self.system_lookup = system_lookup
 
     def resolve(self, system_id: int) -> str:
         if system_id <= 0:
             return f"System {system_id}"
-        if system_id in self.cache:
-            return self.cache[system_id]
-        url = SYSTEM_URL.format(system_id=system_id)
-        params = {"datasource": DATASOURCE}
-        try:
-            payload, _ = self.http_client.get_json(url, params=params)
-        except RuntimeError:
-            name = f"System {system_id}"
-        else:
-            name = payload.get("name") or f"System {system_id}"
-        self.cache[system_id] = name
-        return name
+        return self.system_lookup.get(system_id, f"System {system_id}")
 
 
 class ArbitrageTracker:
@@ -216,6 +204,18 @@ def build_regions(regions_payload: Iterable[Dict]) -> List[Region]:
     return regions
 
 
+def build_system_lookup(systems_payload: Iterable[Dict]) -> Dict[int, str]:
+    lookup: Dict[int, str] = {}
+    for entry in systems_payload:
+        try:
+            system_id = int(entry["id"])
+            name = str(entry["name"])
+        except (KeyError, ValueError) as exc:
+            raise ValueError(f"Invalid system entry: {entry}") from exc
+        lookup[system_id] = name
+    return lookup
+
+
 def fetch_orders_for_region(
     http_client: HttpClient, region: Region, page: int
 ) -> Tuple[List[Dict], int]:
@@ -281,6 +281,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--ships", type=Path, default=DEFAULT_SHIPS, help="Path to data/ships.json.")
     parser.add_argument("--regions", type=Path, default=DEFAULT_REGIONS, help="Path to data/regions.json.")
+    parser.add_argument("--systems", type=Path, default=DEFAULT_SYSTEMS, help="Path to data/systems.json.")
     parser.add_argument(
         "--min-margin",
         type=float,
@@ -338,6 +339,7 @@ def main() -> None:
     try:
         ships_payload = load_json_list(args.ships)
         regions_payload = load_json_list(args.regions)
+        systems_payload = load_json_list(args.systems)
     except (OSError, json.JSONDecodeError) as exc:
         print(f"Failed to load prerequisite data: {exc}", file=sys.stderr)
         sys.exit(1)
@@ -350,6 +352,10 @@ def main() -> None:
     if not regions:
         print("No regions to scan", file=sys.stderr)
         sys.exit(1)
+    system_lookup = build_system_lookup(systems_payload)
+    if not system_lookup:
+        print("No systems available for name resolution", file=sys.stderr)
+        sys.exit(1)
 
     session = requests.Session()
     session.headers.update({
@@ -357,7 +363,7 @@ def main() -> None:
         "User-Agent": USER_AGENT,
     })
     http_client = HttpClient(session, request_delay=args.request_delay)
-    resolver = SystemNameResolver(http_client)
+    resolver = SystemNameResolver(system_lookup)
     tracker = ArbitrageTracker(ship_lookup)
 
     region_max_pages: Dict[int, int] = {}
