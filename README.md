@@ -56,3 +56,22 @@ Key options:
 
 The script prints an updated table after completing page *N* for every region,
 so you immediately see fresh opportunities as the crawl deepens.
+
+## Route jump calculator
+
+Use `scripts/calc_jumps.py` to query the ESI routing API and quickly determine
+how many stargate jumps separate two systems. The script also exposes the
+`calculate_jump_count` function for reuse in other automation.
+
+```
+python scripts/calc_jumps.py Jita Amarr --flag secure --show-route
+```
+
+Arguments:
+
+- Positional `origin`/`destination` accept either system names or numeric IDs.
+- `--flag` controls ESI routing mode (`shortest`, `secure`, `insecure`).
+- `--systems-file` overrides the cached systems JSON (defaults to
+	`data/systems.json`).
+- `--show-route` prints the full, name-resolved waypoint list instead of just
+	the jump count.
