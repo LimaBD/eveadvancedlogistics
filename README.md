@@ -18,7 +18,7 @@ automation can reason about item classes.
 1. Install dependencies with `pip install -r requirements.txt` (same as above).
 2. Execute `python scripts/fetch_items.py` to create the JSON export (always
 	saved to `data/items.json`). The run may take a long time
-	because it touches every type record; use `--max-items 100` while testing to
+	because it touches every type record; use `--max-types 100` while testing to
 	fetch only the first 100 IDs.
 
 ## Ship data export
