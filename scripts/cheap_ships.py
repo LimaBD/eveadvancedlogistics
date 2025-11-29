@@ -291,20 +291,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--min-profit",
         type=float,
-        default=10_000_000.0,
-        help="Minimum total ISK profit to report (default: 10M).",
+        default=5_000_000.0,
+        help="Minimum total ISK profit to report (default: 5M).",
     )
     parser.add_argument(
         "--max-investment",
         type=float,
-        default=85_000_000.0,
+        default=48_000_000.0,
         help="Maximum ISK to spend on a single hull (default: 85M).",
     )
     parser.add_argument(
         "--top",
         type=int,
-        default=15,
-        help="Display only the top N opportunities each refresh (default: 15).",
+        default=25,
+        help="Display only the top N opportunities each refresh (default: 25).",
     )
     parser.add_argument(
         "--max-pages",
