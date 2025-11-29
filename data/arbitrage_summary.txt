@@ -1,0 +1,17 @@
+
+=== After completing page 421 across 113 regions ===
+Ship                           | Buy From (price)                                             | Sell To (price)                                              |   Units |    Total Profit |   Margin
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Augoror Navy Issue             | Lonetrek / Aunenen (60000319) @ 25,000,000.00   | Metropolis / Aldilur (1039827685477) @ 45,240,000.00   |       1 |   20,240,000.00 |    1.81x
+Gnosis                         | Khanid / Irmalin (60013945) @ 40,290,000.00   | Heimatar / Rens (60004588) @ 55,750,000.00   |       1 |   15,460,000.00 |    1.38x
+Procurer                       | Domain / Penirgman (60008164) @ 36,300,000.00   | The Forge / Jita (60003760) @ 50,100,000.00   |       1 |   13,800,000.00 |    1.38x
+Ferox                          | Khanid / Irmalin (60013945) @ 37,000,000.00   | The Citadel / Yria (60004411) @ 51,000,000.00   |       1 |   14,000,000.00 |    1.38x
+Vedmak                         | Khanid / Gehi (60013990) @ 77,000,000.00   | Tenerifis / UALX-3 (1046664001931) @ 100,000,000.00  |       1 |   23,000,000.00 |    1.30x
+Sabre                          | Curse / D87E-A (60012196) @ 45,000,000.00   | The Forge / Jita (60003760) @ 58,410,000.00   |       1 |   13,410,000.00 |    1.30x
+Drake                          | Derelik / Uzistoon (60012175) @ 47,610,000.00   | The Forge / Jita (60003760) @ 60,140,000.00   |       1 |   12,530,000.00 |    1.26x
+Pioneer Consortium Issue       | The Forge / Jita (60003760) @ 79,670,000.00   | Verge Vendor / Sortet (60011908) @ 100,000,000.00  |       1 |   20,330,000.00 |    1.26x
+Prophecy                       | Metropolis / Odebeinn (60001030) @ 50,000,000.00   | Sinq Laison / Dodixie (60011866) @ 62,470,000.00   |       1 |   12,470,000.00 |    1.25x
+Svipul                         | Metropolis / Odebeinn (60001030) @ 65,000,000.00   | Sinq Laison / Botane (1044961079041) @ 79,560,000.00   |       1 |   14,560,000.00 |    1.22x
+Succubus                       | Metropolis / Odebeinn (60001030) @ 85,000,000.00   | The Forge / Jita (60003760) @ 101,700,000.00  |       1 |   16,700,000.00 |    1.20x
+Jackdaw                        | Metropolis / Odebeinn (60001030) @ 70,000,000.00   | Domain / Amarr (60008494) @ 83,120,000.00   |       1 |   13,120,000.00 |    1.19x
+Worm                           | The Forge / Jita (60003760) @ 60,280,000.00   | The Citadel / Tama (1044579290081) @ 71,400,000.00   |       1 |   11,120,000.00 |    1.18x

@@ -34,3 +34,25 @@ ship names, IDs, and their parent group metadata.
 
 Both scripts automatically create the `data/` directory when needed, so manual
 setup is minimal.
+
+## Ship market arbitrage scanner
+
+Use `scripts/find_arbitrage.py` to walk every regional market page in lockstep
+and surface profitable ship flips (buying from sell orders, selling to buy
+orders). The tool reuses the locally cached ship/region datasets so it does not
+have to refetch static metadata each run.
+
+```
+python scripts/find_arbitrage.py --min-margin 0.05 --min-profit 5000000 --top 10
+```
+
+Key options:
+
+- `--min-margin`: Smallest acceptable margin (defaults to 2%).
+- `--min-profit`: Minimum total ISK profit for an opportunity (defaults to 10M).
+- `--max-investment`: Maximum ISK you are willing to spend on the hull (defaults to 85M).
+- `--top`: Number of opportunities printed after each page sweep.
+- `--max-pages`: Cap the number of pages per region while testing.
+
+The script prints an updated table after completing page *N* for every region,
+so you immediately see fresh opportunities as the crawl deepens.
