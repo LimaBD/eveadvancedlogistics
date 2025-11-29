@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Mapping, Tuple
+from typing import Dict, Mapping, Optional, Tuple
 
 import requests
 
@@ -15,6 +17,7 @@ ROUTE_URL = f"{ESI_BASE}/route/{{origin}}/{{destination}}/"
 USER_AGENT = "EveAdvancedLogistics/0.1 (jump calculator)"
 REQUEST_TIMEOUT = 15
 DEFAULT_SYSTEMS_PATH = Path("data/systems.json")
+DEFAULT_JUMP_CACHE_PATH = Path("data/jumps.json")
 VALID_FLAGS = {"shortest", "secure", "insecure"}
 
 
@@ -35,6 +38,104 @@ class JumpResult:
 
     def route_names(self) -> Tuple[str, ...]:
         return tuple(self.name_lookup.get(system_id, str(system_id)) for system_id in self.route)
+
+
+class JumpCache:
+    """Persistent jump-distance cache to reduce repeated ESI lookups."""
+
+    def __init__(self, *, flag: str, cache_path: Path | str = DEFAULT_JUMP_CACHE_PATH):
+        if flag not in VALID_FLAGS:
+            raise ValueError(f"Flag '{flag}' is not supported. Choose from {sorted(VALID_FLAGS)}")
+        self.flag = flag
+        self.cache_path = Path(cache_path)
+        self._cache: Dict[str, Dict[str, Optional[int]]] = self._load_cache()
+        self._dirty = False
+        self._last_write = 0.0
+
+    def jumps(self, origin_id: int, destination_id: int) -> Optional[int]:
+        if origin_id == destination_id:
+            return 0
+        flag_cache = self._cache.setdefault(self.flag, {})
+        key = self._make_key(origin_id, destination_id)
+        if key in flag_cache:
+            return flag_cache[key]
+        try:
+            route = fetch_route(origin_id, destination_id, self.flag)
+        except requests.RequestException as exc:
+            print(
+                f"Warning: failed to fetch route {origin_id}->{destination_id} ({self.flag}): {exc}",
+                file=sys.stderr,
+            )
+            flag_cache[key] = None
+            self._dirty = True
+            self._write_cache()
+            return None
+        except Exception as exc:
+            print(
+                f"Warning: unexpected error fetching route {origin_id}->{destination_id} ({self.flag}): {exc}",
+                file=sys.stderr,
+            )
+            flag_cache[key] = None
+            self._dirty = True
+            self._write_cache()
+            return None
+        jumps = max(0, len(route) - 1)
+        flag_cache[key] = jumps
+        reverse_key = self._make_key(destination_id, origin_id)
+        flag_cache.setdefault(reverse_key, jumps)
+        self._dirty = True
+        self._write_cache()
+        return jumps
+
+    def _make_key(self, origin_id: int, destination_id: int) -> str:
+        return f"{origin_id}:{destination_id}"
+
+    def _load_cache(self) -> Dict[str, Dict[str, Optional[int]]]:
+        if not self.cache_path.exists():
+            return {}
+        try:
+            raw = json.loads(self.cache_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"Warning: failed to load jump cache {self.cache_path}: {exc}", file=sys.stderr)
+            return {}
+        if not isinstance(raw, dict):
+            return {}
+        normalized: Dict[str, Dict[str, Optional[int]]] = {}
+        for flag, entries in raw.items():
+            if not isinstance(flag, str) or not isinstance(entries, dict):
+                continue
+            cleaned: Dict[str, Optional[int]] = {}
+            for key, value in entries.items():
+                if value is None:
+                    cleaned[str(key)] = None
+                    continue
+                try:
+                    cleaned[str(key)] = int(value)
+                except (TypeError, ValueError):
+                    continue
+            normalized[flag] = cleaned
+        return normalized
+
+    def _write_cache(self) -> None:
+        self._write_cache_impl(force=False)
+
+    def flush(self) -> None:
+        self._write_cache_impl(force=True)
+
+    def _write_cache_impl(self, *, force: bool) -> None:
+        if not self._dirty:
+            return
+        now = time.time()
+        if not force and now - self._last_write < 60:
+            return
+        try:
+            self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+            with self.cache_path.open("w", encoding="utf-8") as handle:
+                json.dump(self._cache, handle, indent=2, sort_keys=True)
+            self._dirty = False
+            self._last_write = now
+        except OSError as exc:
+            print(f"Warning: failed to persist jump cache {self.cache_path}: {exc}", file=sys.stderr)
 
 
 def load_system_indexes(systems_path: Path) -> tuple[Dict[str, int], Dict[int, str]]:

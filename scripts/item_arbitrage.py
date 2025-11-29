@@ -15,7 +15,7 @@ import requests
 from calc_jumps import (
     DEFAULT_SYSTEMS_PATH,
     VALID_FLAGS,
-    fetch_route,
+    JumpCache,
     load_system_indexes,
     resolve_system_identifier,
 )
@@ -100,9 +100,11 @@ class RouteOpportunity:
     @property
     def isk_per_jump(self) -> Optional[float]:
         jumps = self.total_jumps
-        if jumps is None or jumps == 0:
+        if jumps is None:
             return None
-        return self.total_profit / jumps
+        # Treat stationary trades as one jump so profit still yields a usable ratio.
+        effective_jumps = jumps if jumps > 0 else 1
+        return self.total_profit / effective_jumps
 
 
 class HttpClient:
@@ -146,33 +148,6 @@ class SystemResolver:
         return self.lookup.get(system_id, f"System {system_id}")
 
 
-class RouteCache:
-    def __init__(self, flag: str):
-        self.flag = flag
-        self._cache: Dict[Tuple[int, int], Tuple[int, ...]] = {}
-
-    def jumps(self, origin_id: int, destination_id: int) -> Optional[int]:
-        if origin_id == destination_id:
-            return 0
-        key = (origin_id, destination_id)
-        if key not in self._cache:
-            try:
-                self._cache[key] = fetch_route(origin_id, destination_id, self.flag)
-            except requests.RequestException as exc:
-                print(
-                    f"Warning: failed to fetch route {origin_id}->{destination_id}: {exc}",
-                    file=sys.stderr,
-                )
-                return None
-            except Exception as exc:  # Defensive safety net.
-                print(
-                    f"Warning: unexpected error fetching route {origin_id}->{destination_id}: {exc}",
-                    file=sys.stderr,
-                )
-                return None
-        route = self._cache[key]
-        return max(0, len(route) - 1)
-
 
 class ArbitrageTracker:
     def __init__(self, item_lookup: Mapping[int, ItemMetadata]):
@@ -211,7 +186,6 @@ class ArbitrageTracker:
         self,
         *,
         min_multiplier: float,
-        min_profit: float,
         max_investment: Optional[float],
         max_volume: Optional[float],
         max_item_volume: Optional[float],
@@ -248,8 +222,6 @@ class ArbitrageTracker:
                 continue
             unit_profit = buyer.price - seller.price
             total_profit = unit_profit * max_units
-            if total_profit < min_profit:
-                continue
             multiplier = buyer.price / seller.price if seller.price else 0.0
             if multiplier < min_multiplier:
                 continue
@@ -343,7 +315,7 @@ def group_opportunities(
     opportunities: Sequence[ItemOpportunity],
     *,
     resolver: SystemResolver,
-    route_cache: RouteCache,
+    jump_cache: JumpCache,
     current_system_id: int,
 ) -> List[RouteOpportunity]:
     grouped: Dict[Tuple[int, int], RouteOpportunity] = {}
@@ -362,8 +334,8 @@ def group_opportunities(
                 sell_system_name=resolver.resolve(sell_sys),
             )
             grouped[key] = group
-            jumps_to_buy = route_cache.jumps(current_system_id, buy_sys)
-            jumps_trade = route_cache.jumps(buy_sys, sell_sys)
+            jumps_to_buy = jump_cache.jumps(current_system_id, buy_sys)
+            jumps_trade = jump_cache.jumps(buy_sys, sell_sys)
             group.jumps_from_current = jumps_to_buy
             group.jumps_trade = jumps_trade
         group.items.append(opportunity)
@@ -378,6 +350,23 @@ def group_opportunities(
         reverse=True,
     )
     return ordered
+
+
+def filter_routes_by_profit_per_jump(
+    routes: Sequence[RouteOpportunity],
+    *,
+    min_profit_per_jump: Optional[float],
+) -> List[RouteOpportunity]:
+    if min_profit_per_jump is None or min_profit_per_jump <= 0:
+        return list(routes)
+    filtered: List[RouteOpportunity] = []
+    for route in routes:
+        isk_per_jump = route.isk_per_jump
+        if isk_per_jump is None:
+            continue
+        if isk_per_jump >= min_profit_per_jump:
+            filtered.append(route)
+    return filtered
 
 
 def render_route_report(
@@ -444,16 +433,16 @@ def parse_args() -> argparse.Namespace:
         help="Minimum price multiplier (buyer/seller) to accept (default: 1.05).",
     )
     parser.add_argument(
-        "--min-profit",
+        "--min-profit-per-jump",
         type=float,
-        default=5_000_000.0,
-        help="Minimum total ISK profit for an item before grouping (default: 5M).",
+        default=1_000_000.0,
+        help="Minimum ISK earned per jump required for a route (default: 1M).",
     )
     parser.add_argument(
         "--max-investment",
         type=float,
-        default=100_000_000.0,
-        help="Maximum ISK to commit per item opportunity (default: 100M).",
+        default=10_000_000.0,
+        help="Maximum ISK to commit per item opportunity.",
     )
     parser.add_argument(
         "--max-volume",
@@ -546,7 +535,7 @@ def main() -> None:
     http_client = HttpClient(session, request_delay=args.request_delay)
     tracker = ArbitrageTracker(item_lookup)
     resolver = SystemResolver(id_to_name)
-    route_cache = RouteCache(args.route_flag)
+    jump_cache = JumpCache(flag=args.route_flag)
 
     region_max_pages: Dict[int, int] = {}
     page = 1
@@ -573,7 +562,6 @@ def main() -> None:
             break
         opportunities = tracker.opportunities(
             min_multiplier=args.min_multiplier,
-            min_profit=args.min_profit,
             max_investment=args.max_investment,
             max_volume=args.max_volume,
             max_item_volume=args.max_item_volume,
@@ -581,8 +569,12 @@ def main() -> None:
         routes = group_opportunities(
             opportunities,
             resolver=resolver,
-            route_cache=route_cache,
+            jump_cache=jump_cache,
             current_system_id=current_system_id,
+        )
+        routes = filter_routes_by_profit_per_jump(
+            routes,
+            min_profit_per_jump=args.min_profit_per_jump,
         )
         report = render_route_report(
             routes,
@@ -598,7 +590,6 @@ def main() -> None:
     print("Scanning finished. Final grouped opportunity snapshot:")
     opportunities = tracker.opportunities(
         min_multiplier=args.min_multiplier,
-        min_profit=args.min_profit,
         max_investment=args.max_investment,
         max_volume=args.max_volume,
         max_item_volume=args.max_item_volume,
@@ -606,8 +597,12 @@ def main() -> None:
     routes = group_opportunities(
         opportunities,
         resolver=resolver,
-        route_cache=route_cache,
+        jump_cache=jump_cache,
         current_system_id=current_system_id,
+    )
+    routes = filter_routes_by_profit_per_jump(
+        routes,
+        min_profit_per_jump=args.min_profit_per_jump,
     )
     final_report = render_route_report(
         routes,
@@ -615,6 +610,7 @@ def main() -> None:
         current_system_name=current_system_name,
     )
     print(final_report)
+    jump_cache.flush()
     try:
         args.final_output.parent.mkdir(parents=True, exist_ok=True)
         args.final_output.write_text(final_report.rstrip() + "\n", encoding="utf-8")
