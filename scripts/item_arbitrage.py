@@ -42,6 +42,117 @@ FORGE_ADJACENT_REGION_IDS = {
 }
 
 
+@dataclass
+class ProfileConfig:
+    profile_name: Optional[str] = None
+    profile_path: Optional[Path] = None
+    items: Path = DEFAULT_ITEMS
+    regions: Path = DEFAULT_REGIONS
+    systems: Path = DEFAULT_SYSTEMS
+    current_system: Optional[str] = None
+    min_multiplier: float = 1.2
+    min_profit_per_jump: Optional[float] = None
+    max_total_jumps: Optional[int] = None
+    max_investment: float = 20_000_000.0
+    max_volume: float = 140.0
+    max_units: Optional[int] = None
+    max_items: Optional[int] = None
+    max_item_volume: Optional[float] = None
+    top: int = 15
+    max_pages: Optional[int] = None
+    request_delay: float = 0.1
+    item_limit: Optional[int] = None
+    route_flag: str = "shortest"
+    forge_adjacent_only: bool = False
+    final_output: Path = DEFAULT_FINAL_OUTPUT
+
+
+def _expand_path(value: object | None, default: Path, *, base_dir: Path) -> Path:
+    if value is None:
+        return default
+    candidate = value if isinstance(value, Path) else Path(str(value))
+    candidate = candidate.expanduser()
+    if not candidate.is_absolute():
+        candidate = (base_dir / candidate).resolve()
+    return candidate
+
+
+def _coerce_optional_float(value: object | None) -> Optional[float]:
+    if value is None:
+        return None
+    return float(value)
+
+
+def _coerce_optional_int(value: object | None) -> Optional[int]:
+    if value is None:
+        return None
+    return int(value)
+
+
+def _coerce_bool(value: object | None, default: bool) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered in {"true", "1", "yes", "y", "on"}:
+            return True
+        if lowered in {"false", "0", "no", "n", "off"}:
+            return False
+    raise ValueError(f"Expected boolean value, received {value!r}")
+
+
+def load_profile_config(profile_path: Path) -> ProfileConfig:
+    profile_path = profile_path.expanduser().resolve()
+    if not profile_path.exists():
+        raise FileNotFoundError(f"Profile file {profile_path} does not exist")
+    payload = json.loads(profile_path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"Profile {profile_path} must contain a JSON object")
+    config = ProfileConfig()
+    config.profile_path = profile_path
+    config.profile_name = str(payload.get("name") or profile_path.stem)
+    base_dir = profile_path.parent
+    if "items" in payload:
+        config.items = _expand_path(payload["items"], config.items, base_dir=base_dir)
+    if "regions" in payload:
+        config.regions = _expand_path(payload["regions"], config.regions, base_dir=base_dir)
+    if "systems" in payload:
+        config.systems = _expand_path(payload["systems"], config.systems, base_dir=base_dir)
+    if "final_output" in payload:
+        config.final_output = _expand_path(payload["final_output"], config.final_output, base_dir=base_dir)
+    if "current_system" in payload:
+        raw_system = payload["current_system"]
+        config.current_system = None if raw_system is None else str(raw_system)
+    if "min_multiplier" in payload:
+        config.min_multiplier = float(payload["min_multiplier"])
+    config.min_profit_per_jump = _coerce_optional_float(payload.get("min_profit_per_jump"))
+    config.max_total_jumps = _coerce_optional_int(payload.get("max_total_jumps"))
+    if "max_investment" in payload:
+        config.max_investment = float(payload["max_investment"])
+    if "max_volume" in payload:
+        config.max_volume = float(payload["max_volume"])
+    config.max_units = _coerce_optional_int(payload.get("max_units"))
+    config.max_items = _coerce_optional_int(payload.get("max_items"))
+    config.max_item_volume = _coerce_optional_float(payload.get("max_item_volume"))
+    if "top" in payload:
+        config.top = int(payload["top"])
+    config.max_pages = _coerce_optional_int(payload.get("max_pages"))
+    if "request_delay" in payload:
+        config.request_delay = float(payload["request_delay"])
+    config.item_limit = _coerce_optional_int(payload.get("item_limit"))
+    if "route_flag" in payload:
+        route_flag = str(payload["route_flag"])
+        if route_flag not in VALID_FLAGS:
+            raise ValueError(
+                f"Invalid route_flag '{route_flag}' in {profile_path}. Choose from {sorted(VALID_FLAGS)}"
+            )
+        config.route_flag = route_flag
+    config.forge_adjacent_only = _coerce_bool(payload.get("forge_adjacent_only"), config.forge_adjacent_only)
+    return config
+
+
 @dataclass(frozen=True)
 class Region:
     region_id: int
@@ -530,112 +641,36 @@ def _clear_console() -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Enumerate arbitrage opportunities across all published items, grouped by travel route.",
-    )
-    parser.add_argument("--items", type=Path, default=DEFAULT_ITEMS, help="Path to data/items.json.")
-    parser.add_argument("--regions", type=Path, default=DEFAULT_REGIONS, help="Path to data/regions.json.")
-    parser.add_argument("--systems", type=Path, default=DEFAULT_SYSTEMS, help="Path to data/systems.json.")
-    parser.add_argument(
-        "--current-system",
-        required=True,
-        help="Name or ID of the system you are currently in (used to compute total jumps).",
-    )
-    parser.add_argument(
-        "--min-multiplier",
-        type=float,
-        default=1.2,
-        help="Minimum price multiplier (buyer/seller) to accept (default: 1.3).",
-    )
-    parser.add_argument(
-        "--min-profit-per-jump",
-        type=float,
-        default=None,
-        help="Minimum ISK earned per jump required for a route (disabled by default).",
-    )
-    parser.add_argument(
-        "--max-total-jumps",
-        type=int,
-        default=None,
-        help=(
-            "Skip grouped opportunities whose total travel (current -> buy -> sell) exceeds this many jumps."
+        description=(
+            "Enumerate arbitrage opportunities using a JSON profile that encapsulates all runtime settings."
         ),
     )
     parser.add_argument(
-        "--max-investment",
-        type=float,
-        default=20_000_000.0,
-        help="Maximum ISK to commit per item opportunity.",
-    )
-    parser.add_argument(
-        "--max-volume",
-        type=float,
-        default=140.0,
-        help="Maximum cubic meters per item opportunity (default: 200m3).",
-    )
-    parser.add_argument(
-        "--max-units",
-        type=int,
-        default=None,
-        help="Maximum number of units to buy per item opportunity.",
-    )
-    parser.add_argument(
-        "--max-items",
-        type=int,
-        default=None,
-        help="Maximum number of individual item opportunities to retain after sorting.",
-    )
-    parser.add_argument(
-        "--max-item-volume",
-        type=float,
-        default=None,
-        help="Maximum cubic meters per individual item (skip larger items if set).",
-    )
-    parser.add_argument(
-        "--top",
-        type=int,
-        default=15,
-        help="Display only the top N grouped routes per refresh (default: 15).",
-    )
-    parser.add_argument(
-        "--max-pages",
-        type=int,
-        default=None,
-        help="Limit scanning to this many pages per region (testing helper).",
-    )
-    parser.add_argument(
-        "--request-delay",
-        type=float,
-        default=0.1,
-        help="Seconds to sleep after each ESI call to avoid throttling (default: 0.1).",
-    )
-    parser.add_argument(
-        "--item-limit",
-        type=int,
-        default=None,
-        help="Consider only the first N published items (testing helper).",
-    )
-    parser.add_argument(
-        "--route-flag",
-        choices=sorted(VALID_FLAGS),
-        default="shortest",
-        help="Routing preference passed to the ESI route API.",
-    )
-    parser.add_argument(
-        "--forge-adjacent-only",
-        action="store_true",
-        help="Limit scanning to The Forge and its directly adjacent regions",
-    )
-    parser.add_argument(
-        "--final-output",
+        "--profile",
         type=Path,
-        default=DEFAULT_FINAL_OUTPUT,
-        help="Write the final grouped snapshot to this path.",
+        required=True,
+        help="Path to the JSON profile describing scan parameters.",
     )
     return parser.parse_args()
 
 
 def main() -> None:
-    args = parse_args()
+    cli_args = parse_args()
+    try:
+        args = load_profile_config(cli_args.profile)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"Failed to load profile {cli_args.profile}: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    if not args.current_system:
+        print(
+            "Profile must include a 'current_system' value so jump distances can be computed.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    profile_label = args.profile_name or cli_args.profile
+    print(f"Using profile {profile_label!r} ({cli_args.profile})")
 
     try:
         items_payload = load_json_list(args.items)

@@ -60,40 +60,31 @@ so you immediately see fresh opportunities as the crawl deepens.
 ## Item-wide arbitrage scanner grouped by route
 
 Use `scripts/item_arbitrage.py` when you want to consider *any* published item
-and weigh each trade against your hauling constraints. The script consumes the
-cached `items.json`, `regions.json`, and `systems.json` datasets plus your
-current system to determine total travel distance (current system -> buy system
--> sell system) and orders the grouped output by ISK per jump.
+and weigh each trade against your hauling constraints. All runtime parameters
+now live in a JSON profile; the CLI only accepts `--profile PATH`.
 
 ```
-python scripts/item_arbitrage.py --current-system Jita --min-multiplier 1.08 \
-		--max-investment 150000000 --max-volume 9500 --min-profit-per-jump 1500000 \
-		--max-total-jumps 6 --top 15
+python scripts/item_arbitrage.py --profile scripts/presets/fast_rat.json
 ```
 
-Key options:
+Profiles accept keys that mirror the previous CLI options, including:
 
-- `--current-system`: Name or ID of your present location (required). The
-	script adds the approach leg to the total jump count before ordering results.
-- `--max-investment`: Maximum ISK you are willing to tie up per item trade.
-- `--max-volume`: Maximum cubic meters you can haul per trade (default 200m3).
-	Volume data comes from `packaged_volume` when available.
-- `--max-item-volume`: Hard cap on the per-unit volume; skip bulky items even
-	if the total trade volume would have fit otherwise.
-- `--min-multiplier`: Minimum buyer/seller price multiplier (e.g. `1.05`).
-- `--min-profit-per-jump`: Skip routes whose ISK per jump falls below this
-	value; helpful when you want only the most efficient hauls.
-- `--max-total-jumps`: Drop any grouped opportunity that would require more
-	than this many jumps (current system -> buy -> sell), ideal when flying a
-	short-range hauler like a Tayra.
-- `--top`: How many grouped routes to print after every sweep.
-- `--route-flag`: Pass `shortest`, `secure`, or `insecure` to mirror the ESI
-	route API preference.
+- `current_system` (required): Name or ID of your present location.
+- `max_investment`, `max_volume`, `max_item_volume`, `min_multiplier`,
+  `min_profit_per_jump`, `max_total_jumps`, `max_units`, `max_items`, `top`.
+- `items`, `regions`, `systems`, `final_output`: Override data file paths.
+- `forge_adjacent_only`, `route_flag`, `request_delay`, `max_pages`,
+  `item_limit` for advanced tuning/testing.
+
+Ship with one of the bundled presets in `scripts/presets/*.json` (e.g.
+`fast_rat.json`, `fat_bastard.json`, `cheap_ships.json`) or duplicate a profile
+and tweak the key/value pairs. Relative paths inside a profile are resolved
+relative to the profile file itself.
 
 After each full page sweep the script prints a table summarizing each buy/sell
 route (grouping all items that share the same origin/destination pair) along
 with item-level details and ISK per jump. The final snapshot is written to
-`data/arbitrage_items_summary.txt` by default.
+`data/arbitrage_items_summary.txt` by default unless overridden in the profile.
 
 ## Route jump calculator
 

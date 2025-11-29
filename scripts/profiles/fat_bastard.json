@@ -1,0 +1,8 @@
+{
+  "name": "fat_bastard",
+  "current_system": "Jita",
+  "forge_adjacent_only": true,
+  "max_total_jumps": 8,
+  "max_investment": 50000000,
+  "max_volume": 33000
+}
