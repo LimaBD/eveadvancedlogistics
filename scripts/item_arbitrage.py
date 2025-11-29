@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import sys
 import time
 from dataclasses import dataclass, field
@@ -98,6 +99,8 @@ class RouteOpportunity:
     multiplier_hint: float = 0.0
     jumps_from_current: Optional[int] = None
     jumps_trade: Optional[int] = None
+    transit_to_buy: Optional[ItemOpportunity] = None
+    transit_to_sell: Optional[ItemOpportunity] = None
 
     @property
     def total_jumps(self) -> Optional[int]:
@@ -360,6 +363,25 @@ def group_opportunities(
     return ordered
 
 
+def _best_item_from_route(route: Optional[RouteOpportunity]) -> Optional[ItemOpportunity]:
+    if route is None or not route.items:
+        return None
+    return max(route.items, key=lambda item: (item.total_profit, item.multiplier))
+
+
+def annotate_transit_opportunities(
+    routes: Sequence[RouteOpportunity],
+    *,
+    route_lookup: Mapping[Tuple[int, int], RouteOpportunity],
+    current_system_id: int,
+) -> None:
+    for route in routes:
+        transit_buy_route = route_lookup.get((current_system_id, route.buy_system_id))
+        transit_sell_route = route_lookup.get((current_system_id, route.sell_system_id))
+        route.transit_to_buy = _best_item_from_route(transit_buy_route)
+        route.transit_to_sell = _best_item_from_route(transit_sell_route)
+
+
 def filter_routes_by_profit_per_jump(
     routes: Sequence[RouteOpportunity],
     *,
@@ -402,47 +424,97 @@ def describe_active_route_filters(
     return reasons
 
 
+def _format_item_details(item: ItemOpportunity) -> str:
+    return (
+        f"{item.item_name} x{item.tradable_units} @ {item.buy_from.price:,.2f} -> {item.sell_to.price:,.2f}"
+        f" | profit {item.total_profit:,.2f} ( {item.multiplier:.2f}x )"
+    )
+
+
+def _append_leg_section(
+    lines: List[str],
+    *,
+    label: str,
+    opportunities: Sequence[ItemOpportunity],
+    empty_message: str,
+) -> None:
+    lines.append(f"    {label}")
+    if not opportunities:
+        lines.append(f"        {empty_message}")
+        return
+    for item in opportunities:
+        lines.append("        " + _format_item_details(item))
+
+
+def _format_system_label(system_name: str, region_name: Optional[str]) -> str:
+    if region_name:
+        return f"{system_name} ({region_name})"
+    return system_name
+
+
 def render_route_report(
     routes: Sequence[RouteOpportunity],
     *,
     top_n: int,
     current_system_name: str,
+    current_system_region: Optional[str],
 ) -> str:
     lines: List[str] = []
     if not routes:
         return "No qualifying arbitrage opportunities yet."
-    header = (
-        f"{'Buy -> Sell':<55} | {'Items':>5} | {'Units':>7} | {'Profit (ISK)':>18} | "
-        f"{'Investment':>18} | {'Volume (m3)':>14} | {'Jumps':>10} | {'ISK/jump':>12}"
-    )
-    lines.append(header)
-    lines.append("-" * len(header))
+    current_label = _format_system_label(current_system_name, current_system_region)
     for route in routes[:top_n]:
         jumps_total = route.total_jumps
         jumps_display = "n/a" if jumps_total is None else str(jumps_total)
         isk_per_jump = route.isk_per_jump
-        isk_per_jump_display = "n/a" if isk_per_jump is None else f"{isk_per_jump:,.2f}"
+        isk_per_jump_display = None if isk_per_jump is None else f"{isk_per_jump:,.2f}"
         profit_display = f"{route.total_profit:,.2f}"
         investment_display = f"{route.total_investment:,.2f}"
         volume_display = f"{route.total_volume:,.2f}"
-        buy_sell = f"{route.buy_region} / {route.buy_system_name} -> {route.sell_region} / {route.sell_system_name}"
-        lines.append(
-            f"{buy_sell:<55} | {len(route.items):>5} | {route.total_units:>7} | {profit_display:>18} | "
-            f"{investment_display:>18} | {volume_display:>14} | {jumps_display:>10} | {isk_per_jump_display:>12}"
+        buy_label = _format_system_label(route.buy_system_name, route.buy_region)
+        sell_label = _format_system_label(route.sell_system_name, route.sell_region)
+        path_label = f"{current_label} -> {buy_label} -> {sell_label}"
+        jump_component = f"jumps {jumps_display}"
+        isk_per_jump_component = (
+            f"i/j $ {isk_per_jump_display}" if isk_per_jump_display is not None else "i/j n/a"
         )
-        for item in route.items:
-            lines.append(
-                "    "
-                + f"{item.item_name} x{item.tradable_units} @ {item.buy_from.price:,.2f} -> {item.sell_to.price:,.2f}"
-                + f" | profit {item.total_profit:,.2f} | mult {item.multiplier:.2f}x"
+        lines.append(
+            f"{path_label} | in. $ {investment_display} | p. $ {profit_display} | "
+            f"vol. {volume_display} m3 | {jump_component} | {isk_per_jump_component}"
+        )
+        transit_to_buy = [route.transit_to_buy] if route.transit_to_buy else []
+        if transit_to_buy and current_label != buy_label:
+            _append_leg_section(
+                lines,
+                label=f"{current_label} -> {buy_label}",
+                opportunities=transit_to_buy,
+                empty_message="no transit opportunity",
             )
-        if route.jumps_from_current is not None and route.jumps_trade is not None:
-            lines.append(
-                "    "
-                + f"Route: {current_system_name} -> {route.buy_system_name} ({route.jumps_from_current} jumps), "
-                + f"then {route.buy_system_name} -> {route.sell_system_name} ({route.jumps_trade} jumps)"
+        transit_to_sell = [route.transit_to_sell] if route.transit_to_sell else []
+        if transit_to_sell and current_label != sell_label and buy_label != current_label:
+            _append_leg_section(
+                lines,
+                label=f"{current_label} -> {sell_label}",
+                opportunities=transit_to_sell,
+                empty_message="no transit opportunity",
             )
+        _append_leg_section(
+            lines,
+            label=f"{buy_label} -> {sell_label}",
+            opportunities=route.items,
+            empty_message="no trade opportunities",
+        )
+        lines.append("")
     return "\n".join(lines)
+
+
+def _clear_console() -> None:
+    """Clear the active console so only the latest refresh is visible."""
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        sys.stdout.write("\033[2J\033[H")
+        sys.stdout.flush()
 
 
 def parse_args() -> argparse.Namespace:
@@ -460,8 +532,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--min-multiplier",
         type=float,
-        default=2,
-        help="Minimum price multiplier (buyer/seller) to accept (default: 2).",
+        default=1.2,
+        help="Minimum price multiplier (buyer/seller) to accept (default: 1.3).",
     )
     parser.add_argument(
         "--min-profit-per-jump",
@@ -498,8 +570,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--top",
         type=int,
-        default=50,
-        help="Display only the top N grouped routes per refresh (default: 25).",
+        default=15,
+        help="Display only the top N grouped routes per refresh (default: 15).",
     )
     parser.add_argument(
         "--max-pages",
@@ -550,7 +622,7 @@ def main() -> None:
         sys.exit(1)
 
     try:
-        name_to_id, id_to_name = load_system_indexes(Path(args.systems))
+        name_to_id, id_to_name, system_regions = load_system_indexes(Path(args.systems))
     except (OSError, ValueError) as exc:
         print(f"Failed to load system metadata: {exc}", file=sys.stderr)
         sys.exit(1)
@@ -567,6 +639,7 @@ def main() -> None:
         print("No published items available after applying filters", file=sys.stderr)
         sys.exit(1)
     regions = build_regions(regions_payload)
+    region_name_lookup = {region.region_id: region.name for region in regions}
     if args.forge_adjacent_only:
         before = len(regions)
         regions = [region for region in regions if region.region_id in FORGE_ADJACENT_REGION_IDS]
@@ -583,6 +656,11 @@ def main() -> None:
     if not regions:
         print("No regions to scan", file=sys.stderr)
         sys.exit(1)
+
+    current_system_region_name = None
+    current_region_id = system_regions.get(current_system_id)
+    if current_region_id is not None:
+        current_system_region_name = region_name_lookup.get(current_region_id)
 
     session = requests.Session()
     session.headers.update({
@@ -629,10 +707,18 @@ def main() -> None:
             jump_cache=jump_cache,
             current_system_id=current_system_id,
         )
+        route_lookup = {
+            (route.buy_system_id, route.sell_system_id): route for route in routes_raw
+        }
         routes = filter_routes_by_profit_per_jump(
             routes_raw,
             min_profit_per_jump=args.min_profit_per_jump,
             max_total_jumps=args.max_total_jumps,
+        )
+        annotate_transit_opportunities(
+            routes,
+            route_lookup=route_lookup,
+            current_system_id=current_system_id,
         )
         if not routes and routes_raw:
             reasons = describe_active_route_filters(
@@ -649,7 +735,9 @@ def main() -> None:
             routes,
             top_n=args.top,
             current_system_name=current_system_name,
+            current_system_region=current_system_region_name,
         )
+        _clear_console()
         print(f"\n=== After completing page {page} across {pages_fetched} regions ===")
         print(report)
         page += 1
@@ -669,10 +757,18 @@ def main() -> None:
         jump_cache=jump_cache,
         current_system_id=current_system_id,
     )
+    route_lookup = {
+        (route.buy_system_id, route.sell_system_id): route for route in routes_raw
+    }
     routes = filter_routes_by_profit_per_jump(
         routes_raw,
         min_profit_per_jump=args.min_profit_per_jump,
         max_total_jumps=args.max_total_jumps,
+    )
+    annotate_transit_opportunities(
+        routes,
+        route_lookup=route_lookup,
+        current_system_id=current_system_id,
     )
     if not routes and routes_raw:
         reasons = describe_active_route_filters(
@@ -689,7 +785,9 @@ def main() -> None:
         routes,
         top_n=args.top,
         current_system_name=current_system_name,
+        current_system_region=current_system_region_name,
     )
+    _clear_console()
     print(final_report)
     jump_cache.flush()
     try:

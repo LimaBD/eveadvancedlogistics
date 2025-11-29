@@ -138,7 +138,7 @@ class JumpCache:
             print(f"Warning: failed to persist jump cache {self.cache_path}: {exc}", file=sys.stderr)
 
 
-def load_system_indexes(systems_path: Path) -> tuple[Dict[str, int], Dict[int, str]]:
+def load_system_indexes(systems_path: Path) -> tuple[Dict[str, int], Dict[int, str], Dict[int, int]]:
     """Build lookup tables from the cached systems export."""
     if not systems_path.exists():
         raise FileNotFoundError(
@@ -153,18 +153,25 @@ def load_system_indexes(systems_path: Path) -> tuple[Dict[str, int], Dict[int, s
 
     name_to_id: Dict[str, int] = {}
     id_to_name: Dict[int, str] = {}
+    system_regions: Dict[int, int] = {}
     for entry in data:
         if "id" not in entry or "name" not in entry:
             continue
         system_id = int(entry["id"])
         system_name = str(entry["name"])
+        region_id = entry.get("region_id")
         name_to_id[system_name.lower()] = system_id
         id_to_name[system_id] = system_name
+        if region_id is not None:
+            try:
+                system_regions[system_id] = int(region_id)
+            except (TypeError, ValueError):
+                continue
 
     if not name_to_id:
         raise ValueError(f"No valid system records found in {systems_path}")
 
-    return name_to_id, id_to_name
+    return name_to_id, id_to_name, system_regions
 
 
 def resolve_system_identifier(
@@ -216,7 +223,7 @@ def calculate_jump_count(
 ) -> JumpResult:
     """Resolve both endpoints and fetch a route from ESI."""
     systems_file = Path(systems_path)
-    name_to_id, id_to_name = load_system_indexes(systems_file)
+    name_to_id, id_to_name, _ = load_system_indexes(systems_file)
 
     origin_id = resolve_system_identifier(origin, name_to_id, id_to_name)
     destination_id = resolve_system_identifier(destination, name_to_id, id_to_name)
