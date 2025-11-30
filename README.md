@@ -57,50 +57,67 @@ Key options:
 The script prints an updated table after completing page *N* for every region,
 so you immediately see fresh opportunities as the crawl deepens.
 
-## Item-wide arbitrage scanner grouped by route
+## Item-wide arbitrage: split workflow
 
-Use `scripts/item_arbitrage.py` when you want to consider *any* published item
-and weigh each trade against your hauling constraints. All runtime parameters
-now live in a JSON profile; the CLI only accepts `--profile PATH`.
+Live scanning has been split into two scripts so you can fetch once and iterate
+on strategies offline.
+
+### 1. Fetch market orders
 
 ```
-python scripts/item_arbitrage.py --profile scripts/presets/fast_rat.json
+python -m scripts.fetch_market_orders --regions data/regions.json --output data/new_eden_orders.json --max-pages 10
 ```
 
-Profiles accept keys that mirror the previous CLI options, including:
+- Profile is optional; use it only when you want to reuse an existing region/request-delay configuration.
+- Without a profile the script simply walks every region in `--regions` (default `data/regions.json`) and dumps **all** active orders.
+- Outputs a JSON blob with `orders[]`, per-region stats, request delay, and provenance info so downstream processing can reuse it.
 
-- `current_system` (required): Name or ID of your present location.
-- `max_investment`, `max_volume`, `max_item_volume`, `min_multiplier`,
-  `min_profit_per_jump`, `max_total_jumps`, `max_units`, `max_items`, `top`.
-- `items`, `regions`, `systems`, `final_output`: Override data file paths.
-- `forge_adjacent_only`, `route_flag`, `request_delay`, `max_pages`,
-  `item_limit` for advanced tuning/testing.
+### 2. Process cached orders
 
-Ship with one of the bundled presets in `scripts/presets/*.json` (e.g.
-`fast_rat.json`, `fat_bastard.json`, `cheap_ships.json`) or duplicate a profile
-and tweak the key/value pairs. Relative paths inside a profile are resolved
-relative to the profile file itself.
+```
+python -m scripts.item_arbitrage --profile scripts/presets/fast_rat.json --orders-file data/new_eden_orders.json
+```
 
-After each full page sweep the script prints a table summarizing each buy/sell
-route (grouping all items that share the same origin/destination pair) along
-with item-level details and ISK per jump. The final snapshot is written to
-`data/arbitrage_items_summary.txt` by default unless overridden in the profile.
+- Rebuilds order books from the snapshot and applies the selected profile.
+- Swap profiles between runs to compare hauling strategies without hitting ESI.
+- Writes the usual grouped route report to `final_output` from the profile.
+
+Profiles still carry every runtime knob:
+
+- `current_system` (required), `min_profit_per_jump`, `max_total_jumps`, `min_multiplier`.
+- Investment/volume controls: `max_investment`, `max_volume`, `max_item_volume`, `max_units`, `max_items`.
+- Data/IO overrides: `items`, `regions`, `systems`, `final_output`.
+- Advanced tuning: `route_flag`, `request_delay`, `max_pages`, `item_limit`, `forge_adjacent_only`.
+
+Relative paths in a profile resolve next to the JSON file, so copy an existing
+profile under `scripts/presets/` to get started quickly.
 
 ## Route jump calculator
 
-Use `scripts/calc_jumps.py` to query the ESI routing API and quickly determine
-how many stargate jumps separate two systems. The script also exposes the
-`calculate_jump_count` function for reuse in other automation.
+The legacy ESI-backed `calc_jumps.py` script has been retired. Routing is now
+handled entirely offline using a cached graph, which avoids API churn and makes
+repeat queries instant.
+
+First, build or refresh the reusable stargate network file:
 
 ```
-python scripts/calc_jumps.py Jita Amarr --flag secure --show-route
+python scripts/build_system_graph.py --systems-file data/systems.json --output data/system_graph.json
 ```
 
-Arguments:
+Then run the local calculator, which performs a breadth-first search over that
+graph:
+
+```
+python scripts/calc_jumps_local.py Jita Amarr --graph-file data/system_graph.json --show-route
+```
+
+Key options:
 
 - Positional `origin`/`destination` accept either system names or numeric IDs.
-- `--flag` controls ESI routing mode (`shortest`, `secure`, `insecure`).
-- `--systems-file` overrides the cached systems JSON (defaults to
-	`data/systems.json`).
-- `--show-route` prints the full, name-resolved waypoint list instead of just
-	the jump count.
+- `--graph-file` points at the generated graph (defaults to
+	`data/system_graph.json`).
+- `--systems-file` provides the metadata needed to resolve names.
+- `--show-route` prints the full path.
+
+The local solver always returns the shortest hop count and never calls ESI once
+the graph has been generated.

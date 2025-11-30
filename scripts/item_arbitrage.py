@@ -1,4 +1,4 @@
-"""Scan EVE Online regional markets for generalized arbitrage opportunities."""
+"""Process cached market orders and rank arbitrage routes."""
 from __future__ import annotations
 
 import argparse
@@ -9,29 +9,25 @@ import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
-import requests
-
-from calc_jumps import (
+from calc_jumps_local import (
+    DEFAULT_GRAPH_PATH,
     DEFAULT_SYSTEMS_PATH,
+    LocalJumpCache,
     VALID_FLAGS,
-    JumpCache,
     load_system_indexes,
     resolve_system_identifier,
 )
 
-ESI_BASE = "https://esi.evetech.net/latest"
-DATASOURCE = "tranquility"
-ORDERS_URL = f"{ESI_BASE}/markets/{{region_id}}/orders/"
-USER_AGENT = "EveAdvancedLogistics/0.2 (item arbitrage scanner)"
-REQUEST_TIMEOUT = 30
-MAX_RETRIES = 4
-BACKOFF_SECONDS = 1.5
+
 DEFAULT_ITEMS = Path("data/items.json")
 DEFAULT_REGIONS = Path("data/regions.json")
 DEFAULT_SYSTEMS = DEFAULT_SYSTEMS_PATH
+DEFAULT_SYSTEM_GRAPH = DEFAULT_GRAPH_PATH
 DEFAULT_FINAL_OUTPUT = Path("data/arbitrage_items_summary.txt")
+DEFAULT_ORDERS_SNAPSHOT = Path("data/market_orders_snapshot.json")
+PLAYER_STRUCTURE_MIN_LOCATION_ID = 1_000_000_000_000
 THE_FORGE_REGION_ID = 10000002
 FORGE_ADJACENT_REGION_IDS = {
     THE_FORGE_REGION_ID,
@@ -42,6 +38,33 @@ FORGE_ADJACENT_REGION_IDS = {
 }
 
 
+def is_player_structure(location_id: int) -> bool:
+    """Player-owned structures use large location IDs (>= 1e12)."""
+    return location_id >= PLAYER_STRUCTURE_MIN_LOCATION_ID
+
+
+def load_system_security(path: Path) -> Dict[int, float]:
+    path = path.expanduser().resolve()
+    if not path.exists():
+        raise FileNotFoundError(f"Systems file {path} missing; cannot evaluate security status")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError(f"Systems file {path} must contain a JSON array")
+    lookup: Dict[int, float] = {}
+    for entry in payload:
+        if not isinstance(entry, Mapping):
+            continue
+        system_id = entry.get("id")
+        security = entry.get("security_status")
+        if system_id is None or security is None:
+            continue
+        try:
+            lookup[int(system_id)] = float(security)
+        except (TypeError, ValueError):
+            continue
+    return lookup
+
+
 @dataclass
 class ProfileConfig:
     profile_name: Optional[str] = None
@@ -49,6 +72,7 @@ class ProfileConfig:
     items: Path = DEFAULT_ITEMS
     regions: Path = DEFAULT_REGIONS
     systems: Path = DEFAULT_SYSTEMS
+    system_graph: Path = DEFAULT_SYSTEM_GRAPH
     current_system: Optional[str] = None
     min_multiplier: float = 1.2
     min_profit_per_jump: Optional[float] = None
@@ -59,12 +83,40 @@ class ProfileConfig:
     max_items: Optional[int] = None
     max_item_volume: Optional[float] = None
     top: int = 15
-    max_pages: Optional[int] = None
-    request_delay: float = 0.1
     item_limit: Optional[int] = None
     route_flag: str = "shortest"
     forge_adjacent_only: bool = False
+    min_security_status: Optional[float] = None
     final_output: Path = DEFAULT_FINAL_OUTPUT
+    partial_top: int = 5
+    partial_interval: int = 50
+
+
+@dataclass(frozen=True)
+class Region:
+    region_id: int
+    name: str
+
+
+@dataclass
+class Order:
+    order_id: int
+    type_id: int
+    price: float
+    volume_remain: int
+    min_volume: int
+    is_buy_order: bool
+    system_id: int
+    location_id: int
+    region_id: int
+    region_name: str
+
+
+@dataclass(frozen=True)
+class ItemMetadata:
+    type_id: int
+    name: str
+    unit_volume: float
 
 
 def _expand_path(value: object | None, default: Path, *, base_dir: Path) -> Path:
@@ -120,6 +172,13 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
         config.regions = _expand_path(payload["regions"], config.regions, base_dir=base_dir)
     if "systems" in payload:
         config.systems = _expand_path(payload["systems"], config.systems, base_dir=base_dir)
+    graph_override = (
+        payload.get("system_graph")
+        or payload.get("graph")
+        or payload.get("graph_file")
+    )
+    if graph_override is not None:
+        config.system_graph = _expand_path(graph_override, config.system_graph, base_dir=base_dir)
     if "final_output" in payload:
         config.final_output = _expand_path(payload["final_output"], config.final_output, base_dir=base_dir)
     if "current_system" in payload:
@@ -138,9 +197,6 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
     config.max_item_volume = _coerce_optional_float(payload.get("max_item_volume"))
     if "top" in payload:
         config.top = int(payload["top"])
-    config.max_pages = _coerce_optional_int(payload.get("max_pages"))
-    if "request_delay" in payload:
-        config.request_delay = float(payload["request_delay"])
     config.item_limit = _coerce_optional_int(payload.get("item_limit"))
     if "route_flag" in payload:
         route_flag = str(payload["route_flag"])
@@ -150,34 +206,58 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
             )
         config.route_flag = route_flag
     config.forge_adjacent_only = _coerce_bool(payload.get("forge_adjacent_only"), config.forge_adjacent_only)
+    config.min_security_status = _coerce_optional_float(payload.get("min_security_status"))
+    if "partial_top" in payload:
+        config.partial_top = max(0, int(payload["partial_top"]))
+    if "partial_interval" in payload:
+        config.partial_interval = max(1, int(payload["partial_interval"]))
     return config
 
 
-@dataclass(frozen=True)
-class Region:
-    region_id: int
-    name: str
+def load_json_list(path: Path) -> List[Dict]:
+    path = path.expanduser().resolve()
+    if not path.exists():
+        raise FileNotFoundError(f"Missing required file: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, list):
+        raise ValueError(f"Expected a list in {path}")
+    return payload
 
 
-@dataclass
-class Order:
-    order_id: int
-    type_id: int
-    price: float
-    volume_remain: int
-    min_volume: int
-    is_buy_order: bool
-    system_id: int
-    location_id: int
-    region_id: int
-    region_name: str
+def build_item_lookup(items_payload: Iterable[Mapping], *, limit: Optional[int]) -> Dict[int, ItemMetadata]:
+    lookup: Dict[int, ItemMetadata] = {}
+    remaining = limit if limit is None else max(1, limit)
+    for entry in items_payload:
+        if not entry.get("published", True):
+            continue
+        try:
+            type_id = int(entry["id"])
+            name = str(entry["name"]).strip()
+        except (KeyError, ValueError) as exc:
+            raise ValueError(f"Invalid item entry: {entry}") from exc
+        if not name:
+            continue
+        packaged_vol = float(entry.get("packaged_volume") or 0.0)
+        regular_vol = float(entry.get("volume") or 0.0)
+        unit_volume = packaged_vol if packaged_vol > 0 else regular_vol
+        lookup[type_id] = ItemMetadata(type_id=type_id, name=name, unit_volume=unit_volume)
+        if remaining is not None:
+            remaining -= 1
+            if remaining == 0:
+                break
+    return lookup
 
 
-@dataclass(frozen=True)
-class ItemMetadata:
-    type_id: int
-    name: str
-    unit_volume: float
+def build_regions(regions_payload: Iterable[Mapping]) -> List[Region]:
+    regions: List[Region] = []
+    for entry in regions_payload:
+        try:
+            region_id = int(entry["id"])
+            name = str(entry["name"])
+        except (KeyError, ValueError) as exc:
+            raise ValueError(f"Invalid region entry: {entry}") from exc
+        regions.append(Region(region_id=region_id, name=name))
+    return regions
 
 
 @dataclass
@@ -224,42 +304,8 @@ class RouteOpportunity:
         jumps = self.total_jumps
         if jumps is None:
             return None
-        # Treat stationary trades as one jump so profit still yields a usable ratio.
         effective_jumps = jumps if jumps > 0 else 1
         return self.total_profit / effective_jumps
-
-
-class HttpClient:
-    """Thin wrapper with retry/backoff for ESI requests."""
-
-    def __init__(self, session: requests.Session, request_delay: float) -> None:
-        self.session = session
-        self.request_delay = max(0.0, request_delay)
-
-    def get_json(self, url: str, *, params: Dict[str, str] | None = None) -> Tuple[object, Mapping[str, str]]:
-        last_exc: Optional[Exception] = None
-        for attempt in range(1, MAX_RETRIES + 1):
-            try:
-                response = self.session.get(url, params=params, timeout=REQUEST_TIMEOUT)
-                if self.request_delay:
-                    time.sleep(self.request_delay)
-                if response.status_code == 404:
-                    return {}, response.headers
-                if response.status_code == 420:
-                    reset = int(response.headers.get("x-esi-error-limit-reset", "1"))
-                    time.sleep(reset + 1)
-                    continue
-                if response.status_code >= 500:
-                    raise requests.HTTPError(f"ESI server error {response.status_code}")
-                response.raise_for_status()
-                payload = response.json()
-                return payload, response.headers
-            except (requests.RequestException, ValueError) as exc:
-                last_exc = exc
-                if attempt == MAX_RETRIES:
-                    break
-                time.sleep(BACKOFF_SECONDS * attempt)
-        raise RuntimeError(f"Failed to GET {url}") from last_exc
 
 
 class SystemResolver:
@@ -270,39 +316,37 @@ class SystemResolver:
         return self.lookup.get(system_id, f"System {system_id}")
 
 
+@dataclass
+class ItemOrderBook:
+    sells: Dict[int, Order] = field(default_factory=dict)
+    buys: Dict[int, Order] = field(default_factory=dict)
+
+    def ingest(self, order: Order) -> None:
+        bucket = self.buys if order.is_buy_order else self.sells
+        existing = bucket.get(order.system_id)
+        is_better = False
+        if existing is None:
+            is_better = True
+        elif order.is_buy_order:
+            is_better = order.price > existing.price
+        else:
+            is_better = order.price < existing.price
+        if is_better:
+            bucket[order.system_id] = order
+
 
 class ArbitrageTracker:
     def __init__(self, item_lookup: Mapping[int, ItemMetadata]):
         self.item_lookup = item_lookup
-        self.best_buy_orders: Dict[int, Order] = {}
-        self.best_sell_orders: Dict[int, Order] = {}
+        self.books: Dict[int, ItemOrderBook] = {}
 
-    def ingest(self, order_payload: Mapping, region: Region) -> None:
-        type_id = int(order_payload.get("type_id", 0))
-        if type_id not in self.item_lookup:
+    def ingest(self, order: Order) -> None:
+        if order.type_id not in self.item_lookup:
             return
-        order = Order(
-            order_id=int(order_payload.get("order_id") or 0),
-            type_id=type_id,
-            price=float(order_payload.get("price", 0.0)),
-            volume_remain=int(order_payload.get("volume_remain", 0)),
-            min_volume=int(order_payload.get("min_volume", 1)),
-            is_buy_order=bool(order_payload.get("is_buy_order", False)),
-            system_id=int(order_payload.get("system_id") or 0),
-            location_id=int(order_payload.get("location_id") or 0),
-            region_id=region.region_id,
-            region_name=region.name,
-        )
         if order.volume_remain <= 0:
             return
-        if order.is_buy_order:
-            best = self.best_buy_orders.get(type_id)
-            if best is None or order.price > best.price:
-                self.best_buy_orders[type_id] = order
-        else:
-            best = self.best_sell_orders.get(type_id)
-            if best is None or order.price < best.price:
-                self.best_sell_orders[type_id] = order
+        book = self.books.setdefault(order.type_id, ItemOrderBook())
+        book.ingest(order)
 
     def opportunities(
         self,
@@ -313,69 +357,69 @@ class ArbitrageTracker:
         max_item_volume: Optional[float],
         max_units_cap: Optional[int],
         max_items_cap: Optional[int],
+        progress_callback: Optional[Callable[[int, ItemOpportunity], None]] = None,
     ) -> List[ItemOpportunity]:
         opps: List[ItemOpportunity] = []
-        shared_type_ids = self.best_buy_orders.keys() & self.best_sell_orders.keys()
-        for type_id in shared_type_ids:
+        for type_id, book in self.books.items():
+            if not book.sells or not book.buys:
+                continue
             item_meta = self.item_lookup[type_id]
-            seller = self.best_sell_orders[type_id]
-            buyer = self.best_buy_orders[type_id]
-            if buyer.price <= seller.price:
-                continue
-            if seller.min_volume > 1 or buyer.min_volume > 1:
-                continue
-            if seller.volume_remain <= 0 or buyer.volume_remain <= 0:
-                continue
-            if seller.price <= 0:
-                continue
             unit_volume = max(item_meta.unit_volume, 0.0)
             if max_item_volume is not None and unit_volume > max_item_volume:
                 continue
-            max_units = min(seller.volume_remain, buyer.volume_remain)
-            if max_units <= 0:
-                continue
-            if max_units_cap is not None:
-                if max_units_cap <= 0:
+            for sell_order in book.sells.values():
+                if sell_order.min_volume > 1:
                     continue
-                max_units = min(max_units, max_units_cap)
-            if max_investment is not None:
-                if seller.price > max_investment:
-                    continue
-                invest_cap = int(max_investment // seller.price)
-                max_units = min(max_units, invest_cap)
-            if max_volume is not None and unit_volume > 0:
-                volume_cap = int(max_volume // unit_volume)
-                max_units = min(max_units, volume_cap)
-            if max_units <= 0:
-                continue
-            unit_profit = buyer.price - seller.price
-            total_profit = unit_profit * max_units
-            multiplier = buyer.price / seller.price if seller.price else 0.0
-            if multiplier < min_multiplier:
-                continue
-            total_investment = seller.price * max_units
-            total_volume = unit_volume * max_units
-            if max_volume is not None and total_volume > max_volume + 1e-6:
-                continue
-            opps.append(
-                ItemOpportunity(
-                    type_id=type_id,
-                    item_name=item_meta.name,
-                    buy_from=seller,
-                    sell_to=buyer,
-                    unit_profit=unit_profit,
-                    tradable_units=max_units,
-                    total_profit=total_profit,
-                    multiplier=multiplier,
-                    total_investment=total_investment,
-                    total_volume=total_volume,
-                )
-            )
-        ordered = sorted(
-            opps,
-            key=lambda entry: (entry.total_profit, entry.multiplier),
-            reverse=True,
-        )
+                for buy_order in book.buys.values():
+                    if buy_order.price <= sell_order.price:
+                        continue
+                    if buy_order.min_volume > 1:
+                        continue
+                    tradable = min(sell_order.volume_remain, buy_order.volume_remain)
+                    if tradable <= 0:
+                        continue
+                    if max_units_cap is not None:
+                        if max_units_cap <= 0:
+                            continue
+                        tradable = min(tradable, max_units_cap)
+                    if max_investment is not None:
+                        if sell_order.price > max_investment:
+                            continue
+                        invest_cap = int(max_investment // sell_order.price)
+                        tradable = min(tradable, invest_cap)
+                    if tradable <= 0:
+                        continue
+                    if max_volume is not None and unit_volume > 0:
+                        volume_cap = int(max_volume // unit_volume)
+                        tradable = min(tradable, volume_cap)
+                    if tradable <= 0:
+                        continue
+                    unit_profit = buy_order.price - sell_order.price
+                    multiplier = buy_order.price / sell_order.price if sell_order.price else 0.0
+                    if multiplier < min_multiplier:
+                        continue
+                    total_profit = unit_profit * tradable
+                    total_investment = sell_order.price * tradable
+                    total_volume = unit_volume * tradable
+                    if max_volume is not None and total_volume > max_volume + 1e-6:
+                        continue
+                    opps.append(
+                        ItemOpportunity(
+                            type_id=type_id,
+                            item_name=item_meta.name,
+                            buy_from=sell_order,
+                            sell_to=buy_order,
+                            unit_profit=unit_profit,
+                            tradable_units=tradable,
+                            total_profit=total_profit,
+                            multiplier=multiplier,
+                            total_investment=total_investment,
+                            total_volume=total_volume,
+                        )
+                    )
+                    if progress_callback is not None:
+                        progress_callback(len(opps), opps[-1])
+        ordered = sorted(opps, key=lambda entry: (entry.total_profit, entry.multiplier), reverse=True)
         if max_items_cap is not None:
             if max_items_cap <= 0:
                 return []
@@ -383,73 +427,48 @@ class ArbitrageTracker:
         return ordered
 
 
-def load_json_list(path: Path) -> List[Dict]:
-    if not path.exists():
-        raise FileNotFoundError(f"Missing required file: {path}")
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, list):
-        raise ValueError(f"Expected a list in {path}")
-    return payload
-
-
-def build_item_lookup(items_payload: Iterable[Mapping], *, limit: Optional[int]) -> Dict[int, ItemMetadata]:
-    lookup: Dict[int, ItemMetadata] = {}
-    remaining = limit if limit is None else max(1, limit)
-    for entry in items_payload:
-        if not entry.get("published", True):
+def load_orders_snapshot(path: Path) -> Tuple[List[Order], Mapping[str, object]]:
+    snapshot_path = path.expanduser().resolve()
+    if not snapshot_path.exists():
+        raise FileNotFoundError(f"Orders snapshot {snapshot_path} does not exist")
+    payload = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    orders_payload = payload.get("orders")
+    if not isinstance(orders_payload, list):
+        raise ValueError(f"Snapshot {snapshot_path} does not contain an 'orders' array")
+    orders: List[Order] = []
+    for entry in orders_payload:
+        if not isinstance(entry, Mapping):
             continue
         try:
-            type_id = int(entry["id"])
-            name = str(entry["name"]).strip()
-        except (KeyError, ValueError) as exc:
-            raise ValueError(f"Invalid item entry: {entry}") from exc
-        if not name:
+            order = Order(
+                order_id=int(entry.get("order_id") or 0),
+                type_id=int(entry.get("type_id") or 0),
+                price=float(entry.get("price") or 0.0),
+                volume_remain=int(entry.get("volume_remain") or 0),
+                min_volume=int(entry.get("min_volume") or 1),
+                is_buy_order=bool(entry.get("is_buy_order", False)),
+                system_id=int(entry.get("system_id") or 0),
+                location_id=int(entry.get("location_id") or 0),
+                region_id=int(entry.get("region_id") or 0),
+                region_name=str(entry.get("region_name") or f"Region {entry.get('region_id')}")
+            )
+        except (TypeError, ValueError) as exc:
+            raise ValueError(f"Invalid order entry in snapshot: {entry}") from exc
+        if order.volume_remain <= 0:
             continue
-        packaged_vol = float(entry.get("packaged_volume") or 0.0)
-        regular_vol = float(entry.get("volume") or 0.0)
-        unit_volume = packaged_vol if packaged_vol > 0 else regular_vol
-        lookup[type_id] = ItemMetadata(type_id=type_id, name=name, unit_volume=unit_volume)
-        if remaining is not None:
-            remaining -= 1
-            if remaining == 0:
-                break
-    return lookup
-
-
-def build_regions(regions_payload: Iterable[Mapping]) -> List[Region]:
-    regions: List[Region] = []
-    for entry in regions_payload:
-        try:
-            region_id = int(entry["id"])
-            name = str(entry["name"])
-        except (KeyError, ValueError) as exc:
-            raise ValueError(f"Invalid region entry: {entry}") from exc
-        regions.append(Region(region_id=region_id, name=name))
-    return regions
-
-
-def fetch_orders_for_region(http_client: HttpClient, region: Region, page: int) -> Tuple[List[Dict], int]:
-    params = {
-        "datasource": DATASOURCE,
-        "order_type": "all",
-        "page": str(page),
-    }
-    url = ORDERS_URL.format(region_id=region.region_id)
-    payload, headers = http_client.get_json(url, params=params)
-    if not payload:
-        return [], int(headers.get("X-Pages", "0"))
-    if not isinstance(payload, list):
-        raise ValueError(f"Unexpected payload for region {region.region_id}: {payload}")
-    max_pages = int(headers.get("X-Pages", "1"))
-    return payload, max_pages
+        orders.append(order)
+    if not orders:
+        raise ValueError(f"Snapshot {snapshot_path} does not contain usable orders")
+    return orders, payload
 
 
 def group_opportunities(
     opportunities: Sequence[ItemOpportunity],
     *,
     resolver: SystemResolver,
-    jump_cache: JumpCache,
+    jump_cache: LocalJumpCache,
     current_system_id: int,
+    max_total_volume: Optional[float],
 ) -> List[RouteOpportunity]:
     grouped: Dict[Tuple[int, int], RouteOpportunity] = {}
     for opportunity in opportunities:
@@ -467,16 +486,41 @@ def group_opportunities(
                 sell_system_name=resolver.resolve(sell_sys),
             )
             grouped[key] = group
-            jumps_to_buy = jump_cache.jumps(current_system_id, buy_sys)
-            jumps_trade = jump_cache.jumps(buy_sys, sell_sys)
-            group.jumps_from_current = jumps_to_buy
-            group.jumps_trade = jumps_trade
-        group.items.append(opportunity)
-        group.total_profit += opportunity.total_profit
-        group.total_investment += opportunity.total_investment
-        group.total_volume += opportunity.total_volume
-        group.total_units += opportunity.tradable_units
-        group.multiplier_hint = max(group.multiplier_hint, opportunity.multiplier)
+            group.jumps_from_current = jump_cache.jumps(current_system_id, buy_sys)
+            group.jumps_trade = jump_cache.jumps(buy_sys, sell_sys)
+        candidate = opportunity
+        if max_total_volume is not None:
+            remaining_volume = max_total_volume - group.total_volume
+            if remaining_volume <= 1e-6:
+                continue
+            if candidate.total_volume - remaining_volume > 1e-6:
+                unit_volume = 0.0
+                if candidate.tradable_units > 0:
+                    unit_volume = candidate.total_volume / candidate.tradable_units
+                if unit_volume > 0:
+                    max_units_by_volume = int(math.floor((remaining_volume + 1e-9) / unit_volume))
+                    if max_units_by_volume <= 0:
+                        continue
+                    allowed_units = min(candidate.tradable_units, max_units_by_volume)
+                    if allowed_units < candidate.tradable_units:
+                        candidate = ItemOpportunity(
+                            type_id=candidate.type_id,
+                            item_name=candidate.item_name,
+                            buy_from=candidate.buy_from,
+                            sell_to=candidate.sell_to,
+                            unit_profit=candidate.unit_profit,
+                            tradable_units=allowed_units,
+                            total_profit=candidate.unit_profit * allowed_units,
+                            multiplier=candidate.multiplier,
+                            total_investment=candidate.buy_from.price * allowed_units,
+                            total_volume=unit_volume * allowed_units,
+                        )
+        group.items.append(candidate)
+        group.total_profit += candidate.total_profit
+        group.total_investment += candidate.total_investment
+        group.total_volume += candidate.total_volume
+        group.total_units += candidate.tradable_units
+        group.multiplier_hint = max(group.multiplier_hint, candidate.multiplier)
     ordered = sorted(
         grouped.values(),
         key=lambda entry: (entry.isk_per_jump or -math.inf, entry.total_profit),
@@ -544,6 +588,27 @@ def describe_active_route_filters(
     if max_total_jumps is not None and max_total_jumps >= 0:
         reasons.append(f"--max-total-jumps={max_total_jumps}")
     return reasons
+
+
+def apply_route_filters(
+    routes: Sequence[RouteOpportunity],
+    *,
+    min_profit_per_jump: Optional[float],
+    max_total_jumps: Optional[int],
+) -> Tuple[List[RouteOpportunity], List[str]]:
+    """Apply filters and return (filtered_routes, blocking_reasons)."""
+    filtered = filter_routes_by_profit_per_jump(
+        routes,
+        min_profit_per_jump=min_profit_per_jump,
+        max_total_jumps=max_total_jumps,
+    )
+    reasons: List[str] = []
+    if routes and not filtered:
+        reasons = describe_active_route_filters(
+            min_profit_per_jump=min_profit_per_jump,
+            max_total_jumps=max_total_jumps,
+        )
+    return filtered, reasons
 
 
 def _format_item_details(item: ItemOpportunity) -> str:
@@ -630,20 +695,9 @@ def render_route_report(
     return "\n".join(lines)
 
 
-def _clear_console() -> None:
-    """Clear the active console so only the latest refresh is visible."""
-    if os.name == "nt":
-        os.system("cls")
-    else:
-        sys.stdout.write("\033[2J\033[H")
-        sys.stdout.flush()
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description=(
-            "Enumerate arbitrage opportunities using a JSON profile that encapsulates all runtime settings."
-        ),
+        description="Enumerate arbitrage opportunities using cached market orders and a JSON profile.",
     )
     parser.add_argument(
         "--profile",
@@ -651,213 +705,246 @@ def parse_args() -> argparse.Namespace:
         required=True,
         help="Path to the JSON profile describing scan parameters.",
     )
+    parser.add_argument(
+        "--orders-file",
+        type=Path,
+        default=DEFAULT_ORDERS_SNAPSHOT,
+        help="Path to a cached orders snapshot produced by fetch_market_orders.py.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     cli_args = parse_args()
     try:
-        args = load_profile_config(cli_args.profile)
+        profile = load_profile_config(cli_args.profile)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Failed to load profile {cli_args.profile}: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    if not args.current_system:
+    if not profile.current_system:
         print(
             "Profile must include a 'current_system' value so jump distances can be computed.",
             file=sys.stderr,
         )
         sys.exit(1)
 
-    profile_label = args.profile_name or cli_args.profile
-    print(f"Using profile {profile_label!r} ({cli_args.profile})")
+    try:
+        orders, snapshot_meta = load_orders_snapshot(cli_args.orders_file)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        print(f"Failed to load orders snapshot {cli_args.orders_file}: {exc}", file=sys.stderr)
+        sys.exit(1)
 
     try:
-        items_payload = load_json_list(args.items)
-        regions_payload = load_json_list(args.regions)
+        items_payload = load_json_list(profile.items)
+        regions_payload = load_json_list(profile.regions)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"Failed to load prerequisite data: {exc}", file=sys.stderr)
         sys.exit(1)
 
     try:
-        name_to_id, id_to_name, system_regions = load_system_indexes(Path(args.systems))
+        name_to_id, id_to_name, system_regions = load_system_indexes(Path(profile.systems))
     except (OSError, ValueError) as exc:
         print(f"Failed to load system metadata: {exc}", file=sys.stderr)
         sys.exit(1)
 
     try:
-        current_system_id = resolve_system_identifier(args.current_system, name_to_id, id_to_name)
+        current_system_id = resolve_system_identifier(profile.current_system, name_to_id, id_to_name)
     except ValueError as exc:
         print(f"Invalid --current-system: {exc}", file=sys.stderr)
         sys.exit(1)
     current_system_name = id_to_name[current_system_id]
 
-    item_lookup = build_item_lookup(items_payload, limit=args.item_limit)
+    item_lookup = build_item_lookup(items_payload, limit=profile.item_limit)
     if not item_lookup:
         print("No published items available after applying filters", file=sys.stderr)
         sys.exit(1)
+
     regions = build_regions(regions_payload)
     region_name_lookup = {region.region_id: region.name for region in regions}
-    if args.forge_adjacent_only:
-        before = len(regions)
-        regions = [region for region in regions if region.region_id in FORGE_ADJACENT_REGION_IDS]
-        if not regions:
-            print(
-                "No regions remain after applying --forge-adjacent-only.",
-                file=sys.stderr,
-            )
-            sys.exit(1)
-        print(
-            f"Forge adjacency filter active: scanning {len(regions)} of {before} regions.",
-            file=sys.stderr,
-        )
-    if not regions:
-        print("No regions to scan", file=sys.stderr)
-        sys.exit(1)
-
     current_system_region_name = None
     current_region_id = system_regions.get(current_system_id)
     if current_region_id is not None:
         current_system_region_name = region_name_lookup.get(current_region_id)
 
-    session = requests.Session()
-    session.headers.update({
-        "Accept": "application/json",
-        "User-Agent": USER_AGENT,
-    })
-    http_client = HttpClient(session, request_delay=args.request_delay)
-    tracker = ArbitrageTracker(item_lookup)
     resolver = SystemResolver(id_to_name)
-    jump_cache = JumpCache(flag=args.route_flag)
+    jump_cache = LocalJumpCache(flag=profile.route_flag, graph_path=profile.system_graph)
+    system_security_lookup: Dict[int, float] = {}
+    if profile.min_security_status is not None:
+        try:
+            system_security_lookup = load_system_security(Path(profile.systems))
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            print(f"Failed to load system security data: {exc}", file=sys.stderr)
+            sys.exit(1)
 
-    region_max_pages: Dict[int, int] = {}
-    page = 1
-    total_regions = len(regions)
+    tracker = ArbitrageTracker(item_lookup)
+    skipped_player_orders = 0
+    skipped_regions = 0
+    skipped_security_orders = 0
+    applicable_orders = orders
+    if profile.forge_adjacent_only:
+        applicable_orders = [order for order in orders if order.region_id in FORGE_ADJACENT_REGION_IDS]
+        skipped_regions = len(orders) - len(applicable_orders)
+        if not applicable_orders:
+            print(
+                "Forge adjacency filter removed all orders; rerun fetch_market_orders with matching regions",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+    for order in applicable_orders:
+        if profile.min_security_status is not None:
+            security = system_security_lookup.get(order.system_id)
+            if security is None or security < profile.min_security_status:
+                skipped_security_orders += 1
+                continue
+        if is_player_structure(order.location_id):
+            skipped_player_orders += 1
+            continue
+        tracker.ingest(order)
 
-    while True:
-        pages_fetched = 0
-        for region in regions:
-            max_pages_for_region = region_max_pages.get(region.region_id)
-            if args.max_pages and page > args.max_pages:
-                continue
-            if max_pages_for_region is not None and page > max_pages_for_region:
-                continue
-            try:
-                orders, max_pages = fetch_orders_for_region(http_client, region, page)
-            except RuntimeError as exc:
-                print(f"Warning: failed to fetch region {region.name} page {page}: {exc}", file=sys.stderr)
-                continue
-            region_max_pages[region.region_id] = max(max_pages, region_max_pages.get(region.region_id, 0))
-            for order_payload in orders:
-                tracker.ingest(order_payload, region)
-            pages_fetched += 1
-        if pages_fetched == 0:
-            break
-        opportunities = tracker.opportunities(
-            min_multiplier=args.min_multiplier,
-            max_investment=args.max_investment,
-            max_volume=args.max_volume,
-            max_item_volume=args.max_item_volume,
-            max_units_cap=args.max_units,
-            max_items_cap=args.max_items,
+    print(
+        f"Loaded {len(applicable_orders):,} orders from {cli_args.orders_file} (snapshot: {snapshot_meta.get('fetched_at', 'unknown')}),"
+    )
+    if profile.forge_adjacent_only:
+        print(
+            f"Forge adjacency filter active: {len(applicable_orders):,} kept, {skipped_regions:,} discarded."
         )
-        routes_raw = group_opportunities(
-            opportunities,
+    if skipped_player_orders:
+        print(f"Skipped {skipped_player_orders:,} player-structure orders (non-dockable).")
+    if skipped_security_orders:
+        print(
+            f"Skipped {skipped_security_orders:,} orders below min security ({profile.min_security_status})."
+        )
+
+    partial_top = max(0, profile.partial_top)
+    partial_interval_seconds = 10.0
+    partial_best: List[ItemOpportunity] = []
+    last_partial_emit_count = 0
+    last_partial_emit_time = time.monotonic()
+
+    def _clear_console() -> None:
+        command = "cls" if os.name == "nt" else "clear"
+        os.system(command)
+
+    def _emit_partial(count: int) -> None:
+        if not partial_best:
+            return
+        _clear_console()
+        partial_routes_raw = group_opportunities(
+            partial_best,
             resolver=resolver,
             jump_cache=jump_cache,
             current_system_id=current_system_id,
+            max_total_volume=profile.max_volume,
         )
+        if not partial_routes_raw:
+            return
         route_lookup = {
-            (route.buy_system_id, route.sell_system_id): route for route in routes_raw
+            (route.buy_system_id, route.sell_system_id): route for route in partial_routes_raw
         }
-        routes = filter_routes_by_profit_per_jump(
-            routes_raw,
-            min_profit_per_jump=args.min_profit_per_jump,
-            max_total_jumps=args.max_total_jumps,
+        display_routes, blocking_reasons = apply_route_filters(
+            partial_routes_raw,
+            min_profit_per_jump=profile.min_profit_per_jump,
+            max_total_jumps=profile.max_total_jumps,
         )
+        if not display_routes:
+            reason_label = " and ".join(blocking_reasons) if blocking_reasons else "active filters"
+            print(
+                f"[partial] {count:,} opportunities so far but none satisfy {reason_label} yet.",
+                flush=True,
+            )
+            print("", flush=True)
+            return
         annotate_transit_opportunities(
-            routes,
+            display_routes,
             route_lookup=route_lookup,
             current_system_id=current_system_id,
         )
-        if not routes and routes_raw:
-            reasons = describe_active_route_filters(
-                min_profit_per_jump=args.min_profit_per_jump,
-                max_total_jumps=args.max_total_jumps,
-            )
-            if reasons:
-                print(
-                    f"All {len(routes_raw)} routes were filtered out by "
-                    + " and ".join(reasons)
-                    + ". Adjust the thresholds to inspect them."
-                )
         report = render_route_report(
-            routes,
-            top_n=args.top,
+            display_routes,
+            top_n=partial_top,
             current_system_name=current_system_name,
             current_system_region=current_system_region_name,
         )
-        _clear_console()
-        print(f"\n=== After completing page {page} across {pages_fetched} regions ===")
-        print(report)
-        page += 1
-        if page == 2:
-            print("Completed first sweep across all regions. Moving to page 2.")
+        visible = min(partial_top, len(display_routes))
+        print(
+            f"[partial] {count:,} qualifying opportunities so far. Best {visible} routes:",
+            flush=True,
+        )
+        print(report, flush=True)
+        print("", flush=True)
 
-    print("Scanning finished. Final grouped opportunity snapshot:")
+    def _on_progress(count: int, new_item: ItemOpportunity) -> None:
+        nonlocal last_partial_emit_count, last_partial_emit_time
+        partial_best.append(new_item)
+        partial_best.sort(key=lambda entry: (entry.total_profit, entry.multiplier), reverse=True)
+        if len(partial_best) > partial_top:
+            del partial_best[partial_top:]
+        now = time.monotonic()
+        if now - last_partial_emit_time >= partial_interval_seconds:
+            _emit_partial(count)
+            last_partial_emit_time = time.monotonic()
+            last_partial_emit_count = count
+
+    progress_callback: Optional[Callable[[int, ItemOpportunity], None]] = None
+    if partial_top > 0:
+        progress_callback = _on_progress
+
     opportunities = tracker.opportunities(
-        min_multiplier=args.min_multiplier,
-        max_investment=args.max_investment,
-        max_volume=args.max_volume,
-        max_item_volume=args.max_item_volume,
-        max_units_cap=args.max_units,
-        max_items_cap=args.max_items,
+        min_multiplier=profile.min_multiplier,
+        max_investment=profile.max_investment,
+        max_volume=profile.max_volume,
+        max_item_volume=profile.max_item_volume,
+        max_units_cap=profile.max_units,
+        max_items_cap=profile.max_items,
+        progress_callback=progress_callback,
     )
+    if partial_top > 0 and partial_best and last_partial_emit_count != len(opportunities):
+        _emit_partial(len(opportunities))
+    if not opportunities:
+        print("No item-level opportunities matched the provided filters.")
+        sys.exit(0)
+
     routes_raw = group_opportunities(
         opportunities,
         resolver=resolver,
         jump_cache=jump_cache,
         current_system_id=current_system_id,
+        max_total_volume=profile.max_volume,
     )
     route_lookup = {
         (route.buy_system_id, route.sell_system_id): route for route in routes_raw
     }
-    routes = filter_routes_by_profit_per_jump(
+    routes, blocking_reasons = apply_route_filters(
         routes_raw,
-        min_profit_per_jump=args.min_profit_per_jump,
-        max_total_jumps=args.max_total_jumps,
+        min_profit_per_jump=profile.min_profit_per_jump,
+        max_total_jumps=profile.max_total_jumps,
     )
     annotate_transit_opportunities(
         routes,
         route_lookup=route_lookup,
         current_system_id=current_system_id,
     )
-    if not routes and routes_raw:
-        reasons = describe_active_route_filters(
-            min_profit_per_jump=args.min_profit_per_jump,
-            max_total_jumps=args.max_total_jumps,
+    if not routes and routes_raw and blocking_reasons:
+        print(
+            f"All {len(routes_raw)} routes were filtered out by "
+            + " and ".join(blocking_reasons)
+            + ". Adjust the thresholds to inspect them."
         )
-        if reasons:
-            print(
-                f"All {len(routes_raw)} routes were filtered out by "
-                + " and ".join(reasons)
-                + ". Adjust the thresholds to inspect them."
-            )
     final_report = render_route_report(
         routes,
-        top_n=args.top,
+        top_n=profile.top,
         current_system_name=current_system_name,
         current_system_region=current_system_region_name,
     )
-    _clear_console()
     print(final_report)
     jump_cache.flush()
     try:
-        args.final_output.parent.mkdir(parents=True, exist_ok=True)
-        args.final_output.write_text(final_report.rstrip() + "\n", encoding="utf-8")
-        print(f"Final snapshot saved to {args.final_output}")
+        profile.final_output.parent.mkdir(parents=True, exist_ok=True)
+        profile.final_output.write_text(final_report.rstrip() + "\n", encoding="utf-8")
+        print(f"Final snapshot saved to {profile.final_output}")
     except OSError as exc:
-        print(f"Warning: failed to write final snapshot to {args.final_output}: {exc}", file=sys.stderr)
+        print(f"Warning: failed to write final snapshot to {profile.final_output}: {exc}", file=sys.stderr)
 
 
 if __name__ == "__main__":
