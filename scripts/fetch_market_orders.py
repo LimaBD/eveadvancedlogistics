@@ -216,18 +216,18 @@ def parse_args() -> argparse.Namespace:
         help="Seconds to sleep between ESI calls (defaults to profile or 0.1).",
     )
     parser.add_argument(
-        "--forge-adjacent-only",
-        dest="forge_adjacent_only",
+        "--near-forge",
+        dest="near_forge",
         action="store_true",
         help="Restrict to The Forge and neighboring regions.",
     )
     parser.add_argument(
         "--all-regions",
-        dest="forge_adjacent_only",
+        dest="near_forge",
         action="store_false",
-        help="Explicitly disable any forge adjacency filter.",
+        help="Explicitly disable the near-Forge filter even if a profile enables it.",
     )
-    parser.set_defaults(forge_adjacent_only=None)
+    parser.set_defaults(near_forge=None)
     return parser.parse_args()
 
 
@@ -249,18 +249,18 @@ def main() -> None:
         sys.exit(1)
 
     regions = build_regions(regions_payload)
-    forge_only = (
-        cli_args.forge_adjacent_only
-        if cli_args.forge_adjacent_only is not None
+    near_forge = (
+        cli_args.near_forge
+        if cli_args.near_forge is not None
         else (profile.forge_adjacent_only if profile else False)
     )
-    if forge_only:
+    if near_forge:
         before = len(regions)
         regions = [region for region in regions if region.region_id in FORGE_ADJACENT_REGION_IDS]
         if not regions:
-            print("No regions remain after applying forge-adjacent-only filter", file=sys.stderr)
+            print("No regions remain after applying near-Forge filter", file=sys.stderr)
             sys.exit(1)
-        print(f"Forge adjacency filter active: scanning {len(regions)} of {before} regions.")
+        print(f"Near-Forge filter active: scanning {len(regions)} of {before} regions.")
     if not regions:
         print("No regions to scan", file=sys.stderr)
         sys.exit(1)
@@ -332,6 +332,7 @@ def main() -> None:
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_profile": str(cli_args.profile) if cli_args.profile else None,
         "request_delay": request_delay,
+        "near_forge": near_forge,
         "regions": [
             {
                 "region_id": region.region_id,

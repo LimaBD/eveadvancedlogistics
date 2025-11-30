@@ -71,6 +71,7 @@ python -m scripts.fetch_market_orders --regions data/regions.json --output data/
 - Profile is optional; use it only when you want to reuse an existing region/request-delay configuration.
 - Without a profile the script simply walks every region in `--regions` (default `data/regions.json`) and dumps **all** active orders.
 - Outputs a JSON blob with `orders[]`, per-region stats, request delay, and provenance info so downstream processing can reuse it.
+- Use `--near-forge` to only fetch The Forge and its neighboring regions (same behavior as the `forge_adjacent_only` profile flag); add `--all-regions` to override a profile that enables it.
 
 ### 2. Process cached orders
 

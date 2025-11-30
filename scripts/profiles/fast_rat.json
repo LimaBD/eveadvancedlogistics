@@ -1,7 +1,7 @@
 {
   "name": "fast_rat",
   "current_system": "Jita",
-  "max_volume": 140,
-  "max_investment": 10000000,
-  "min_profit_per_jump": 400000
+  "max_volume": 1200,
+  "max_investment": 20000000,
+  "min_profit_per_jump": 1000000
 }
