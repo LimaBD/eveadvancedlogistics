@@ -27,6 +27,7 @@ DEFAULT_SYSTEMS = DEFAULT_SYSTEMS_PATH
 DEFAULT_SYSTEM_GRAPH = DEFAULT_GRAPH_PATH
 DEFAULT_FINAL_OUTPUT = Path("data/arbitrage_items_summary.txt")
 DEFAULT_ORDERS_SNAPSHOT = Path("data/market_orders_snapshot.json")
+DEFAULT_STATIONS = Path("data/stations.json")
 PLAYER_STRUCTURE_MIN_LOCATION_ID = 1_000_000_000_000
 THE_FORGE_REGION_ID = 10000002
 FORGE_ADJACENT_REGION_IDS = {
@@ -72,6 +73,7 @@ class ProfileConfig:
     items: Path = DEFAULT_ITEMS
     regions: Path = DEFAULT_REGIONS
     systems: Path = DEFAULT_SYSTEMS
+    stations_file: Optional[Path] = DEFAULT_STATIONS
     system_graph: Path = DEFAULT_SYSTEM_GRAPH
     current_system: Optional[str] = None
     min_multiplier: float = 1.2
@@ -110,6 +112,7 @@ class Order:
     location_id: int
     region_id: int
     region_name: str
+    location_name: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -172,6 +175,12 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
         config.regions = _expand_path(payload["regions"], config.regions, base_dir=base_dir)
     if "systems" in payload:
         config.systems = _expand_path(payload["systems"], config.systems, base_dir=base_dir)
+    if "stations_file" in payload:
+        stations_raw = payload["stations_file"]
+        if stations_raw is None:
+            config.stations_file = None
+        else:
+            config.stations_file = _expand_path(stations_raw, DEFAULT_STATIONS, base_dir=base_dir)
     graph_override = (
         payload.get("system_graph")
         or payload.get("graph")
@@ -222,6 +231,20 @@ def load_json_list(path: Path) -> List[Dict]:
     if not isinstance(payload, list):
         raise ValueError(f"Expected a list in {path}")
     return payload
+
+
+def build_station_lookup(payload: Iterable[Mapping]) -> Dict[int, str]:
+    lookup: Dict[int, str] = {}
+    for entry in payload:
+        try:
+            station_id = int(entry["id"])
+            name = str(entry["name"]).strip()
+        except (KeyError, ValueError) as exc:
+            raise ValueError(f"Invalid station entry: {entry}") from exc
+        if not name:
+            continue
+        lookup[station_id] = name
+    return lookup
 
 
 def build_item_lookup(items_payload: Iterable[Mapping], *, limit: Optional[int]) -> Dict[int, ItemMetadata]:
@@ -282,6 +305,10 @@ class RouteOpportunity:
     sell_system_id: int
     buy_system_name: str
     sell_system_name: str
+    buy_location_id: int
+    sell_location_id: int
+    buy_station_name: Optional[str]
+    sell_station_name: Optional[str]
     items: List[ItemOpportunity] = field(default_factory=list)
     total_profit: float = 0.0
     total_investment: float = 0.0
@@ -292,6 +319,8 @@ class RouteOpportunity:
     jumps_trade: Optional[int] = None
     transit_to_buy: Optional[ItemOpportunity] = None
     transit_to_sell: Optional[ItemOpportunity] = None
+    buy_locations: set[int] = field(default_factory=set)
+    sell_locations: set[int] = field(default_factory=set)
 
     @property
     def total_jumps(self) -> Optional[int]:
@@ -301,11 +330,22 @@ class RouteOpportunity:
 
     @property
     def isk_per_jump(self) -> Optional[float]:
+        steps = self.total_movement_units
+        if steps is None:
+            return None
+        effective_steps = steps if steps > 0 else 1
+        return self.total_profit / effective_steps
+
+    @property
+    def docking_events(self) -> int:
+        return len(self.buy_locations) + len(self.sell_locations)
+
+    @property
+    def total_movement_units(self) -> Optional[int]:
         jumps = self.total_jumps
         if jumps is None:
             return None
-        effective_jumps = jumps if jumps > 0 else 1
-        return self.total_profit / effective_jumps
+        return jumps + self.docking_events
 
 
 class SystemResolver:
@@ -474,7 +514,13 @@ def group_opportunities(
     for opportunity in opportunities:
         buy_sys = opportunity.buy_from.system_id
         sell_sys = opportunity.sell_to.system_id
-        key = (buy_sys, sell_sys)
+        buy_loc = opportunity.buy_from.location_id
+        if buy_loc is None:
+            buy_loc = buy_sys
+        sell_loc = opportunity.sell_to.location_id
+        if sell_loc is None:
+            sell_loc = sell_sys
+        key = (buy_loc, sell_loc)
         group = grouped.get(key)
         if group is None:
             group = RouteOpportunity(
@@ -484,6 +530,10 @@ def group_opportunities(
                 sell_system_id=sell_sys,
                 buy_system_name=resolver.resolve(buy_sys),
                 sell_system_name=resolver.resolve(sell_sys),
+                buy_location_id=int(buy_loc),
+                sell_location_id=int(sell_loc),
+                buy_station_name=opportunity.buy_from.location_name,
+                sell_station_name=opportunity.sell_to.location_name,
             )
             grouped[key] = group
             group.jumps_from_current = jump_cache.jumps(current_system_id, buy_sys)
@@ -521,12 +571,27 @@ def group_opportunities(
         group.total_volume += candidate.total_volume
         group.total_units += candidate.tradable_units
         group.multiplier_hint = max(group.multiplier_hint, candidate.multiplier)
+        if candidate.buy_from.location_id is not None:
+            group.buy_locations.add(int(candidate.buy_from.location_id))
+        if candidate.sell_to.location_id is not None:
+            group.sell_locations.add(int(candidate.sell_to.location_id))
     ordered = sorted(
         grouped.values(),
         key=lambda entry: (entry.isk_per_jump or -math.inf, entry.total_profit),
         reverse=True,
     )
     return ordered
+
+
+def select_best_route(routes: Sequence[RouteOpportunity]) -> Optional[RouteOpportunity]:
+    if not routes:
+        return None
+    def key(route: RouteOpportunity) -> Tuple[float, float]:
+        isk_per_jump = route.isk_per_jump
+        ranking_isk = -math.inf if isk_per_jump is None else isk_per_jump
+        return (ranking_isk, route.total_profit)
+
+    return max(routes, key=key)
 
 
 def _best_item_from_route(route: Optional[RouteOpportunity]) -> Optional[ItemOpportunity]:
@@ -611,88 +676,85 @@ def apply_route_filters(
     return filtered, reasons
 
 
-def _format_item_details(item: ItemOpportunity) -> str:
-    return (
-        f"{item.item_name} x{item.tradable_units} @ {item.buy_from.price:,.2f} -> {item.sell_to.price:,.2f}"
-        f" | profit {item.total_profit:,.2f} ( {item.multiplier:.2f}x )"
-    )
-
-
-def _append_leg_section(
-    lines: List[str],
-    *,
-    label: str,
-    opportunities: Sequence[ItemOpportunity],
-    empty_message: str,
-) -> None:
-    lines.append(f"    {label}")
-    if not opportunities:
-        lines.append(f"        {empty_message}")
-        return
-    for item in opportunities:
-        lines.append("        " + _format_item_details(item))
-
-
 def _format_system_label(system_name: str, region_name: Optional[str]) -> str:
     if region_name:
         return f"{system_name} ({region_name})"
     return system_name
 
 
+def _format_section_label(
+    system_name: str,
+    region_name: Optional[str],
+    station_name: Optional[str],
+    jumps_between_trade: Optional[int],
+) -> str:
+    system_label = _format_system_label(system_name, region_name)
+    station_segment = f" | {station_name}" if station_name else ""
+    jumps_display = "n/a" if jumps_between_trade is None else str(jumps_between_trade)
+    return f"{system_label}{station_segment} ( {jumps_display} jumps )"
+
+
 def render_route_report(
-    routes: Sequence[RouteOpportunity],
+    route: Optional[RouteOpportunity],
     *,
-    top_n: int,
     current_system_name: str,
     current_system_region: Optional[str],
 ) -> str:
-    lines: List[str] = []
-    if not routes:
+    if route is None:
         return "No qualifying arbitrage opportunities yet."
+
+    lines: List[str] = []
     current_label = _format_system_label(current_system_name, current_system_region)
-    for route in routes[:top_n]:
-        jumps_total = route.total_jumps
-        jumps_display = "n/a" if jumps_total is None else str(jumps_total)
-        isk_per_jump = route.isk_per_jump
-        isk_per_jump_display = None if isk_per_jump is None else f"{isk_per_jump:,.2f}"
-        profit_display = f"{route.total_profit:,.2f}"
-        investment_display = f"{route.total_investment:,.2f}"
-        volume_display = f"{route.total_volume:,.2f}"
-        buy_label = _format_system_label(route.buy_system_name, route.buy_region)
-        sell_label = _format_system_label(route.sell_system_name, route.sell_region)
-        path_label = f"{current_label} -> {buy_label} -> {sell_label}"
-        jump_component = f"jumps {jumps_display}"
-        isk_per_jump_component = (
-            f"i/j $ {isk_per_jump_display}" if isk_per_jump_display is not None else "i/j n/a"
+    buy_label = _format_section_label(
+        route.buy_system_name,
+        route.buy_region,
+        route.buy_station_name,
+        route.jumps_from_current,
+    )
+    sell_label = _format_section_label(
+        route.sell_system_name,
+        route.sell_region,
+        route.sell_station_name,
+        route.jumps_trade,
+    )
+    jumps_total = route.total_jumps
+    jumps_display = "n/a" if jumps_total is None else str(jumps_total)
+    docks_display = str(route.docking_events)
+    isk_per_jump = route.isk_per_jump
+    isk_per_jump_display = "n/a" if isk_per_jump is None else f"{isk_per_jump:,.2f}"
+    header = (
+        f"Route found | "
+        f"in $ {route.total_investment:,.2f} | p. $ {route.total_profit:,.2f} | "
+        f"vol {route.total_volume:,.2f} m3 | "
+        f"jumps {jumps_display} | docks {docks_display} | i/(j+d) $ {isk_per_jump_display}"
+    )
+    lines.append(header)
+    lines.append("")
+    lines.extend(_format_trade_section(buy_label, route.items, action="BUY"))
+    lines.append("")
+    lines.extend(_format_trade_section(sell_label, route.items, action="SELL"))
+    return "\n".join(lines).rstrip()
+
+
+def _format_trade_section(
+    label: str,
+    items: Sequence[ItemOpportunity],
+    *,
+    action: str,
+) -> List[str]:
+    section_lines = [f"    {label}"]
+    if not items:
+        section_lines.append("        (no items)")
+        return section_lines
+    for item in items:
+        order = item.buy_from if action == "BUY" else item.sell_to
+        price = order.price
+        prefix = "-BUY -" if action == "BUY" else "-SELL-"
+        station_label = order.location_name or f"Station {order.location_id}"
+        section_lines.append(
+            f"        {prefix} {item.item_name} x{item.tradable_units:,} @ {price:,.2f} | {station_label}"
         )
-        lines.append(
-            f"{path_label} | in. $ {investment_display} | p. $ {profit_display} | "
-            f"vol. {volume_display} m3 | {jump_component} | {isk_per_jump_component}"
-        )
-        transit_to_buy = [route.transit_to_buy] if route.transit_to_buy else []
-        if transit_to_buy and current_label != buy_label:
-            _append_leg_section(
-                lines,
-                label=f"{current_label} -> {buy_label}",
-                opportunities=transit_to_buy,
-                empty_message="no transit opportunity",
-            )
-        transit_to_sell = [route.transit_to_sell] if route.transit_to_sell else []
-        if transit_to_sell and current_label != sell_label and buy_label != current_label:
-            _append_leg_section(
-                lines,
-                label=f"{current_label} -> {sell_label}",
-                opportunities=transit_to_sell,
-                empty_message="no transit opportunity",
-            )
-        _append_leg_section(
-            lines,
-            label=f"{buy_label} -> {sell_label}",
-            opportunities=route.items,
-            empty_message="no trade opportunities",
-        )
-        lines.append("")
-    return "\n".join(lines)
+    return section_lines
 
 
 def parse_args() -> argparse.Namespace:
@@ -742,6 +804,19 @@ def main() -> None:
         print(f"Failed to load prerequisite data: {exc}", file=sys.stderr)
         sys.exit(1)
 
+    station_lookup: Dict[int, str] = {}
+    if profile.stations_file is not None:
+        try:
+            stations_payload = load_json_list(profile.stations_file)
+            station_lookup = build_station_lookup(stations_payload)
+        except FileNotFoundError:
+            print(
+                f"Station metadata file {profile.stations_file} not found; station names will be omitted.",
+                file=sys.stderr,
+            )
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
+            print(f"Failed to load station metadata: {exc}", file=sys.stderr)
+
     try:
         name_to_id, id_to_name, system_regions = load_system_indexes(Path(profile.systems))
     except (OSError, ValueError) as exc:
@@ -776,6 +851,10 @@ def main() -> None:
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             print(f"Failed to load system security data: {exc}", file=sys.stderr)
             sys.exit(1)
+
+    if station_lookup:
+        for order in orders:
+            order.location_name = station_lookup.get(order.location_id)
 
     tracker = ArbitrageTracker(item_lookup)
     skipped_player_orders = 0
@@ -860,15 +939,14 @@ def main() -> None:
             route_lookup=route_lookup,
             current_system_id=current_system_id,
         )
+        best_route = select_best_route(display_routes)
         report = render_route_report(
-            display_routes,
-            top_n=partial_top,
+            best_route,
             current_system_name=current_system_name,
             current_system_region=current_system_region_name,
         )
-        visible = min(partial_top, len(display_routes))
         print(
-            f"[partial] {count:,} qualifying opportunities so far. Best {visible} routes:",
+            f"[partial] {count:,} qualifying opportunities so far. Best route:",
             flush=True,
         )
         print(report, flush=True)
@@ -931,9 +1009,9 @@ def main() -> None:
             + " and ".join(blocking_reasons)
             + ". Adjust the thresholds to inspect them."
         )
+    best_route = select_best_route(routes)
     final_report = render_route_report(
-        routes,
-        top_n=profile.top,
+        best_route,
         current_system_name=current_system_name,
         current_system_region=current_system_region_name,
     )

@@ -1,6 +1,6 @@
 {
   "name": "fat_bastard",
-  "current_system": "Perimeter",
+  "current_system": "jita",
   "forge_adjacent_only": true,
   "max_total_jumps": 10,
   "max_investment": 147000000,
