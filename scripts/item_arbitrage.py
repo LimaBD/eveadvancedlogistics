@@ -76,7 +76,7 @@ class ProfileConfig:
     stations_file: Optional[Path] = DEFAULT_STATIONS
     system_graph: Path = DEFAULT_SYSTEM_GRAPH
     current_system: Optional[str] = None
-    min_multiplier: float = 1.2
+    min_multiplier: float = 1.05
     min_profit_per_jump: Optional[float] = None
     max_total_jumps: Optional[int] = None
     max_investment: float = 20_000_000.0
@@ -92,6 +92,7 @@ class ProfileConfig:
     final_output: Path = DEFAULT_FINAL_OUTPUT
     partial_top: int = 5
     partial_interval: int = 50
+    broker_fee_rate: float = 0.03
 
 
 @dataclass(frozen=True)
@@ -195,6 +196,8 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
         config.current_system = None if raw_system is None else str(raw_system)
     if "min_multiplier" in payload:
         config.min_multiplier = float(payload["min_multiplier"])
+    if "broker_fee_rate" in payload:
+        config.broker_fee_rate = max(0.0, float(payload["broker_fee_rate"]))
     config.min_profit_per_jump = _coerce_optional_float(payload.get("min_profit_per_jump"))
     config.max_total_jumps = _coerce_optional_int(payload.get("max_total_jumps"))
     if "max_investment" in payload:
@@ -397,9 +400,13 @@ class ArbitrageTracker:
         max_item_volume: Optional[float],
         max_units_cap: Optional[int],
         max_items_cap: Optional[int],
+        broker_fee_rate: float,
         progress_callback: Optional[Callable[[int, ItemOpportunity], None]] = None,
     ) -> List[ItemOpportunity]:
         opps: List[ItemOpportunity] = []
+        fee_rate = max(0.0, broker_fee_rate)
+        buy_fee_multiplier = 1.0 + fee_rate
+        sell_fee_multiplier = max(0.0, 1.0 - fee_rate)
         for type_id, book in self.books.items():
             if not book.sells or not book.buys:
                 continue
@@ -411,9 +418,11 @@ class ArbitrageTracker:
                 if sell_order.min_volume > 1:
                     continue
                 for buy_order in book.buys.values():
-                    if buy_order.price <= sell_order.price:
-                        continue
                     if buy_order.min_volume > 1:
+                        continue
+                    effective_buy_price = sell_order.price * buy_fee_multiplier
+                    effective_sell_price = buy_order.price * sell_fee_multiplier
+                    if effective_sell_price <= effective_buy_price:
                         continue
                     tradable = min(sell_order.volume_remain, buy_order.volume_remain)
                     if tradable <= 0:
@@ -423,9 +432,9 @@ class ArbitrageTracker:
                             continue
                         tradable = min(tradable, max_units_cap)
                     if max_investment is not None:
-                        if sell_order.price > max_investment:
+                        if effective_buy_price > max_investment:
                             continue
-                        invest_cap = int(max_investment // sell_order.price)
+                        invest_cap = int(max_investment // effective_buy_price)
                         tradable = min(tradable, invest_cap)
                     if tradable <= 0:
                         continue
@@ -434,12 +443,14 @@ class ArbitrageTracker:
                         tradable = min(tradable, volume_cap)
                     if tradable <= 0:
                         continue
-                    unit_profit = buy_order.price - sell_order.price
-                    multiplier = buy_order.price / sell_order.price if sell_order.price else 0.0
+                    unit_profit = effective_sell_price - effective_buy_price
+                    multiplier = (
+                        effective_sell_price / effective_buy_price if effective_buy_price else 0.0
+                    )
                     if multiplier < min_multiplier:
                         continue
                     total_profit = unit_profit * tradable
-                    total_investment = sell_order.price * tradable
+                    total_investment = effective_buy_price * tradable
                     total_volume = unit_volume * tradable
                     if max_volume is not None and total_volume > max_volume + 1e-6:
                         continue
@@ -553,6 +564,9 @@ def group_opportunities(
                         continue
                     allowed_units = min(candidate.tradable_units, max_units_by_volume)
                     if allowed_units < candidate.tradable_units:
+                        unit_investment = 0.0
+                        if candidate.tradable_units > 0:
+                            unit_investment = candidate.total_investment / candidate.tradable_units
                         candidate = ItemOpportunity(
                             type_id=candidate.type_id,
                             item_name=candidate.item_name,
@@ -562,7 +576,7 @@ def group_opportunities(
                             tradable_units=allowed_units,
                             total_profit=candidate.unit_profit * allowed_units,
                             multiplier=candidate.multiplier,
-                            total_investment=candidate.buy_from.price * allowed_units,
+                            total_investment=unit_investment * allowed_units,
                             total_volume=unit_volume * allowed_units,
                         )
         group.items.append(candidate)
@@ -749,10 +763,9 @@ def _format_trade_section(
     for item in items:
         order = item.buy_from if action == "BUY" else item.sell_to
         price = order.price
-        prefix = "-BUY -" if action == "BUY" else "-SELL-"
-        station_label = order.location_name or f"Station {order.location_id}"
+        prefix = "-BUY-" if action == "BUY" else "-SELL-"
         section_lines.append(
-            f"        {prefix} {item.item_name} x{item.tradable_units:,} @ {price:,.2f} | {station_label}"
+            f"        {prefix} {item.item_name} x{item.tradable_units:,} @ {price:,.2f}"
         )
     return section_lines
 
@@ -975,6 +988,7 @@ def main() -> None:
         max_item_volume=profile.max_item_volume,
         max_units_cap=profile.max_units,
         max_items_cap=profile.max_items,
+        broker_fee_rate=profile.broker_fee_rate,
         progress_callback=progress_callback,
     )
     if partial_top > 0 and partial_best and last_partial_emit_count != len(opportunities):
