@@ -61,6 +61,7 @@ class FetchProfile:
     request_delay: float
     max_pages: Optional[int]
     forge_adjacent_only: bool
+    forge_only: bool
 
 
 def is_player_structure(location_id: int) -> bool:
@@ -114,12 +115,14 @@ def load_profile_config(profile_path: Path) -> FetchProfile:
     max_pages = payload.get("max_pages")
     max_pages_int = None if max_pages is None else int(max_pages)
     forge_adjacent_only = bool(payload.get("forge_adjacent_only", False))
+    forge_only = bool(payload.get("forge_only", False))
     return FetchProfile(
         profile_name=name,
         regions=regions,
         request_delay=request_delay,
         max_pages=max_pages_int,
         forge_adjacent_only=forge_adjacent_only,
+        forge_only=forge_only,
     )
 
 
@@ -227,7 +230,19 @@ def parse_args() -> argparse.Namespace:
         action="store_false",
         help="Explicitly disable the near-Forge filter even if a profile enables it.",
     )
-    parser.set_defaults(near_forge=None)
+    parser.add_argument(
+        "--forge-only",
+        dest="forge_only",
+        action="store_true",
+        help="Restrict fetch to The Forge region only.",
+    )
+    parser.add_argument(
+        "--no-forge-only",
+        dest="forge_only",
+        action="store_false",
+        help="Disable Forge-only filtering even if a profile enables it.",
+    )
+    parser.set_defaults(near_forge=None, forge_only=None)
     return parser.parse_args()
 
 
@@ -249,12 +264,24 @@ def main() -> None:
         sys.exit(1)
 
     regions = build_regions(regions_payload)
+    forge_only = (
+        cli_args.forge_only
+        if cli_args.forge_only is not None
+        else (profile.forge_only if profile else False)
+    )
     near_forge = (
         cli_args.near_forge
         if cli_args.near_forge is not None
         else (profile.forge_adjacent_only if profile else False)
     )
-    if near_forge:
+    if forge_only:
+        before = len(regions)
+        regions = [region for region in regions if region.region_id == THE_FORGE_REGION_ID]
+        if not regions:
+            print("Forge-only filter removed all regions; ensure regions.json includes The Forge.", file=sys.stderr)
+            sys.exit(1)
+        print(f"Forge-only filter active: scanning {len(regions)} of {before} regions.")
+    elif near_forge:
         before = len(regions)
         regions = [region for region in regions if region.region_id in FORGE_ADJACENT_REGION_IDS]
         if not regions:
@@ -332,6 +359,7 @@ def main() -> None:
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "source_profile": str(cli_args.profile) if cli_args.profile else None,
         "request_delay": request_delay,
+        "forge_only": forge_only,
         "near_forge": near_forge,
         "regions": [
             {

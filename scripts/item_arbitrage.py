@@ -84,7 +84,7 @@ class ProfileConfig:
     max_units: Optional[int] = None
     max_items: Optional[int] = None
     max_item_volume: Optional[float] = None
-    top: int = 15
+    top_routes: int = 1
     item_limit: Optional[int] = None
     route_flag: str = "shortest"
     forge_adjacent_only: bool = False
@@ -207,8 +207,10 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
     config.max_units = _coerce_optional_int(payload.get("max_units"))
     config.max_items = _coerce_optional_int(payload.get("max_items"))
     config.max_item_volume = _coerce_optional_float(payload.get("max_item_volume"))
-    if "top" in payload:
-        config.top = int(payload["top"])
+    if "top_routes" in payload:
+        config.top_routes = max(1, int(payload["top_routes"]))
+    elif "top" in payload:
+        config.top_routes = max(1, int(payload["top"]))
     config.item_limit = _coerce_optional_int(payload.get("item_limit"))
     if "route_flag" in payload:
         route_flag = str(payload["route_flag"])
@@ -223,6 +225,7 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
         config.partial_top = max(0, int(payload["partial_top"]))
     if "partial_interval" in payload:
         config.partial_interval = max(1, int(payload["partial_interval"]))
+    config.top_routes = max(1, int(config.top_routes))
     return config
 
 
@@ -750,6 +753,45 @@ def render_route_report(
     return "\n".join(lines).rstrip()
 
 
+def render_ranked_routes(
+    routes: Sequence[RouteOpportunity],
+    *,
+    current_system_name: str,
+    current_system_region: Optional[str],
+    limit: int,
+) -> str:
+    if not routes:
+        return render_route_report(
+            None,
+            current_system_name=current_system_name,
+            current_system_region=current_system_region,
+        )
+
+    trimmed_limit = max(1, limit)
+    selected = list(routes)
+    if len(selected) > trimmed_limit:
+        selected = selected[:trimmed_limit]
+    if len(selected) == 1:
+        return render_route_report(
+            selected[0],
+            current_system_name=current_system_name,
+            current_system_region=current_system_region,
+        )
+
+    sections: List[str] = []
+    digits = len(str(len(selected)))
+    for index, route in enumerate(selected, start=1):
+        sections.append(f"=== Route #{index:0{digits}d} ===")
+        sections.append(
+            render_route_report(
+                route,
+                current_system_name=current_system_name,
+                current_system_region=current_system_region,
+            )
+        )
+    return "\n\n".join(sections).rstrip()
+
+
 def _format_trade_section(
     label: str,
     items: Sequence[ItemOpportunity],
@@ -786,6 +828,12 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_ORDERS_SNAPSHOT,
         help="Path to a cached orders snapshot produced by fetch_market_orders.py.",
     )
+    parser.add_argument(
+        "--top-routes",
+        type=int,
+        default=None,
+        help="Number of best routes to display (default: 1).",
+    )
     return parser.parse_args()
 
 
@@ -796,6 +844,9 @@ def main() -> None:
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"Failed to load profile {cli_args.profile}: {exc}", file=sys.stderr)
         sys.exit(1)
+
+    if cli_args.top_routes is not None:
+        profile.top_routes = max(1, cli_args.top_routes)
 
     if not profile.current_system:
         print(
@@ -952,14 +1003,16 @@ def main() -> None:
             route_lookup=route_lookup,
             current_system_id=current_system_id,
         )
-        best_route = select_best_route(display_routes)
-        report = render_route_report(
-            best_route,
+        report = render_ranked_routes(
+            display_routes,
             current_system_name=current_system_name,
             current_system_region=current_system_region_name,
+            limit=profile.top_routes,
         )
+        shown_count = min(profile.top_routes, len(display_routes))
+        label = "Best route" if shown_count == 1 else f"Top {shown_count} routes"
         print(
-            f"[partial] {count:,} qualifying opportunities so far. Best route:",
+            f"[partial] {count:,} qualifying opportunities so far. {label}:",
             flush=True,
         )
         print(report, flush=True)
@@ -1023,11 +1076,11 @@ def main() -> None:
             + " and ".join(blocking_reasons)
             + ". Adjust the thresholds to inspect them."
         )
-    best_route = select_best_route(routes)
-    final_report = render_route_report(
-        best_route,
+    final_report = render_ranked_routes(
+        routes,
         current_system_name=current_system_name,
         current_system_region=current_system_region_name,
+        limit=profile.top_routes,
     )
     print(final_report)
     jump_cache.flush()
