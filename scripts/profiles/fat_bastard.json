@@ -3,7 +3,7 @@
   "current_system": "jita",
   "forge_adjacent_only": true,
   "max_total_jumps": 10,
-  "max_investment": 160000000,
+  "max_investment": 200000000,
   "max_volume": 33000,
   "min_security_status": 0.5,
   "top_routes": 50

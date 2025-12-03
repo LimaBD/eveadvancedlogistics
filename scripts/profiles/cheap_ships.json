@@ -2,9 +2,10 @@
   "name": "cheap_ships",
   "current_system": "Jita",
   "items": "../../data/ships.json",
-  "max_investment": 100000000,
-  "min_profit_per_jump": 8000000,
+  "max_investment": 200000000,
+  "min_profit_per_jump": 1000000,
   "max_items": 1,
   "max_units": 1,
-  "min_security_status": 0
+  "min_security_status": 0,
+  "top_routes": 50
 }
