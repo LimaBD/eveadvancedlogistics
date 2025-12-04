@@ -21,6 +21,23 @@ automation can reason about item classes.
 	because it touches every type record; use `--max-types 100` while testing to
 	fetch only the first 100 IDs.
 
+## Blueprint data export
+
+Use `scripts/fetch_blueprints.py` to download the Static Data Export (SDE)
+archive, extract `industryBlueprints.yaml`, and convert it to
+`data/blueprints.json`:
+
+```
+python scripts/fetch_blueprints.py --output data/blueprints.json
+```
+
+Helpful flags:
+
+- `--input-yaml`: point to an existing `industryBlueprints.yaml` if you already
+  have the SDE locally.
+- `--sde-url`: override the default CCP download URL.
+- `--max-blueprints`: limit the number of entries while testing parses.
+
 ## Ship data export
 
 `scripts/fetch_ships.py` focuses on the Ship category (category ID 6) and pulls
@@ -34,6 +51,42 @@ ship names, IDs, and their parent group metadata.
 
 Both scripts automatically create the `data/` directory when needed, so manual
 setup is minimal.
+
+## Manufacturing target finder (Jita 4-4)
+
+`scripts/find_jita_manufacturing.py` ranks the best blueprints to run entirely
+inside Jita 4-4 (Caldari Navy Assembly Plant). It buys every required input from
+local sell orders, applies the live Jita manufacturing cost index, and subtracts
+NPC taxes/fees so you can keep the entire workflow docked.
+
+Prerequisites:
+
+1. `data/items.json` (from `scripts/fetch_items.py`).
+2. `data/market_orders_snapshot.json` created by `scripts/fetch_market_orders.py`
+	 with Jita orders included.
+3. `data/blueprints.json`, produced by `scripts/fetch_blueprints.py` (or any
+	 equivalent conversion of `industryBlueprints.yaml`).
+
+Example run (sell order mode, ME 10, TE 20):
+
+```
+python scripts/find_jita_manufacturing.py \
+	--orders data/market_orders_snapshot.json \
+	--blueprints data/blueprints.json \
+	--items data/items.json \
+	--sell-mode sell --me 10 --te 20 --top 5
+```
+
+Key flags:
+
+- `--sell-mode`: choose `sell` (default) to assume you list your own sell order
+	or `buy` to dump to existing buy orders.
+- `--me`/`--te`: material/time efficiency percentages applied to every
+	blueprint.
+- `--sales-tax`, `--broker-fee`, `--industry-tax`: override high-tax assumptions
+	for Jita.
+- `--min-profit`/`--min-profit-hour`: filter noise when scanning large blueprint
+	sets.
 
 ## Ship market arbitrage scanner
 
