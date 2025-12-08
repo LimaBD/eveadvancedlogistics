@@ -52,6 +52,36 @@ ship names, IDs, and their parent group metadata.
 Both scripts automatically create the `data/` directory when needed, so manual
 setup is minimal.
 
+## Latest ship kill monitor
+
+Use `scripts/fetch_last_ship_destroyed.py` to quickly see the most recent kill
+that happened inside a solar system (for example Jita). The script combines
+zKillboard for killmail discovery and ESI for metadata so you know what died and
+where (station, gate, moon, etc.).
+
+Requirements:
+
+1. `data/systems.json` populated by `scripts/fetch_systems.py` so system names
+	(or IDs) can be resolved.
+2. `data/ships.json` generated via `scripts/fetch_ships.py` to map ship type IDs
+	to readable hull/group names.
+
+Example usage (latest Jita kill, human-readable output):
+
+```
+python scripts/fetch_last_ship_destroyed.py --system Jita
+```
+
+Switch to JSON output for automation:
+
+```
+python scripts/fetch_last_ship_destroyed.py --system-id 30000142 --format json
+```
+
+The report includes the victim, hull, kill timestamp, exact location (e.g.
+"Jita IV - Moon 11" or a specific gate/station), zKillboard value estimates,
+and a direct killmail link so you can react immediately.
+
 ## Manufacturing target finder (Jita 4-4)
 
 `scripts/find_jita_manufacturing.py` ranks the best blueprints to run entirely
