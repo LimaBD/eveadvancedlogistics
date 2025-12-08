@@ -168,10 +168,12 @@ python -m scripts.item_arbitrage --profile scripts/presets/fast_rat.json --order
 
 Profiles still carry every runtime knob:
 
-- `current_system` (required), `min_profit_per_jump`, `max_total_jumps`, `min_multiplier`.
+- `starting_systems` (list) or legacy `current_system`/`current_systems` (at least one required), plus `min_profit_per_jump`, `max_total_jumps`, `min_multiplier`.
 - Investment/volume controls: `max_investment`, `max_volume`, `max_item_volume`, `max_units`, `max_items`.
 - Data/IO overrides: `items`, `regions`, `systems`, `final_output`.
 - Advanced tuning: `route_flag`, `request_delay`, `max_pages`, `item_limit`, `forge_adjacent_only`.
+
+When multiple starting systems are supplied the processor computes jumps, filters, and best-route summaries for each hub independently, making it easy to plan logistics for several characters in parallel.
 
 Relative paths in a profile resolve next to the JSON file, so copy an existing
 profile under `scripts/presets/` to get started quickly.

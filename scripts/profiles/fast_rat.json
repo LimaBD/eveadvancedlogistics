@@ -1,8 +1,12 @@
 {
   "name": "fast_rat",
-  "current_system": "Lanngisi",
-  "max_volume": 1200,
-  "max_investment": 100000000,
-  "min_profit_per_jump": 8000000,
-  "top_routes": 50
+  "starting_systems": [
+    "Jita",
+    "Amarr",
+    "Rens"
+  ],
+  "max_volume": 140,
+  "max_investment": 200000000,
+  "min_profit_per_jump": 1000000,
+  "top_routes": 3
 }

@@ -9,7 +9,7 @@ import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple
 
 from calc_jumps_local import (
     DEFAULT_GRAPH_PATH,
@@ -76,6 +76,7 @@ class ProfileConfig:
     stations_file: Optional[Path] = DEFAULT_STATIONS
     system_graph: Path = DEFAULT_SYSTEM_GRAPH
     current_system: Optional[str] = None
+    starting_systems: List[str] = field(default_factory=list)
     min_multiplier: float = 1.05
     min_profit_per_jump: Optional[float] = None
     max_total_jumps: Optional[int] = None
@@ -159,6 +160,38 @@ def _coerce_bool(value: object | None, default: bool) -> bool:
     raise ValueError(f"Expected boolean value, received {value!r}")
 
 
+def _normalize_system_label(value: object | None) -> Optional[str]:
+    if value is None:
+        return None
+    label = str(value).strip()
+    return label or None
+
+
+def _parse_system_list(value: object | None, *, field_name: str) -> List[str]:
+    if value is None:
+        return []
+    if isinstance(value, (str, bytes)) or not isinstance(value, Sequence):
+        raise ValueError(f"Field '{field_name}' must be an array of system names or IDs")
+    entries: List[str] = []
+    for entry in value:
+        normalized = _normalize_system_label(entry)
+        if normalized:
+            entries.append(normalized)
+    return entries
+
+
+def _dedupe_preserve_order(values: Iterable[str]) -> List[str]:
+    seen: Set[str] = set()
+    ordered: List[str] = []
+    for value in values:
+        key = value.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        ordered.append(value)
+    return ordered
+
+
 def load_profile_config(profile_path: Path) -> ProfileConfig:
     profile_path = profile_path.expanduser().resolve()
     if not profile_path.exists():
@@ -192,8 +225,7 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
     if "final_output" in payload:
         config.final_output = _expand_path(payload["final_output"], config.final_output, base_dir=base_dir)
     if "current_system" in payload:
-        raw_system = payload["current_system"]
-        config.current_system = None if raw_system is None else str(raw_system)
+        config.current_system = _normalize_system_label(payload["current_system"])
     if "min_multiplier" in payload:
         config.min_multiplier = float(payload["min_multiplier"])
     if "broker_fee_rate" in payload:
@@ -225,6 +257,19 @@ def load_profile_config(profile_path: Path) -> ProfileConfig:
         config.partial_top = max(0, int(payload["partial_top"]))
     if "partial_interval" in payload:
         config.partial_interval = max(1, int(payload["partial_interval"]))
+    system_fields: List[str] = []
+    for field_name in ("starting_systems", "current_systems"):
+        if field_name in payload:
+            system_fields.extend(_parse_system_list(payload.get(field_name), field_name=field_name))
+    starting_candidates: List[str] = []
+    if config.current_system:
+        starting_candidates.append(config.current_system)
+    starting_candidates.extend(system_fields)
+    config.starting_systems = _dedupe_preserve_order(starting_candidates)
+    if config.starting_systems:
+        config.current_system = config.starting_systems[0]
+    else:
+        config.current_system = None
     config.top_routes = max(1, int(config.top_routes))
     return config
 
@@ -352,6 +397,14 @@ class RouteOpportunity:
         if jumps is None:
             return None
         return jumps + self.docking_events
+
+
+@dataclass(frozen=True)
+class StartingPoint:
+    label: str
+    system_id: int
+    system_name: str
+    region_name: Optional[str]
 
 
 class SystemResolver:
@@ -848,9 +901,9 @@ def main() -> None:
     if cli_args.top_routes is not None:
         profile.top_routes = max(1, cli_args.top_routes)
 
-    if not profile.current_system:
+    if not profile.starting_systems:
         print(
-            "Profile must include a 'current_system' value so jump distances can be computed.",
+            "Profile must include at least one starting system via 'current_system' or 'starting_systems'.",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -887,13 +940,6 @@ def main() -> None:
         print(f"Failed to load system metadata: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    try:
-        current_system_id = resolve_system_identifier(profile.current_system, name_to_id, id_to_name)
-    except ValueError as exc:
-        print(f"Invalid --current-system: {exc}", file=sys.stderr)
-        sys.exit(1)
-    current_system_name = id_to_name[current_system_id]
-
     item_lookup = build_item_lookup(items_payload, limit=profile.item_limit)
     if not item_lookup:
         print("No published items available after applying filters", file=sys.stderr)
@@ -901,10 +947,31 @@ def main() -> None:
 
     regions = build_regions(regions_payload)
     region_name_lookup = {region.region_id: region.name for region in regions}
-    current_system_region_name = None
-    current_region_id = system_regions.get(current_system_id)
-    if current_region_id is not None:
-        current_system_region_name = region_name_lookup.get(current_region_id)
+    starting_points: List[StartingPoint] = []
+    seen_start_ids: Set[int] = set()
+    for raw_label in profile.starting_systems:
+        try:
+            system_id = resolve_system_identifier(raw_label, name_to_id, id_to_name)
+        except ValueError as exc:
+            print(f"Invalid starting system '{raw_label}': {exc}", file=sys.stderr)
+            sys.exit(1)
+        if system_id in seen_start_ids:
+            continue
+        seen_start_ids.add(system_id)
+        region_id = system_regions.get(system_id)
+        region_name = region_name_lookup.get(region_id) if region_id is not None else None
+        starting_points.append(
+            StartingPoint(
+                label=str(raw_label),
+                system_id=system_id,
+                system_name=id_to_name[system_id],
+                region_name=region_name,
+            )
+        )
+
+    if not starting_points:
+        print("No valid starting systems were resolved from the profile.", file=sys.stderr)
+        sys.exit(1)
 
     resolver = SystemResolver(id_to_name)
     jump_cache = LocalJumpCache(flag=profile.route_flag, graph_path=profile.system_graph)
@@ -973,50 +1040,57 @@ def main() -> None:
         if not partial_best:
             return
         _clear_console()
-        partial_routes_raw = group_opportunities(
-            partial_best,
-            resolver=resolver,
-            jump_cache=jump_cache,
-            current_system_id=current_system_id,
-            max_total_volume=profile.max_volume,
-        )
-        if not partial_routes_raw:
-            return
-        route_lookup = {
-            (route.buy_system_id, route.sell_system_id): route for route in partial_routes_raw
-        }
-        display_routes, blocking_reasons = apply_route_filters(
-            partial_routes_raw,
-            min_profit_per_jump=profile.min_profit_per_jump,
-            max_total_jumps=profile.max_total_jumps,
-        )
-        if not display_routes:
-            reason_label = " and ".join(blocking_reasons) if blocking_reasons else "active filters"
+        for start in starting_points:
+            partial_routes_raw = group_opportunities(
+                partial_best,
+                resolver=resolver,
+                jump_cache=jump_cache,
+                current_system_id=start.system_id,
+                max_total_volume=profile.max_volume,
+            )
+            start_label = _format_system_label(start.system_name, start.region_name)
+            if not partial_routes_raw:
+                print(
+                    f"[partial][{start_label}] {count:,} opportunities so far but no qualifying routes yet.",
+                    flush=True,
+                )
+                print("", flush=True)
+                continue
+            route_lookup = {
+                (route.buy_system_id, route.sell_system_id): route for route in partial_routes_raw
+            }
+            display_routes, blocking_reasons = apply_route_filters(
+                partial_routes_raw,
+                min_profit_per_jump=profile.min_profit_per_jump,
+                max_total_jumps=profile.max_total_jumps,
+            )
+            if not display_routes:
+                reason_label = " and ".join(blocking_reasons) if blocking_reasons else "active filters"
+                print(
+                    f"[partial][{start_label}] {count:,} opportunities so far but none satisfy {reason_label} yet.",
+                    flush=True,
+                )
+                print("", flush=True)
+                continue
+            annotate_transit_opportunities(
+                display_routes,
+                route_lookup=route_lookup,
+                current_system_id=start.system_id,
+            )
+            report = render_ranked_routes(
+                display_routes,
+                current_system_name=start.system_name,
+                current_system_region=start.region_name,
+                limit=profile.top_routes,
+            )
+            shown_count = min(profile.top_routes, len(display_routes))
+            label = "Best route" if shown_count == 1 else f"Top {shown_count} routes"
             print(
-                f"[partial] {count:,} opportunities so far but none satisfy {reason_label} yet.",
+                f"[partial][{start_label}] {count:,} qualifying opportunities so far. {label}:",
                 flush=True,
             )
+            print(report, flush=True)
             print("", flush=True)
-            return
-        annotate_transit_opportunities(
-            display_routes,
-            route_lookup=route_lookup,
-            current_system_id=current_system_id,
-        )
-        report = render_ranked_routes(
-            display_routes,
-            current_system_name=current_system_name,
-            current_system_region=current_system_region_name,
-            limit=profile.top_routes,
-        )
-        shown_count = min(profile.top_routes, len(display_routes))
-        label = "Best route" if shown_count == 1 else f"Top {shown_count} routes"
-        print(
-            f"[partial] {count:,} qualifying opportunities so far. {label}:",
-            flush=True,
-        )
-        print(report, flush=True)
-        print("", flush=True)
 
     def _on_progress(count: int, new_item: ItemOpportunity) -> None:
         nonlocal last_partial_emit_count, last_partial_emit_time
@@ -1050,38 +1124,47 @@ def main() -> None:
         print("No item-level opportunities matched the provided filters.")
         sys.exit(0)
 
-    routes_raw = group_opportunities(
-        opportunities,
-        resolver=resolver,
-        jump_cache=jump_cache,
-        current_system_id=current_system_id,
-        max_total_volume=profile.max_volume,
-    )
-    route_lookup = {
-        (route.buy_system_id, route.sell_system_id): route for route in routes_raw
-    }
-    routes, blocking_reasons = apply_route_filters(
-        routes_raw,
-        min_profit_per_jump=profile.min_profit_per_jump,
-        max_total_jumps=profile.max_total_jumps,
-    )
-    annotate_transit_opportunities(
-        routes,
-        route_lookup=route_lookup,
-        current_system_id=current_system_id,
-    )
-    if not routes and routes_raw and blocking_reasons:
-        print(
-            f"All {len(routes_raw)} routes were filtered out by "
-            + " and ".join(blocking_reasons)
-            + ". Adjust the thresholds to inspect them."
+    final_sections: List[str] = []
+    for start in starting_points:
+        routes_raw = group_opportunities(
+            opportunities,
+            resolver=resolver,
+            jump_cache=jump_cache,
+            current_system_id=start.system_id,
+            max_total_volume=profile.max_volume,
         )
-    final_report = render_ranked_routes(
-        routes,
-        current_system_name=current_system_name,
-        current_system_region=current_system_region_name,
-        limit=profile.top_routes,
-    )
+        route_lookup = {
+            (route.buy_system_id, route.sell_system_id): route for route in routes_raw
+        }
+        routes, blocking_reasons = apply_route_filters(
+            routes_raw,
+            min_profit_per_jump=profile.min_profit_per_jump,
+            max_total_jumps=profile.max_total_jumps,
+        )
+        annotate_transit_opportunities(
+            routes,
+            route_lookup=route_lookup,
+            current_system_id=start.system_id,
+        )
+        start_label = _format_system_label(start.system_name, start.region_name)
+        if not routes and routes_raw and blocking_reasons:
+            print(
+                f"{start_label}: All {len(routes_raw)} routes were filtered out by "
+                + " and ".join(blocking_reasons)
+                + ". Adjust the thresholds to inspect them."
+            )
+        route_report = render_ranked_routes(
+            routes,
+            current_system_name=start.system_name,
+            current_system_region=start.region_name,
+            limit=profile.top_routes,
+        )
+        section_header = f"=== Starting system: {start_label} ==="
+        final_sections.append(f"{section_header}\n{route_report}".rstrip())
+
+    final_report = "\n\n".join(section for section in final_sections if section).strip()
+    if not final_report:
+        final_report = "No qualifying arbitrage opportunities yet."
     print(final_report)
     jump_cache.flush()
     try:

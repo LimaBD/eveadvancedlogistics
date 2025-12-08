@@ -1,11 +1,15 @@
 {
   "name": "cheap_ships",
-  "current_system": "Jita",
+  "starting_systems": [
+    "Jita",
+    "Amarr",
+    "Rens"
+  ],
   "items": "../../data/ships.json",
   "max_investment": 200000000,
   "min_profit_per_jump": 1000000,
   "max_items": 1,
   "max_units": 1,
   "min_security_status": 0,
-  "top_routes": 50
+  "top_routes": 3
 }
