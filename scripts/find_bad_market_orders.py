@@ -146,6 +146,12 @@ def parse_args() -> argparse.Namespace:
         help="Maximum number of flagged orders to print (sorted by multiplier).",
     )
     parser.add_argument(
+        "--sort-by",
+        choices=("multiplier", "profit"),
+        default="multiplier",
+        help="Primary sort key for the final list (multiplier or total profit).",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         help="Optional file to write the final report to (same format as stdout).",
@@ -315,6 +321,7 @@ def find_suspicious_orders(
     min_gap_multiplier: Optional[float],
     min_investment: float,
     min_profit: float,
+    sort_by: str,
 ) -> List[SuspiciousOrder]:
     suspicious: List[SuspiciousOrder] = []
     min_multiplier = max(1.0, min_multiplier)
@@ -399,7 +406,13 @@ def find_suspicious_orders(
             )
         except (KeyError, ValueError, TypeError):
             continue
-    suspicious.sort(key=lambda order: order.multiplier, reverse=True)
+    def sort_key(order: SuspiciousOrder) -> float:
+        if sort_by == "profit":
+            profit_value = order.profit_best_buy if order.profit_best_buy is not None else order.profit_normal
+            return profit_value if profit_value is not None else 0.0
+        return order.multiplier
+
+    suspicious.sort(key=sort_key, reverse=True)
     return suspicious
 
 
@@ -478,6 +491,7 @@ def main() -> None:
         min_gap_multiplier=gap_multiplier,
         min_investment=args.min_investment,
         min_profit=args.min_profit,
+        sort_by=args.sort_by,
     )
     if not suspicious:
         print("No suspicious sell orders matched the filters.")
