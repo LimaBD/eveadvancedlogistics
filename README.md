@@ -178,6 +178,49 @@ When multiple starting systems are supplied the processor computes jumps, filter
 Relative paths in a profile resolve next to the JSON file, so copy an existing
 profile under `scripts/presets/` to get started quickly.
 
+## Bad order sanity check
+
+Use `scripts/find_bad_market_orders.py` to scan a cached market snapshot for
+sell orders that look suspiciously cheap (for example, a misplaced zero). The
+tool computes a trimmed median price per item, filters out anything normally
+worth less than 1M ISK, and then reports orders that are at least 2x cheaper
+than that baseline **and** the best live buy orders. It also verifies that the
+next-highest sell order is significantly more expensive so you catch the classic
+"missing zero" situations even when the best buy price sits near the bad sell.
+
+```
+python scripts/find_bad_market_orders.py \
+		--orders-path data/market_orders_snapshot.json \
+		--min-multiplier 2 \
+		--min-gap-multiplier 2 \
+		--min-normal-price 1000000 \
+		--limit 50
+```
+
+Key options:
+
+- `--trim-ratio`: drop a percentage of extreme prices before computing the
+	median (helps absorb market spikes).
+- `--min-normal-value`: ensure the order would be worth a minimum ISK amount at
+	normal pricing so you only see impactful mistakes.
+- `--min-buy-multiplier`: require the best buy order to outbid the flagged sell
+	order by a given ratio (defaults to `--min-multiplier`). Set to `0` if you
+	don't want to compare against buy orders.
+- `--min-gap-multiplier`: demand that the next-highest sell order is at least
+	this many times more expensive than the flagged one (defaults to 2). Set to
+	`0` to disable the neighbor comparison.
+- `--min-investment`: ignore mistakes that would cost less than this ISK amount
+	to scoop (price * remaining units).
+- `--min-profit`: require the estimated profit (best buy if available, otherwise
+	median price) to clear a minimum threshold, so low-volume noise stays hidden.
+- `--format`: switch between a table (`table`, default) and machine-readable
+	output (`json`).
+- `--skip-item-names`: skip loading `data/items.json` if you only need type IDs
+	(useful when working on low-memory machines).
+
+The script also reads `data/stations.json` to resolve structure names so you
+can immediately see where each mispriced order lives.
+
 ## Route jump calculator
 
 The legacy ESI-backed `calc_jumps.py` script has been retired. Routing is now
