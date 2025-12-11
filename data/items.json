@@ -1,5 +1,19 @@
 [
   {
+    "id": 91387,
+    "name": " Alliance Tournament XXI Script",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 79336,
     "name": " Insurgency Angel Roaming Spawner - ST3 - DO NOT TRANSLATE",
     "group_id": 4055,
@@ -18909,6 +18923,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91515,
+    "name": "21st Alliance Tournament: The Tuskers Co.",
+    "group_id": 4100,
+    "group_name": "Logo Display Monument",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 19419,
     "name": "21st Tier Overseer's Personal Effects",
     "group_id": 493,
@@ -23401,6 +23428,20 @@
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91405,
+    "name": "A Capsuleer\u2019s Guide To Dropping Dreads",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -31800,6 +31841,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 90820,
+    "name": "Airlock-Slammer",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56977,
     "name": "Airlock-Slammer Display",
     "group_id": 1194,
@@ -37492,10 +37546,10 @@
     "portion_size": 1.0
   },
   {
-    "id": 76483,
+    "id": 9877,
     "name": "Amarr Military Station Ruins",
-    "group_id": 1975,
-    "group_name": "Non-Interactable Object",
+    "group_id": 226,
+    "group_name": "Large Collidable Object",
     "category_id": 2,
     "category_name": "Celestial",
     "published": false,
@@ -37505,10 +37559,10 @@
     "portion_size": 1.0
   },
   {
-    "id": 9877,
+    "id": 76483,
     "name": "Amarr Military Station Ruins",
-    "group_id": 226,
-    "group_name": "Large Collidable Object",
+    "group_id": 1975,
+    "group_name": "Non-Interactable Object",
     "category_id": 2,
     "category_name": "Celestial",
     "published": false,
@@ -42777,6 +42831,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91235,
+    "name": "Anathema Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -48606,6 +48673,85 @@
     "portion_size": 1.0
   },
   {
+    "id": 89807,
+    "name": "Anhinga",
+    "group_id": 1201,
+    "group_name": "Attack Battlecruiser",
+    "category_id": 6,
+    "category_name": "Ship",
+    "published": true,
+    "market_group_id": 1698,
+    "volume": 252000.0,
+    "packaged_volume": 15000.0,
+    "mass": 14760000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91279,
+    "name": "Anhinga Alliance Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91278,
+    "name": "Anhinga Corporation Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90061,
+    "name": "Anhinga Primary Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90063,
+    "name": "Anhinga Secondary Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90065,
+    "name": "Anhinga Tertiary Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 33024,
     "name": "Animal Medical Expert",
     "group_id": 1194,
@@ -49065,6 +49211,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2097,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -57107,6 +57254,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2095,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -69944,7 +70092,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85286,
+    "id": 90699,
     "name": "BLTZN-05L Lowsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -70034,6 +70182,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91239,
+    "name": "Babaroga Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -73518,6 +73679,20 @@
     "category_id": 20,
     "category_name": "Implant",
     "published": true,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90694,
+    "name": "Basic 'Brainfreeze' Cerebral Accelerator",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2487,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -78356,6 +78531,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91236,
+    "name": "Bhaalgorn Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -90172,6 +90360,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91152,
+    "name": "Brumal Spark Metallic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 30830,
     "name": "Brus Colterne's Megathron",
     "group_id": 517,
@@ -93733,6 +93935,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91240,
+    "name": "Buzzard Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 55570,
     "name": "Buzzard Biosecurity Responders SKIN",
     "group_id": 1950,
@@ -95737,7 +95952,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85287,
+    "id": 90698,
     "name": "CMT-05N Nullsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -98436,7 +98651,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85288,
+    "id": 90697,
     "name": "CPD-10N Nullsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -98623,6 +98838,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91399,
+    "name": "CSM 19 Electee Archive Script",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 34770,
     "name": "CSM 2 Electee Archive Script",
     "group_id": 1194,
@@ -98634,6 +98863,20 @@
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91403,
+    "name": "CSM 20 Electee Archive Script",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -107732,6 +107975,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91516,
+    "name": "Caldari Victory SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2120,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 55952,
     "name": "Caldari Vulture Battlecruiser",
     "group_id": 226,
@@ -108149,6 +108406,20 @@
     "volume": 0.1,
     "packaged_volume": 0.1,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91413,
+    "name": "Canned Quantum Superposition Wormhole",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -122915,6 +123186,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91115,
+    "name": "Celestial Crest - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91116,
+    "name": "Celestial Crest - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 19749,
     "name": "Celestial Environment",
     "group_id": 1882,
@@ -126392,6 +126691,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91142,
+    "name": "Cereulean Crest Metallic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91143,
+    "name": "Cereulean Crest Satin - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": false,
+    "market_group_id": 3654,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 29530,
     "name": "Certificate",
     "group_id": 937,
@@ -127776,6 +128103,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91245,
+    "name": "Cheetah Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -136286,6 +136626,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91392,
+    "name": "Collections of paintings",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 32728,
     "name": "Collision",
     "group_id": 1107,
@@ -143634,6 +143988,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91237,
+    "name": "Confessor Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -155436,6 +155803,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91411,
+    "name": "Counterfeit Alliance Tournament Emergency Auxiliary Rebroadcasting System",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 21468,
     "name": "Counterfeit Credits",
     "group_id": 526,
@@ -156645,6 +157026,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2089,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -159054,6 +159436,34 @@
     "volume": 5.0,
     "packaged_volume": 5.0,
     "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91140,
+    "name": "Crisp Mint Metallic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91141,
+    "name": "Crisp Mint Metallic - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -162304,6 +162714,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91126,
+    "name": "Cryo Barrage - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91127,
+    "name": "Cryo Barrage - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 28972,
     "name": "Cryogenic Stasis Capsule",
     "group_id": 314,
@@ -162314,6 +162752,48 @@
     "volume": 25.0,
     "packaged_volume": 25.0,
     "mass": 400.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91082,
+    "name": "Cryograph Diffractor",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91083,
+    "name": "Cryograph Exactor",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91084,
+    "name": "Cryograph Resolver",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
     "portion_size": 1.0
   },
   {
@@ -162328,6 +162808,118 @@
     "volume": 3.0,
     "packaged_volume": 3.0,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91118,
+    "name": "Cryoshard Burst - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91119,
+    "name": "Cryoshard Burst - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91019,
+    "name": "Cryostatic Estimator",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91021,
+    "name": "Cryostatic Nullifier",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91020,
+    "name": "Cryostatic Suppressor",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90894,
+    "name": "Cryostorm Clarifier",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90895,
+    "name": "Cryostorm Mapper",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90896,
+    "name": "Cryostorm Reconciler",
+    "group_id": 4972,
+    "group_name": "Verity Cryo Tech",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
     "portion_size": 1.0
   },
   {
@@ -166334,8 +166926,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 85281,
-    "name": "DNCR-05H Highsec Ice Storm Filament",
+    "id": 90705,
+    "name": "DNCR-05H Highsec Ice Storm Filament ",
     "group_id": 4041,
     "group_name": "Jump Filaments",
     "category_id": 17,
@@ -166348,7 +166940,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85289,
+    "id": 90704,
     "name": "DNNR-01L Lowsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -166441,6 +167033,19 @@
   },
   {
     "id": 85282,
+    "name": "DSHR-01H Highsec Ice Storm Filament",
+    "group_id": 4041,
+    "group_name": "Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90703,
     "name": "DSHR-01H Highsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -172246,6 +172851,19 @@
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90824,
+    "name": "Data-Sniffer",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
     "portion_size": 1.0
   },
   {
@@ -183518,6 +184136,19 @@
     "volume": 27500.0,
     "packaged_volume": 27500.0,
     "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90919,
+    "name": "Disabled Sansha Transit Modulator",
+    "group_id": 226,
+    "group_name": "Large Collidable Object",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -197844,6 +198475,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91390,
+    "name": "Drone Lands Evacuation Plans",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 355109,
     "name": "Drone Laser Rifle",
     "group_id": 350858,
@@ -204803,6 +205448,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 90819,
+    "name": "Ectoplasm-Skimmer",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56978,
     "name": "Ectoplasm-Skimmer Display",
     "group_id": 1194,
@@ -209303,6 +209961,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91395,
+    "name": "Emergency Application Form \u2013 A-77B/Redline",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 5841,
     "name": "Emergency Damage Control I",
     "group_id": 60,
@@ -210532,6 +211204,19 @@
     "category_name": "SKINs",
     "published": true,
     "market_group_id": 2320,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91246,
+    "name": "Endurance Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -211859,6 +212544,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2362,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -218097,6 +218783,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91144,
+    "name": "Evergreen Malachite Metallic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91145,
+    "name": "Evergreen Malachite Metallic - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 16209,
     "name": "Ex-Elite Secret Agent",
     "group_id": 817,
@@ -222665,6 +223379,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 85286,
+    "name": "Expired BLTZN-05L Lowsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 53337,
     "name": "Expired BLTZN-05L Lowsec Ice Storm Filament",
     "group_id": 4072,
@@ -223266,6 +223993,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 85287,
+    "name": "Expired CMT-05N Nullsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 53334,
     "name": "Expired CMT-05N Nullsec Ice Storm Filament",
     "group_id": 4072,
@@ -223307,6 +224047,19 @@
   },
   {
     "id": 79215,
+    "name": "Expired CPD-10N Nullsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85288,
     "name": "Expired CPD-10N Nullsec Ice Storm Filament",
     "group_id": 4072,
     "group_name": "Expired Jump Filaments",
@@ -224116,6 +224869,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 85281,
+    "name": "Expired DNCR-05H Highsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 53331,
     "name": "Expired DNCR-05H Highsec Ice Storm Filament",
     "group_id": 4072,
@@ -224170,6 +224936,19 @@
   },
   {
     "id": 79206,
+    "name": "Expired DNNR-01L Lowsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85289,
     "name": "Expired DNNR-01L Lowsec Ice Storm Filament",
     "group_id": 4072,
     "group_name": "Expired Jump Filaments",
@@ -228242,6 +229021,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 85283,
+    "name": "Expired PRNCR-10H Highsec Ice Storm Filament",
+    "group_id": 4041,
+    "group_name": "Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 53332,
     "name": "Expired PRNCR-10H Highsec Ice Storm Filament",
     "group_id": 4072,
@@ -229754,6 +230546,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 85284,
+    "name": "Expired RDLF-10L Lowsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 53338,
     "name": "Expired RDLF-10L Lowsec Ice Storm Filament",
     "group_id": 4072,
@@ -230461,19 +231266,6 @@
     "portion_size": 1.0
   },
   {
-    "id": 76532,
-    "name": "Expired SoCT Agility Booster I",
-    "group_id": 303,
-    "group_name": "Booster",
-    "category_id": 20,
-    "category_name": "Implant",
-    "published": false,
-    "volume": 1.0,
-    "packaged_volume": 1.0,
-    "mass": 0.0,
-    "portion_size": 1.0
-  },
-  {
     "id": 80757,
     "name": "Expired SoCT Agility Booster I",
     "group_id": 303,
@@ -230487,8 +231279,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76533,
-    "name": "Expired SoCT Agility Booster II",
+    "id": 76532,
+    "name": "Expired SoCT Agility Booster I",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230513,8 +231305,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76534,
-    "name": "Expired SoCT Agility Booster III",
+    "id": 76533,
+    "name": "Expired SoCT Agility Booster II",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230527,6 +231319,19 @@
   },
   {
     "id": 80763,
+    "name": "Expired SoCT Agility Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 76534,
     "name": "Expired SoCT Agility Booster III",
     "group_id": 303,
     "group_name": "Booster",
@@ -230552,19 +231357,6 @@
     "portion_size": 1.0
   },
   {
-    "id": 76524,
-    "name": "Expired SoCT Armor Booster I",
-    "group_id": 303,
-    "group_name": "Booster",
-    "category_id": 20,
-    "category_name": "Implant",
-    "published": false,
-    "volume": 1.0,
-    "packaged_volume": 1.0,
-    "mass": 0.0,
-    "portion_size": 1.0
-  },
-  {
     "id": 80765,
     "name": "Expired SoCT Armor Booster I",
     "group_id": 303,
@@ -230578,8 +231370,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76525,
-    "name": "Expired SoCT Armor Booster II",
+    "id": 76524,
+    "name": "Expired SoCT Armor Booster I",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230604,8 +231396,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76526,
-    "name": "Expired SoCT Armor Booster III",
+    "id": 76525,
+    "name": "Expired SoCT Armor Booster II",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230618,6 +231410,19 @@
   },
   {
     "id": 80768,
+    "name": "Expired SoCT Armor Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 76526,
     "name": "Expired SoCT Armor Booster III",
     "group_id": 303,
     "group_name": "Booster",
@@ -230838,19 +231643,6 @@
     "portion_size": 1.0
   },
   {
-    "id": 76516,
-    "name": "Expired SoCT Scan Booster I",
-    "group_id": 303,
-    "group_name": "Booster",
-    "category_id": 20,
-    "category_name": "Implant",
-    "published": false,
-    "volume": 1.0,
-    "packaged_volume": 1.0,
-    "mass": 0.0,
-    "portion_size": 1.0
-  },
-  {
     "id": 80769,
     "name": "Expired SoCT Scan Booster I",
     "group_id": 303,
@@ -230864,8 +231656,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76517,
-    "name": "Expired SoCT Scan Booster II",
+    "id": 76516,
+    "name": "Expired SoCT Scan Booster I",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230890,8 +231682,8 @@
     "portion_size": 1.0
   },
   {
-    "id": 76518,
-    "name": "Expired SoCT Scan Booster III",
+    "id": 76517,
+    "name": "Expired SoCT Scan Booster II",
     "group_id": 303,
     "group_name": "Booster",
     "category_id": 20,
@@ -230904,6 +231696,19 @@
   },
   {
     "id": 80773,
+    "name": "Expired SoCT Scan Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 76518,
     "name": "Expired SoCT Scan Booster III",
     "group_id": 303,
     "group_name": "Booster",
@@ -232270,6 +233075,19 @@
   },
   {
     "id": 79211,
+    "name": "Expired VXN-01N Nullsec Ice Storm Filament",
+    "group_id": 4072,
+    "group_name": "Expired Jump Filaments",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": false,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85285,
     "name": "Expired VXN-01N Nullsec Ice Storm Filament",
     "group_id": 4072,
     "group_name": "Expired Jump Filaments",
@@ -234119,6 +234937,45 @@
     "portion_size": 1.0
   },
   {
+    "id": 90821,
+    "name": "Express Power-Drainer",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90826,
+    "name": "Express Radiation-Rogue",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90816,
+    "name": "Express Tool-Swiper",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 3882,
     "name": "Exsanguinator",
     "group_id": 820,
@@ -234168,6 +235025,20 @@
     "published": false,
     "volume": 0.01,
     "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90696,
+    "name": "Extended 'Brainfreeze' Cerebral Accelerator",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2487,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -237718,6 +238589,20 @@
   {
     "id": 52277,
     "name": "Fall of Fort Knocks YC120",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91404,
+    "name": "Fall of \u201cHoth\u201d",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
@@ -249533,6 +250418,20 @@
     "portion_size": 250.0
   },
   {
+    "id": 91412,
+    "name": "For Those Lost, But Never Forgotten",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 23160,
     "name": "Force Cable",
     "group_id": 530,
@@ -252446,6 +253345,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91397,
+    "name": "Fragmented Quarterly Earnings Report Holoreel",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 88667,
     "name": "Fragmented Warp - Limited",
     "group_id": 4726,
@@ -252815,6 +253728,33 @@
     "portion_size": 1.0
   },
   {
+    "id": 91017,
+    "name": "Freelancing",
+    "group_id": 278,
+    "group_name": "Social",
+    "category_id": 16,
+    "category_name": "Skill",
+    "published": true,
+    "market_group_id": 376,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90817,
+    "name": "Freezer-Thief",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56982,
     "name": "Freezer-Thief Display",
     "group_id": 1194,
@@ -253090,6 +254030,20 @@
     "volume": 27500.0,
     "packaged_volume": 27500.0,
     "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91117,
+    "name": "Frigid Mosaic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -253387,6 +254341,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91132,
+    "name": "Frozen Obelisk - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 45,
     "name": "Frozen Plant Seeds",
     "group_id": 281,
@@ -253451,6 +254419,19 @@
     "volume": 100000000.0,
     "packaged_volume": 100000000.0,
     "mass": 100000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90818,
+    "name": "Fuel-Stealer",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
     "portion_size": 1.0
   },
   {
@@ -263967,6 +264948,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91156,
+    "name": "Gilded Glory Metallic - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3632,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 18674,
     "name": "Gist A-Type 100MN Afterburner",
     "group_id": 46,
@@ -266249,6 +267244,34 @@
     "volume": 109000.0,
     "packaged_volume": 109000.0,
     "mass": 10900000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91128,
+    "name": "Glacial Cross - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91129,
+    "name": "Glacial Cross - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": false,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -272409,6 +273432,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91241,
+    "name": "Golem Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -286508,6 +287544,45 @@
     "portion_size": 1.0
   },
   {
+    "id": 91045,
+    "name": "Hackable Cryptoanalytic Relay",
+    "group_id": 1207,
+    "group_name": "Scatter Container",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91044,
+    "name": "Hackable Signaling Relay",
+    "group_id": 1207,
+    "group_name": "Scatter Container",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91046,
+    "name": "Hackable Tactical Relay",
+    "group_id": 1207,
+    "group_name": "Scatter Container",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 367770,
     "name": "Hacked Decryptor Key",
     "group_id": 367776,
@@ -294653,6 +295728,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91254,
+    "name": "Hecate Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2356,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 55584,
     "name": "Hecate Biosecurity Responders SKIN",
     "group_id": 1950,
@@ -296038,6 +297127,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91255,
+    "name": "Helios Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2053,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -300814,6 +301917,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 90739,
+    "name": "Historic Yoiul Festival SKIN Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90740,
+    "name": "Historic Yoiul Festival SKINR Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 32278,
     "name": "Hiva Shesha's Shuttle",
     "group_id": 517,
@@ -304401,6 +305532,19 @@
     "category_name": "SKINs",
     "published": true,
     "market_group_id": 2012,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91247,
+    "name": "Hulk Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -310197,13 +311341,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85309,
+    "id": 90736,
     "name": "Ice Storm Filaments Crate",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -310232,6 +311377,34 @@
     "published": false,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91120,
+    "name": "Icelink Reflection - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91121,
+    "name": "Icelink Reflection - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -322489,6 +323662,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91391,
+    "name": "Industrial-sized Container of Bubble Bath",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 87500,
     "name": "Industrialist",
     "group_id": 4091,
@@ -333320,6 +334507,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91242,
+    "name": "Jackdaw Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2391,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 55531,
     "name": "Jackdaw Biosecurity Responders SKIN",
     "group_id": 1950,
@@ -337804,6 +339005,20 @@
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91408,
+    "name": "Keepstar Fragment",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -342824,6 +344039,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91256,
+    "name": "Kronos Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2026,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -360399,6 +361628,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91396,
+    "name": "Liminal Strawberry Jam",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 52183,
     "name": "Liminal Vedmak",
     "group_id": 4028,
@@ -362027,6 +363270,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 90825,
+    "name": "Livestock-Liberator",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56971,
     "name": "Livestock-Liberator Display",
     "group_id": 1194,
@@ -363584,6 +364840,20 @@
     "volume": 0.1,
     "packaged_volume": 0.1,
     "mass": 0.5,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91409,
+    "name": "Looping Audio log",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -367337,6 +368607,19 @@
     "name": "Machariel Angel's Hex Serenity Only SKIN (90 Days)",
     "group_id": 1954,
     "group_name": "90-Day SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91258,
+    "name": "Machariel Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
@@ -376275,6 +377558,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2406,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -377037,6 +378321,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2091,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -425284,6 +426569,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91105,
+    "name": "Nation Stormhive Shard",
+    "group_id": 4843,
+    "group_name": "Limited Rarities",
+    "category_id": 17,
+    "category_name": "Commodity",
+    "published": true,
+    "market_group_id": 3737,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
     "id": 44271,
     "name": "Nation Uplifts Firework",
     "group_id": 500,
@@ -430097,6 +431396,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91259,
+    "name": "Nightmare Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 17737,
     "name": "Nightmare Blueprint",
     "group_id": 107,
@@ -431474,6 +432786,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2098,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -436920,6 +438233,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91133,
+    "name": "Numbing Aurora - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 20358,
     "name": "Numon Family Heirloom",
     "group_id": 738,
@@ -437033,6 +438360,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 1976,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -440622,6 +441950,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91085,
+    "name": "ORE Faded Cache",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 57042,
     "name": "ORE Faded Volatile Ice Processor",
     "group_id": 494,
@@ -440662,6 +442004,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91087,
+    "name": "ORE Fresh Cache",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 57048,
     "name": "ORE Fresh Volatile Ice Processor",
     "group_id": 494,
@@ -440672,6 +442028,20 @@
     "volume": 10250000.0,
     "packaged_volume": 10250000.0,
     "mass": 150000000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91086,
+    "name": "ORE Friable Cache",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -440923,13 +442293,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85355,
+    "id": 90741,
     "name": "ORE Green Salvage Package",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -441175,13 +442546,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85357,
+    "id": 90743,
     "name": "ORE Red Salvage Package",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -441438,13 +442810,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85358,
+    "id": 90742,
     "name": "ORE White Salvage Package",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -444178,6 +445551,20 @@
   {
     "id": 91169,
     "name": "Odysseus Arkombine Arisen SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 3567,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91260,
+    "name": "Odysseus Aurora Universalis SKIN",
     "group_id": 1950,
     "group_name": "Permanent SKIN",
     "category_id": 91,
@@ -453518,6 +454905,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91248,
+    "name": "Outrider Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 3818,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 89652,
     "name": "Outrider Blueprint",
     "group_id": 1542,
@@ -453983,6 +455384,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91139,
+    "name": "Oxidized Drift Matte - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3653,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91154,
+    "name": "Oxidized Drift Matte - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3653,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 2392,
     "name": "Oxidizing Compound",
     "group_id": 1042,
@@ -454348,7 +455777,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85283,
+    "id": 90702,
     "name": "PRNCR-10H Highsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -454617,6 +456046,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2361,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -454944,6 +456374,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91238,
+    "name": "Paladin Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -460914,13 +462357,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85359,
+    "id": 90744,
     "name": "Peculiar Icebound Salvage",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -461251,6 +462695,62 @@
     "portion_size": 1.0
   },
   {
+    "id": 91135,
+    "name": "Permafrost Interrupted - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91136,
+    "name": "Permafrost Interrupted - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91124,
+    "name": "Permafrost Stream - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91125,
+    "name": "Permafrost Stream - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 23937,
     "name": "Perpetual Chamber Warden",
     "group_id": 526,
@@ -461378,6 +462878,86 @@
     "volume": 28600.0,
     "packaged_volume": 28600.0,
     "mass": 1700000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91174,
+    "name": "Perseverance",
+    "group_id": 420,
+    "group_name": "Destroyer",
+    "category_id": 6,
+    "category_name": "Ship",
+    "published": true,
+    "market_group_id": 2350,
+    "volume": 55000.0,
+    "packaged_volume": 5000.0,
+    "mass": 1600000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91176,
+    "name": "Perseverance Alliance Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91249,
+    "name": "Perseverance Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91175,
+    "name": "Perseverance Blueprint",
+    "group_id": 487,
+    "group_name": "Destroyer Blueprint",
+    "category_id": 9,
+    "category_name": "Blueprint",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91233,
+    "name": "Perseverance Blueprint Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1663,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91177,
+    "name": "Perseverance Corporation Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -464737,6 +466317,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91250,
+    "name": "Pioneer Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 89485,
     "name": "Pioneer Blueprint",
     "group_id": 487,
@@ -464774,6 +466367,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91251,
+    "name": "Pioneer Consortium Issue Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 3497,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -470553,6 +472160,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 90695,
+    "name": "Potent 'Brainfreeze' Cerebral Accelerator",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2487,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 89605,
     "name": "Potent 'Radiance' Cerebral Accelerator",
     "group_id": 303,
@@ -474773,6 +476394,20 @@
     "volume": 0.0,
     "packaged_volume": 0.0,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91406,
+    "name": "Project Firebird Dossier",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -484131,19 +485766,6 @@
     "portion_size": 1.0
   },
   {
-    "id": 90665,
-    "name": "QA Badly Authored Prismaticite",
-    "group_id": 4915,
-    "group_name": "Prismaticite",
-    "category_id": 4,
-    "category_name": "Material",
-    "published": false,
-    "volume": 40.0,
-    "packaged_volume": 40.0,
-    "mass": 0.0,
-    "portion_size": 100.0
-  },
-  {
     "id": 87315,
     "name": "QA Capacitor Transmitter",
     "group_id": 353,
@@ -487048,7 +488670,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85284,
+    "id": 90701,
     "name": "RDLF-10L Lowsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -490577,13 +492199,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85360,
+    "id": 90745,
     "name": "Rare Icebound Salvage",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -490874,6 +492497,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 90822,
+    "name": "Ration-Grabber",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56979,
     "name": "Ration-Grabber Display",
     "group_id": 1194,
@@ -490965,6 +492601,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91243,
+    "name": "Rattlesnake Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 1963,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -494842,6 +496492,19 @@
     "volume": 0.1,
     "packaged_volume": 0.1,
     "mass": 0.1,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90815,
+    "name": "Recycler-Raider",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
     "portion_size": 1.0
   },
   {
@@ -502733,19 +504396,6 @@
     "portion_size": 1.0
   },
   {
-    "id": 32913,
-    "name": "Republic Frigate",
-    "group_id": 1166,
-    "group_name": "FW Minmatar Republic Frigate",
-    "category_id": 11,
-    "category_name": "Entity",
-    "published": false,
-    "volume": 16450.0,
-    "packaged_volume": 16450.0,
-    "mass": 1645000.0,
-    "portion_size": 1.0
-  },
-  {
     "id": 71104,
     "name": "Republic Frigate",
     "group_id": 1166,
@@ -502756,6 +504406,19 @@
     "volume": 28600.0,
     "packaged_volume": 28600.0,
     "mass": 1190000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 32913,
+    "name": "Republic Frigate",
+    "group_id": 1166,
+    "group_name": "FW Minmatar Republic Frigate",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 16450.0,
+    "packaged_volume": 16450.0,
+    "mass": 1645000.0,
     "portion_size": 1.0
   },
   {
@@ -509468,6 +511131,45 @@
     "volume": 96000.0,
     "packaged_volume": 96000.0,
     "mass": 11500000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90814,
+    "name": "Roaming Yule Lads Hisec Spawner (DO NOT TRANASLATE)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90828,
+    "name": "Roaming Yule Lads Lowsec Spawner (DO NOT TRANASLATE)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90827,
+    "name": "Roaming Yule Lads Nullsec Spawner (DO NOT TRANASLATE)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -516727,6 +518429,32 @@
     "portion_size": 250.0
   },
   {
+    "id": 91207,
+    "name": "SOEEB35 (DO NOT TRANSLATE)",
+    "group_id": 920,
+    "group_name": "Effect Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": true,
+    "volume": 20.0,
+    "packaged_volume": 20.0,
+    "mass": 1.0,
+    "portion_size": 250.0
+  },
+  {
+    "id": 91208,
+    "name": "SOEEB36 (DO NOT TRANSLATE)",
+    "group_id": 920,
+    "group_name": "Effect Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": true,
+    "volume": 20.0,
+    "packaged_volume": 20.0,
+    "mass": 1.0,
+    "portion_size": 250.0
+  },
+  {
     "id": 90752,
     "name": "SOEEB4 (DO NOT TRANSLATE)",
     "group_id": 920,
@@ -521748,6 +523476,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 90878,
+    "name": "Sansha's Darkwight Stormlord",
+    "group_id": 1667,
+    "group_name": "Irregular Battleship",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 486000.0,
+    "packaged_volume": 486000.0,
+    "mass": 10010000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 56869,
     "name": "Sansha's Daunting Frostwight",
     "group_id": 1568,
@@ -521758,6 +523499,19 @@
     "volume": 28600.0,
     "packaged_volume": 28600.0,
     "mass": 1148000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90880,
+    "name": "Sansha's Deathwight Stormlord",
+    "group_id": 1667,
+    "group_name": "Irregular Battleship",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 486000.0,
+    "packaged_volume": 486000.0,
+    "mass": 10010000.0,
     "portion_size": 1.0
   },
   {
@@ -521815,6 +523569,19 @@
   {
     "id": 56878,
     "name": "Sansha's Direwight Stormlord",
+    "group_id": 1667,
+    "group_name": "Irregular Battleship",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 486000.0,
+    "packaged_volume": 486000.0,
+    "mass": 10010000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90879,
+    "name": "Sansha's Doomwight Stormlord",
     "group_id": 1667,
     "group_name": "Irregular Battleship",
     "category_id": 11,
@@ -522736,6 +524503,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91043,
+    "name": "Sansha's Stormfield Projector",
+    "group_id": 952,
+    "group_name": "Mission Container",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 11912,
     "name": "Sansha's Torturer",
     "group_id": 566,
@@ -522759,6 +524539,19 @@
     "volume": 100100.0,
     "packaged_volume": 100100.0,
     "mass": 10010000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90886,
+    "name": "Sansha's Transit Modulator",
+    "group_id": 952,
+    "group_name": "Mission Container",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -524838,6 +526631,19 @@
     "volume": 100000000.0,
     "packaged_volume": 100000000.0,
     "mass": 100000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90823,
+    "name": "Scanner-Jacker",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
     "portion_size": 1.0
   },
   {
@@ -529037,6 +530843,45 @@
     "portion_size": 1.0
   },
   {
+    "id": 91048,
+    "name": "Scrambled Cryptoanalytic Relay",
+    "group_id": 226,
+    "group_name": "Large Collidable Object",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91047,
+    "name": "Scrambled Signaling Relay",
+    "group_id": 226,
+    "group_name": "Large Collidable Object",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91049,
+    "name": "Scrambled Tactical Relay",
+    "group_id": 226,
+    "group_name": "Large Collidable Object",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 27500.0,
+    "packaged_volume": 27500.0,
+    "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 352499,
     "name": "Scrambler Pistol",
     "group_id": 350858,
@@ -529216,6 +531061,20 @@
     "volume": 0.0,
     "packaged_volume": 0.0,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91414,
+    "name": "Scrap of paper",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -530381,6 +532240,34 @@
     "volume": 60.0,
     "packaged_volume": 60.0,
     "mass": 100000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91146,
+    "name": "Seasonal Smoke Gloss - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91147,
+    "name": "Seasonal Smoke Gloss - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -548251,6 +550138,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91148,
+    "name": "Silent Midnight Gloss - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91149,
+    "name": "Silent Midnight Gloss - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 89937,
     "name": "Silent Sanguine Satin - Limited",
     "group_id": 4726,
@@ -551236,6 +553151,85 @@
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 89808,
+    "name": "Skua",
+    "group_id": 1305,
+    "group_name": "Tactical Destroyer",
+    "category_id": 6,
+    "category_name": "Ship",
+    "published": true,
+    "market_group_id": 2350,
+    "volume": 47000.0,
+    "packaged_volume": 5000.0,
+    "mass": 1100000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91277,
+    "name": "Skua Alliance Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91276,
+    "name": "Skua Corporation Emblem",
+    "group_id": 4471,
+    "group_name": "Ship Emblems",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90060,
+    "name": "Skua Defense Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90062,
+    "name": "Skua Propulsion Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90064,
+    "name": "Skua Sharpshooter Mode",
+    "group_id": 1306,
+    "group_name": "Ship Modifiers",
+    "category_id": 7,
+    "category_name": "Module",
+    "published": false,
+    "volume": 5.0,
+    "packaged_volume": 5.0,
+    "mass": 100.0,
     "portion_size": 1.0
   },
   {
@@ -564598,6 +566592,34 @@
     "published": false,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91150,
+    "name": "Solstice Bloom Satin - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3654,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91151,
+    "name": "Solstice Bloom Satin - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3654,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -585101,6 +587123,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91122,
+    "name": "Storm Squadron - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91123,
+    "name": "Storm Squadron - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 2561,
     "name": "Storm Storage Facility",
     "group_id": 1029,
@@ -592990,6 +595040,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91134,
+    "name": "Suspended Aurora - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 2308,
     "name": "Suspended Plasma",
     "group_id": 1033,
@@ -593014,6 +595078,20 @@
     "volume": 27500.0,
     "packaged_volume": 27500.0,
     "mass": 10000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91410,
+    "name": "Suspicious \u201cmining permit\u201d",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -593120,6 +595198,19 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91244,
+    "name": "Svipul Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -606958,6 +609049,20 @@
     "volume": 19000000.0,
     "packaged_volume": 19000000.0,
     "mass": 19000000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91415,
+    "name": "The Capsuleer\u2019s Confectionary Codex \u2013 Field Edition",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -624241,6 +626346,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91138,
+    "name": "Twilight Treasure Gloss",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 47877,
     "name": "Twilit Abyssal Overmind",
     "group_id": 1982,
@@ -627765,6 +629884,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91416,
+    "name": "Unfinished Romance Novel",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 88009,
     "name": "Unfit Remnant",
     "group_id": 306,
@@ -629311,6 +631444,20 @@
     "volume": 118000.0,
     "packaged_volume": 118000.0,
     "mass": 12000000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91393,
+    "name": "Unpainted ship miniature",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -631486,13 +633633,14 @@
     "portion_size": 1.0
   },
   {
-    "id": 85361,
+    "id": 90746,
     "name": "Unusual Icebound Salvage",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -636755,7 +638903,7 @@
     "portion_size": 1.0
   },
   {
-    "id": 85285,
+    "id": 90700,
     "name": "VXN-01N Nullsec Ice Storm Filament",
     "group_id": 4041,
     "group_name": "Jump Filaments",
@@ -638228,6 +640376,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91257,
+    "name": "Vargur Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2027,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -641377,6 +643539,19 @@
     "portion_size": 1.0
   },
   {
+    "id": 91253,
+    "name": "Venture Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 43815,
     "name": "Venture Blood Raider Industrial Livery SKIN",
     "group_id": 1950,
@@ -641507,6 +643682,20 @@
     "published": true,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91252,
+    "name": "Venture Consortium Issue Aurora Universalis SKIN",
+    "group_id": 1950,
+    "group_name": "Permanent SKIN",
+    "category_id": 91,
+    "category_name": "SKINs",
+    "published": true,
+    "market_group_id": 2000,
+    "volume": 0.01,
+    "packaged_volume": 0.01,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -642523,6 +644712,20 @@
     "volume": 1100000.0,
     "packaged_volume": 1100000.0,
     "mass": 15300000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91204,
+    "name": "Verity Tech Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -644379,6 +646582,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 2090,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -648408,6 +650612,34 @@
     "portion_size": 1.0
   },
   {
+    "id": 91130,
+    "name": "Volatile Vector - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91131,
+    "name": "Volatile Vector - Unlimited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 354141,
     "name": "Voltaic Energized Plating",
     "group_id": 351121,
@@ -650259,6 +652491,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91394,
+    "name": "Warp-Shifted Reflections \u2013 Personal Journal Page",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 24385,
     "name": "Warrior Collector",
     "group_id": 557,
@@ -650660,6 +652906,19 @@
     "volume": 0.75,
     "packaged_volume": 0.75,
     "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90811,
+    "name": "Water-Sucker",
+    "group_id": 4949,
+    "group_name": "InterBus Yoiul LADs",
+    "category_id": 11,
+    "category_name": "Entity",
+    "published": false,
+    "volume": 28600.0,
+    "packaged_volume": 28600.0,
+    "mass": 11000000.0,
     "portion_size": 1.0
   },
   {
@@ -651109,6 +653368,20 @@
     "volume": 101000.0,
     "packaged_volume": 101000.0,
     "mass": 10100000.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91388,
+    "name": "Well-Used Camera Drone",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
     "portion_size": 1.0
   },
   {
@@ -652065,6 +654338,342 @@
     "portion_size": 1.0
   },
   {
+    "id": 90677,
+    "name": "Wightstorm Cetana Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2791,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90678,
+    "name": "Wightstorm Cetana Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2791,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90679,
+    "name": "Wightstorm Cetana Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2791,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90680,
+    "name": "Wightstorm Cetana Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2791,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90669,
+    "name": "Wightstorm Manasikara Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90670,
+    "name": "Wightstorm Manasikara Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90671,
+    "name": "Wightstorm Manasikara Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90672,
+    "name": "Wightstorm Manasikara Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90686,
+    "name": "Wightstorm Nirvana Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90687,
+    "name": "Wightstorm Nirvana Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90688,
+    "name": "Wightstorm Nirvana Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90689,
+    "name": "Wightstorm Nirvana Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90682,
+    "name": "Wightstorm Rapture Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90683,
+    "name": "Wightstorm Rapture Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90684,
+    "name": "Wightstorm Rapture Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90685,
+    "name": "Wightstorm Rapture Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2790,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90690,
+    "name": "Wightstorm Sunyata Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2531,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90691,
+    "name": "Wightstorm Sunyata Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2531,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90692,
+    "name": "Wightstorm Sunyata Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2531,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90693,
+    "name": "Wightstorm Sunyata Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2531,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90673,
+    "name": "Wightstorm Vitarka Booster I",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90674,
+    "name": "Wightstorm Vitarka Booster II",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90675,
+    "name": "Wightstorm Vitarka Booster III",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90676,
+    "name": "Wightstorm Vitarka Booster IV",
+    "group_id": 303,
+    "group_name": "Booster",
+    "category_id": 20,
+    "category_name": "Implant",
+    "published": true,
+    "market_group_id": 2792,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 87841,
     "name": "Wild Warren - Limited",
     "group_id": 4726,
@@ -652255,6 +654864,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91114,
+    "name": "Winter Filigree - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3633,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 74500,
     "name": "Winter Nexus Expert System",
     "group_id": 4098,
@@ -652265,6 +654888,58 @@
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90881,
+    "name": "Winter Nexus Mutated Boss Easy (Do not Translate)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90883,
+    "name": "Winter Nexus Mutated Boss Hard(Do not Translate)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90882,
+    "name": "Winter Nexus Mutated Boss Medium(Do not Translate)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 90884,
+    "name": "Winter Nexus Mutated Wave Spawner (Do not Translate)",
+    "group_id": 4055,
+    "group_name": "Invisible Beacon",
+    "category_id": 2,
+    "category_name": "Celestial",
+    "published": false,
+    "volume": 0.0,
+    "packaged_volume": 0.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -652290,6 +654965,20 @@
     "published": false,
     "volume": 0.0,
     "packaged_volume": 0.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 91137,
+    "name": "Wintertide Cyan Gloss - Limited",
+    "group_id": 4726,
+    "group_name": "Ship SKIN Design Element",
+    "category_id": 2118,
+    "category_name": "Personalization",
+    "published": true,
+    "market_group_id": 3655,
+    "volume": 0.1,
+    "packaged_volume": 0.1,
     "mass": 0.0,
     "portion_size": 1.0
   },
@@ -663247,6 +665936,20 @@
     "portion_size": 1.0
   },
   {
+    "id": 91407,
+    "name": "Worn-out Titan Jump Console",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": true,
+    "market_group_id": 1661,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
     "id": 88088,
     "name": "Wrath of Tyrannos Crate",
     "group_id": 1194,
@@ -664378,6 +667081,7 @@
     "category_id": 91,
     "category_name": "SKINs",
     "published": true,
+    "market_group_id": 1975,
     "volume": 0.01,
     "packaged_volume": 0.01,
     "mass": 0.0,
@@ -668190,26 +670894,28 @@
     "portion_size": 1.0
   },
   {
-    "id": 86495,
+    "id": 90737,
     "name": "Yoiul Festival Booster Crate",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
     "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
     "portion_size": 1.0
   },
   {
-    "id": 86496,
+    "id": 90738,
     "name": "Yoiul Festival Brainfreeze Crate",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
     "category_name": "Special Edition Assets",
-    "published": false,
+    "published": true,
+    "market_group_id": 1661,
     "volume": 1.0,
     "packaged_volume": 1.0,
     "mass": 0.0,
@@ -668334,6 +671040,32 @@
     "volume": 0.0,
     "packaged_volume": 0.0,
     "mass": 1.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 86495,
+    "name": "Yoiul Festival Y126 Booster Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 86496,
+    "name": "Yoiul Festival Y126 Brainfreeze Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
     "portion_size": 1.0
   },
   {
@@ -668593,6 +671325,97 @@
   {
     "id": 79836,
     "name": "Yoiul Y125 Unusual Icebound Salvage",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85309,
+    "name": "Yoiul Y126 Ice Storm Filaments Crate",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85355,
+    "name": "Yoiul Y126 ORE Green Salvage Package",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85357,
+    "name": "Yoiul Y126 ORE Red Salvage Package",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85358,
+    "name": "Yoiul Y126 ORE White Salvage Package",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85359,
+    "name": "Yoiul Y126 Peculiar Icebound Salvage",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85360,
+    "name": "Yoiul Y126 Rare Icebound Salvage",
+    "group_id": 1194,
+    "group_name": "Special Edition Commodities",
+    "category_id": 63,
+    "category_name": "Special Edition Assets",
+    "published": false,
+    "volume": 1.0,
+    "packaged_volume": 1.0,
+    "mass": 0.0,
+    "portion_size": 1.0
+  },
+  {
+    "id": 85361,
+    "name": "Yoiul Y126 Unusual Icebound Salvage",
     "group_id": 1194,
     "group_name": "Special Edition Commodities",
     "category_id": 63,
