@@ -6,8 +6,8 @@
     "Rens"
   ],
   "items": "../../data/ships.json",
-  "max_investment": 200000000,
-  "min_profit_per_jump": 1000000,
+  "max_investment": 350000000,
+  "min_profit_per_jump": 5000,
   "max_items": 1,
   "max_units": 1,
   "min_security_status": 0,

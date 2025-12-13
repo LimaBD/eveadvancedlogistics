@@ -6,7 +6,7 @@ import json
 import statistics
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Set, Tuple
 
 DEFAULT_ORDERS_PATH = Path("data/market_orders_snapshot.json")
 DEFAULT_ITEMS_PATH = Path("data/items.json")
@@ -167,6 +167,15 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Do not load items.json (useful when only type IDs are needed).",
     )
+    parser.add_argument(
+        "--region",
+        action="append",
+        dest="regions",
+        help=(
+            "Limit results to sell orders in the specified region name (case-insensitive). "
+            "Provide multiple times to allow more than one region."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -322,6 +331,7 @@ def find_suspicious_orders(
     min_investment: float,
     min_profit: float,
     sort_by: str,
+    region_filters: Optional[Set[str]] = None,
 ) -> List[SuspiciousOrder]:
     suspicious: List[SuspiciousOrder] = []
     min_multiplier = max(1.0, min_multiplier)
@@ -339,6 +349,11 @@ def find_suspicious_orders(
             continue
         try:
             type_id = int(order["type_id"])
+            region_name_value = str(order.get("region_name") or "").strip()
+            if not region_name_value:
+                region_name_value = f"Region {order.get('region_id')}"
+            if region_filters and region_name_value.casefold() not in region_filters:
+                continue
             normal_price = normals.get(type_id)
             if normal_price is None or normal_price < min_normal_price:
                 continue
@@ -389,7 +404,7 @@ def find_suspicious_orders(
                     price=price,
                     normal_price=normal_price,
                     multiplier=ratio,
-                    region_name=str(order.get("region_name") or f"Region {order.get('region_id')}").strip(),
+                    region_name=region_name_value,
                     system_id=int(order.get("system_id", 0)),
                     location_id=location_id,
                     volume_remain=volume,
@@ -477,6 +492,15 @@ def main() -> None:
     gap_multiplier = args.min_gap_multiplier
     if gap_multiplier is not None and gap_multiplier <= 1.0:
         gap_multiplier = None
+    region_filters: Optional[Set[str]] = None
+    if getattr(args, "regions", None):
+        normalized_regions = {
+            entry.strip().casefold()
+            for entry in args.regions
+            if entry and entry.strip()
+        }
+        if normalized_regions:
+            region_filters = normalized_regions
     suspicious = find_suspicious_orders(
         orders,
         normals,
@@ -492,6 +516,7 @@ def main() -> None:
         min_investment=args.min_investment,
         min_profit=args.min_profit,
         sort_by=args.sort_by,
+        region_filters=region_filters,
     )
     if not suspicious:
         print("No suspicious sell orders matched the filters.")
