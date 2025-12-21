@@ -38,6 +38,10 @@ FORGE_ADJACENT_REGION_IDS = {
     10000003,  # Vale of the Silent
 }
 
+FILAMENT_MAX_JUMPS = 8
+FILAMENT_COST = 2_000_000.0
+FILAMENT_ALLOWED_REGION_IDS = FORGE_ADJACENT_REGION_IDS
+
 
 def is_player_structure(location_id: int) -> bool:
     """Player-owned structures use large location IDs (>= 1e12)."""
@@ -348,10 +352,34 @@ class ItemOpportunity:
     total_volume: float
 
 
+@dataclass(frozen=True)
+class MovementPlan:
+    total_profit: float
+    total_jumps: Optional[int]
+    movement_units: Optional[int]
+    isk_per_jump: Optional[float]
+    use_filament_from_current: bool
+    use_filament_trade: bool
+
+    @property
+    def filament_count(self) -> int:
+        return int(self.use_filament_from_current) + int(self.use_filament_trade)
+
+    @property
+    def filament_cost(self) -> float:
+        return self.filament_count * FILAMENT_COST
+
+    @property
+    def requires_filament(self) -> bool:
+        return self.filament_count > 0
+
+
 @dataclass
 class RouteOpportunity:
     buy_region: str
     sell_region: str
+    buy_region_id: int
+    sell_region_id: int
     buy_system_id: int
     sell_system_id: int
     buy_system_name: str
@@ -372,20 +400,78 @@ class RouteOpportunity:
     transit_to_sell: Optional[ItemOpportunity] = None
     buy_locations: set[int] = field(default_factory=set)
     sell_locations: set[int] = field(default_factory=set)
+    _movement_plan: Optional[MovementPlan] = field(default=None, init=False, repr=False)
+
+    def _invalidate_movement_plan(self) -> None:
+        self._movement_plan = None
+
+    @staticmethod
+    def _filament_decisions(jumps: Optional[int], *, allowed: bool) -> Tuple[bool, ...]:
+        if not allowed or jumps is None or jumps <= FILAMENT_MAX_JUMPS:
+            return (False,)
+        return (False, True)
+
+    @staticmethod
+    def _apply_filament(jumps: Optional[int], use_filament: bool) -> Optional[int]:
+        if jumps is None or not use_filament:
+            return jumps
+        return min(jumps, FILAMENT_MAX_JUMPS)
+
+    @staticmethod
+    def _plan_key(plan: MovementPlan) -> Tuple[float, float, int]:
+        ranking_isk = -math.inf if plan.isk_per_jump is None else plan.isk_per_jump
+        return (ranking_isk, plan.total_profit, -plan.filament_count)
+
+    def _build_movement_plan(self) -> MovementPlan:
+        allow_current = self.buy_region_id in FILAMENT_ALLOWED_REGION_IDS
+        allow_trade = self.sell_region_id in FILAMENT_ALLOWED_REGION_IDS
+        decisions_current = self._filament_decisions(self.jumps_from_current, allowed=allow_current)
+        decisions_trade = self._filament_decisions(self.jumps_trade, allowed=allow_trade)
+        best_plan: Optional[MovementPlan] = None
+        docking_events = self.docking_events
+        for use_current in decisions_current:
+            current_jumps = self._apply_filament(self.jumps_from_current, use_current)
+            for use_trade in decisions_trade:
+                trade_jumps = self._apply_filament(self.jumps_trade, use_trade)
+                if current_jumps is None or trade_jumps is None:
+                    total_jumps = None
+                    movement_units = None
+                else:
+                    total_jumps = current_jumps + trade_jumps
+                    movement_units = total_jumps + docking_events
+                filament_count = int(use_current) + int(use_trade)
+                total_profit = self.total_profit - (filament_count * FILAMENT_COST)
+                if movement_units is None:
+                    isk_per_jump = None
+                else:
+                    effective_steps = movement_units if movement_units > 0 else 1
+                    isk_per_jump = total_profit / effective_steps
+                candidate = MovementPlan(
+                    total_profit=total_profit,
+                    total_jumps=total_jumps,
+                    movement_units=movement_units,
+                    isk_per_jump=isk_per_jump,
+                    use_filament_from_current=use_current,
+                    use_filament_trade=use_trade,
+                )
+                if best_plan is None or self._plan_key(candidate) > self._plan_key(best_plan):
+                    best_plan = candidate
+        assert best_plan is not None
+        return best_plan
+
+    @property
+    def movement_plan(self) -> MovementPlan:
+        if self._movement_plan is None:
+            self._movement_plan = self._build_movement_plan()
+        return self._movement_plan
 
     @property
     def total_jumps(self) -> Optional[int]:
-        if self.jumps_from_current is None or self.jumps_trade is None:
-            return None
-        return self.jumps_from_current + self.jumps_trade
+        return self.movement_plan.total_jumps
 
     @property
     def isk_per_jump(self) -> Optional[float]:
-        steps = self.total_movement_units
-        if steps is None:
-            return None
-        effective_steps = steps if steps > 0 else 1
-        return self.total_profit / effective_steps
+        return self.movement_plan.isk_per_jump
 
     @property
     def docking_events(self) -> int:
@@ -393,10 +479,19 @@ class RouteOpportunity:
 
     @property
     def total_movement_units(self) -> Optional[int]:
-        jumps = self.total_jumps
-        if jumps is None:
-            return None
-        return jumps + self.docking_events
+        return self.movement_plan.movement_units
+
+    @property
+    def net_total_profit(self) -> float:
+        return self.movement_plan.total_profit
+
+    @property
+    def filament_cost(self) -> float:
+        return self.movement_plan.filament_cost
+
+    @property
+    def requires_filament(self) -> bool:
+        return self.movement_plan.requires_filament
 
 
 @dataclass(frozen=True)
@@ -593,6 +688,8 @@ def group_opportunities(
             group = RouteOpportunity(
                 buy_region=opportunity.buy_from.region_name,
                 sell_region=opportunity.sell_to.region_name,
+                buy_region_id=opportunity.buy_from.region_id,
+                sell_region_id=opportunity.sell_to.region_id,
                 buy_system_id=buy_sys,
                 sell_system_id=sell_sys,
                 buy_system_name=resolver.resolve(buy_sys),
@@ -645,9 +742,10 @@ def group_opportunities(
             group.buy_locations.add(int(candidate.buy_from.location_id))
         if candidate.sell_to.location_id is not None:
             group.sell_locations.add(int(candidate.sell_to.location_id))
+        group._invalidate_movement_plan()
     ordered = sorted(
         grouped.values(),
-        key=lambda entry: (entry.isk_per_jump or -math.inf, entry.total_profit),
+        key=lambda entry: (entry.isk_per_jump or -math.inf, entry.net_total_profit),
         reverse=True,
     )
     return ordered
@@ -659,7 +757,7 @@ def select_best_route(routes: Sequence[RouteOpportunity]) -> Optional[RouteOppor
     def key(route: RouteOpportunity) -> Tuple[float, float]:
         isk_per_jump = route.isk_per_jump
         ranking_isk = -math.inf if isk_per_jump is None else isk_per_jump
-        return (ranking_isk, route.total_profit)
+        return (ranking_isk, route.net_total_profit)
 
     return max(routes, key=key)
 
@@ -794,10 +892,12 @@ def render_route_report(
     isk_per_jump_display = "n/a" if isk_per_jump is None else f"{isk_per_jump:,.2f}"
     header = (
         f"Route found | "
-        f"in $ {route.total_investment:,.2f} | p. $ {route.total_profit:,.2f} | "
+        f"in $ {route.total_investment:,.2f} | p. $ {route.net_total_profit:,.2f} | "
         f"vol {route.total_volume:,.2f} m3 | "
         f"jumps {jumps_display} | docks {docks_display} | i/(j+d) $ {isk_per_jump_display}"
     )
+    if route.requires_filament:
+        header += " [FILAMENT]"
     lines.append(header)
     lines.append("")
     lines.extend(_format_trade_section(buy_label, route.items, action="BUY"))
